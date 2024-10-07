@@ -1,4 +1,4 @@
-# Project Title
+# The Book
 
 A brief description of your project, including its purpose and main features.
 
@@ -35,10 +35,18 @@ This file contains predefined mock data that can be used to simulate responses f
 
 #### Usage
 
-To use the mock data in this application, follow these steps:
+To use the mock data in this application for insert data into database, follow these steps:
 
-1. **Import the Mock Data**: 
-   You can import the mock data in your server routes or services where needed. For example:
+1. **Access the Docker Container**:
+   First, you need to open a bash session in the Docker container running the backend. Use the following command:
+
+   ```bash
+   docker exec -it backend /bin/bash
+2. **Navigate to the Mock Data Folder: Once you are inside the Docker container, change your directory to the folder containing the mock data. Run:**
+    
+    ```bash
+    cd /app/src/config/data/import_dev-data.ts
+3. **Import the Mock Data: Now, you can import the mock data into database. To do this, execute the following command:**
 
    ```bash
    ts-node server/config/data/import_dev-data.ts --import
