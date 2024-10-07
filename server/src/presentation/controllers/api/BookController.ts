@@ -9,7 +9,7 @@ import { TYPES } from "@inversify/types";
 import { controller, httpGet, httpPatch, httpPost } from "inversify-express-utils";
 
 //Use-Cases
-import { CreateBook, GetAllBooks, GetBook, UpdateBook, GetTop5Books } from "@application/use-cases/book/index";
+import { CreateBook, GetAllBooks, GetBook, UpdateBook, GetTop5Books, GetNewBooks } from "@application/use-cases/book/index";
 import { IBookDTO } from "@application/dtos/index";
 import { MulterMiddleware, RolesMiddleware } from "@presentation/middlewares/index";
 import { IQueryParams } from "@domain/interfaces/vendors";
@@ -24,20 +24,22 @@ class BookController {
     private readonly _updateBook: UpdateBook;
     private readonly _getBook: GetBook;
     private readonly _getTop5Books: GetTop5Books
+    private readonly _getNewBooks: GetNewBooks;
 
     constructor(
         @inject(TYPES.CreateBook) createBook: CreateBook,
         @inject(TYPES.GetAllBooks) getAllBooks: GetAllBooks,
         @inject(TYPES.UpdateBook) updateBook: UpdateBook,
         @inject(TYPES.GetBook) getBook: GetBook,
-        @inject(TYPES.GetTop5Book) getTop5Books: GetTop5Books
-
+        @inject(TYPES.GetTop5Books) getTop5Books: GetTop5Books,
+        @inject(TYPES.GetNewBooks) getNewBooks: GetNewBooks
     ) {
         this._createBook = createBook;
         this._getAllBooks = getAllBooks;
         this._updateBook = updateBook;
         this._getBook = getBook;
         this._getTop5Books = getTop5Books;
+        this._getNewBooks = getNewBooks;
     }
 
     @httpPost(
@@ -141,6 +143,25 @@ class BookController {
                 total: top5Books.length
             }
         })
+    }
+
+    @httpGet('/new/month')
+    public async getNewBooksThisMonth(req: Request<unknown, unknown, unknown, IQueryParams>, res: Response) {
+        const param = req.query;
+
+        const newBooks = await this._getNewBooks.execute(param);
+
+        res.status(200).json({
+            success: true,
+            code: 200,
+            data: newBooks,
+            errors: [],
+            meta: {
+                total: newBooks.length
+            }
+        })
+
+
     }
 
 }
