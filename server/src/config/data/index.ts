@@ -48,4 +48,4 @@ function convertToArray(categories: Record<number, string>): string[] {
 
 const book = listCategories(books)
 const result = convertToArray(book)
-console.log(result)
+console.log(JSON.stringify(result))
