@@ -3,7 +3,7 @@ import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 //Components
 import NavbarDropDown from "./NavbarDropDown";
 
-import SearchBar from "./SearchBar";
+import SearchBar from "../features/book/SearchBar";
 import Logo from "./Logo";
 
 
