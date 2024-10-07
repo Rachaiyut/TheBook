@@ -16,10 +16,6 @@ const books = JSON.parse(
     readFileSync(`${__dirname}/books.json`, 'utf-8')
 )
 
-// const genres = JSON.parse(
-//     readFileSync(`${__dirname}/genres.json`, 'utf-8')
-// )
- 
 // Database Connect
 async function init() {
 
