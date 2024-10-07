@@ -4,9 +4,11 @@ import { TYPES } from "@inversify/types";
 // DTO
 import { IBookDTO } from "@application/dtos";
 
+// Interface
+import { IQueryParams } from "@domain/interfaces/vendors";
+
 //Service
 import { BookService } from "@application/services/api";
-import { IQueryParams } from "@domain/interfaces/vendors";
 
 @injectable()
 class GetTop5Books {
