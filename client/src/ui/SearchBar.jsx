@@ -5,7 +5,6 @@ import Search from "./Search";
 
 function SearchBar() {
 
-
     return (
         <form className="flex items-center rounded-l-sm border-2 border-spaceCadet">
             <Dropdown />
