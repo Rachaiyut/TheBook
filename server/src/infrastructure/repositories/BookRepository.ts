@@ -73,6 +73,7 @@ class BookRepository {
         return books.map((book) => BookMapper.toEntityFromModel(book))
     }
 
+
     public async top5Books(queryParams: IQueryParams): Promise<Book[]> {
         const now = new Date();
         const firstDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
@@ -86,8 +87,8 @@ class BookRepository {
                         [Op.gte]: queryParams.minRating
                     },
                     publicationDate: {
-                        [Op.gte]: `${firstDay}`,
-                        [Op.lte]: `${lastDay}`
+                        [Op.gte]: firstDay,
+                        [Op.lte]: lastDay
                     }
                 }
             },
@@ -95,6 +96,26 @@ class BookRepository {
         })
 
         return top5Books.map((book) => BookMapper.toEntityFromModel(book))
+    }
+
+
+    public async newBooks(queryParams: IQueryParams): Promise<Book[]> {
+        const now = new Date();
+        const firstDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+        const lastDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0));
+
+
+        const newBooks = await this._bookModel.findAll({
+            where: {
+                publicationDate: {
+                    [Op.gte]: firstDay,
+                    [Op.lte]: lastDay
+                }
+            },
+            limit: queryParams.limit || 10
+        })
+
+        return newBooks.map((book) => BookMapper.toEntityFromModel(book))
     }
 
 }

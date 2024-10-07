@@ -113,6 +113,12 @@ class BookService {
         return top5Books.map((book) => BookMapper.toDto(book));
     }
 
+    public async getNewBooks(params: IQueryParams) {
+        const newBooks = await this._bookRepository.newBooks(params);
+
+        return newBooks.map((book) => BookMapper.toDto(book));
+    }
+
 }
 
 export default BookService;

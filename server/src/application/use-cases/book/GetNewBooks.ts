@@ -1,4 +1,5 @@
-import { injectable, inject } from "inversify";
+// Inversify
+import { inject, injectable } from "inversify";
 import { TYPES } from "@inversify/types";
 
 // DTO
@@ -7,13 +8,13 @@ import { IBookDTO } from "@application/dtos";
 // Interface
 import { IQueryParams } from "@domain/interfaces/vendors";
 
-//Service
+// Service
 import { BookService } from "@application/services/api";
 
 @injectable()
-class GetTop5Books {
+class GetNewBooks {
 
-    private _bookService: BookService
+    private _bookService: BookService;
 
     constructor(
         @inject(TYPES.BookService) bookService: BookService
@@ -22,11 +23,11 @@ class GetTop5Books {
     }
 
     public async execute(params: IQueryParams): Promise<IBookDTO[]> {
-        const books = await this._bookService.getTop5Book(params)
+        const books = await this._bookService.getNewBooks(params)
 
         return books;
     }
 
 }
 
-export default GetTop5Books;
+export default GetNewBooks;
