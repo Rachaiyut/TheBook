@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from '../ui/AppLayout';
 
 const Home = lazy(() => import('../pages/Home'))
@@ -10,6 +10,7 @@ const Wishlist = lazy(() => import('../pages/Wishlist'))
 function AppRoutes() {
     return (
         <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
             <Route path="/my-account" element={<AppLayout />}>
                 <Route index path="/my-account" element={<Account />} />
