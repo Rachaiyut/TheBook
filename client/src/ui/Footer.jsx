@@ -14,7 +14,7 @@ import {
 function Footer() {
     return (
         <footer className="bg-moonLilly">
-            <div className='max-w-[1440px] mx-auto mt-6 pb-8 px-8'>
+            <div className='max-w-[1440px] mx-auto mt-6 pb-8 px-4'>
                 {/* main 1 */}
                 <div className="grid grid-cols-3 justify-center items-center p-8">
                     {/* item 1 */}

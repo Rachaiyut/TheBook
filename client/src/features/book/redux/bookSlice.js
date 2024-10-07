@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getBook } from "../../../services/book/getBooks";
+import { getTopBooksThisMonth } from "../../../services/book/getBooks";
 
 export const fetchBook = createAsyncThunk(
     'book/fetchBook',
     async function () {
-        const books = await getBook();
+        const books = await getTopBooksThisMonth();
         return books
     }
 )
