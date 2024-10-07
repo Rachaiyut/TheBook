@@ -38,7 +38,14 @@ import {
 //Use-Cases
 import { Register, Login } from "@application/use-cases/auth/index";
 import { DeleteUser, GetAllUsers, UpdateUser } from "@application/use-cases/user/index";
-import { CreateBook, GetAllBooks, UpdateBook, GetBook, GetTop5Books } from "@application/use-cases/book/index";
+import {
+    CreateBook,
+    GetAllBooks,
+    UpdateBook,
+    GetBook,
+    GetTop5Books,
+    GetNewBooks
+} from "@application/use-cases/book/index";
 import { CreateOrder, GetAllOrder } from "@application/use-cases/order/index";
 
 //Middlewares
@@ -128,7 +135,8 @@ export class DIContainer {
         this.container.bind<GetAllBooks>(TYPES.GetAllBooks).to(GetAllBooks);
         this.container.bind<UpdateBook>(TYPES.UpdateBook).to(UpdateBook);
         this.container.bind<GetBook>(TYPES.GetBook).to(GetBook);
-        this.container.bind<GetTop5Books>(TYPES.GetTop5Book).to(GetTop5Books);
+        this.container.bind<GetTop5Books>(TYPES.GetTop5Books).to(GetTop5Books);
+        this.container.bind<GetNewBooks>(TYPES.GetNewBooks).to(GetNewBooks);
 
         //Order
         this.container.bind<CreateOrder>(TYPES.CreateOrder).to(CreateOrder);
