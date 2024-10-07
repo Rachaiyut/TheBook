@@ -1,0 +1,484 @@
+[
+	{
+		"isbn": "ab114xyzres",
+		"name": "Galactic Voyage",
+		"categories": [
+			"Science Fiction"
+		],
+		"description": "An epic space saga exploring distant galaxies and alien civilizations.",
+		"authors": [
+			"Jane Doe"
+		],
+		"price": 12,
+		"totalStock": 60,
+		"ratingAverage": 4.7,
+		"pages": 500,
+		"publicationDate": "2025-05-30T00:00:00.000Z"
+	},
+	{
+		"isbn": "ac224abcqtu",
+		"name": "Starry Horizon",
+		"categories": [
+			"Science Fiction",
+			"Adventure"
+		],
+		"description": "A thrilling adventure through uncharted star systems.",
+		"authors": [
+			"John Smith"
+		],
+		"price": 15,
+		"totalStock": 45,
+		"ratingAverage": 4.6,
+		"pages": 620,
+		"publicationDate": "2024-09-01T00:00:00.000Z"
+	},
+	{
+		"isbn": "fg214defuvw",
+		"name": "Dark Matter Chronicles",
+		"categories": [
+			"Science Fiction",
+			"Thriller"
+		],
+		"description": "A dark and suspenseful story of a scientist's dangerous discovery.",
+		"authors": [
+			"Alice Brown"
+		],
+		"price": 18,
+		"totalStock": 30,
+		"ratingAverage": 4.9,
+		"pages": 480,
+		"publicationDate": "2025-02-10T00:00:00.000Z"
+	},
+	{
+		"isbn": "kl991rstjwx",
+		"name": "Quantum Shift",
+		"categories": [
+			"Science Fiction"
+		],
+		"description": "A quantum physicist unlocks the secret to faster-than-light travel.",
+		"authors": [
+			"George Miller"
+		],
+		"price": 20,
+		"totalStock": 100,
+		"ratingAverage": 4.8,
+		"pages": 700,
+		"publicationDate": "2023-11-12T00:00:00.000Z"
+	},
+	{
+		"isbn": "ty345lmnuvw",
+		"name": "Alien Encounters",
+		"categories": [
+			"Science Fiction",
+			"Mystery"
+		],
+		"description": "Strange signals from space lead to an unexpected discovery.",
+		"authors": [
+			"Sarah Connor"
+		],
+		"price": 14,
+		"totalStock": 70,
+		"ratingAverage": 4.5,
+		"pages": 400,
+		"publicationDate": "2024-04-07T00:00:00.000Z"
+	},
+	{
+		"isbn": "gh342ijklop",
+		"name": "Exoplanet Odyssey",
+		"categories": [
+			"Science Fiction"
+		],
+		"description": "A team of explorers ventures to a mysterious exoplanet.",
+		"authors": [
+			"Rebecca White"
+		],
+		"price": 16,
+		"totalStock": 80,
+		"ratingAverage": 4.3,
+		"pages": 600,
+		"publicationDate": "2024-12-05T00:00:00.000Z"
+	},
+	{
+		"isbn": "qr567defxyz",
+		"name": "Nebula's Heart",
+		"categories": [
+			"Science Fiction",
+			"Romance"
+		],
+		"description": "Love blossoms amidst a galaxy at war.",
+		"authors": [
+			"Michael Grey"
+		],
+		"price": 19,
+		"totalStock": 35,
+		"ratingAverage": 4.7,
+		"pages": 470,
+		"publicationDate": "2025-03-18T00:00:00.000Z"
+	},
+	{
+		"isbn": "uv923ghiklmn",
+		"name": "Galactic Outlaws",
+		"categories": [
+			"Science Fiction",
+			"Adventure"
+		],
+		"description": "A band of outlaws takes on the corrupt Galactic Federation.",
+		"authors": [
+			"Ethan Black"
+		],
+		"price": 12,
+		"totalStock": 55,
+		"ratingAverage": 4.2,
+		"pages": 520,
+		"publicationDate": "2024-02-28T00:00:00.000Z"
+	},
+	{
+		"isbn": "lm394opqstuv",
+		"name": "Asteroid City",
+		"categories": [
+			"Science Fiction",
+			"Mystery"
+		],
+		"description": "A remote mining colony on an asteroid hides dark secrets.",
+		"authors": [
+			"Sophia Adams"
+		],
+		"price": 21,
+		"totalStock": 60,
+		"ratingAverage": 4.9,
+		"pages": 390,
+		"publicationDate": "2025-10-22T00:00:00.000Z"
+	},
+	{
+		"isbn": "xy712ghikrst",
+		"name": "Galactic Guardians",
+		"categories": [
+			"Science Fiction",
+			"Action"
+		],
+		"description": "An elite force is formed to protect the galaxy from an ancient enemy.",
+		"authors": [
+			"Chris Thompson"
+		],
+		"price": 17,
+		"totalStock": 70,
+		"ratingAverage": 4.5,
+		"pages": 480,
+		"publicationDate": "2023-08-12T00:00:00.000Z"
+	},
+	{
+		"isbn": "op123fghijqwx",
+		"name": "Voyage to the Stars",
+		"categories": [
+			"Science Fiction"
+		],
+		"description": "A ship on a one-way journey to the edge of the known universe.",
+		"authors": [
+			"Laura Diaz"
+		],
+		"price": 20,
+		"totalStock": 90,
+		"ratingAverage": 4.8,
+		"pages": 640,
+		"publicationDate": "2025-06-05T00:00:00.000Z"
+	},
+	{
+		"isbn": "ab298xyzklmn",
+		"name": "Galactic Revolt",
+		"categories": [
+			"Science Fiction",
+			"Action"
+		],
+		"description": "Rebels rise against a tyrannical interstellar government.",
+		"authors": [
+			"Frank Moore"
+		],
+		"price": 19,
+		"totalStock": 40,
+		"ratingAverage": 4.4,
+		"pages": 580,
+		"publicationDate": "2024-11-15T00:00:00.000Z"
+	},
+	{
+		"isbn": "kl990fghijlmn",
+		"name": "Lunar Legacy",
+		"categories": [
+			"Science Fiction",
+			"Adventure"
+		],
+		"description": "An ancient alien artifact is discovered on the moon.",
+		"authors": [
+			"Natalie King"
+		],
+		"price": 14,
+		"totalStock": 65,
+		"ratingAverage": 4.6,
+		"pages": 510,
+		"publicationDate": "2023-05-25T00:00:00.000Z"
+	},
+	{
+		"isbn": "qw134pqrstuxyz",
+		"name": "Planetfall",
+		"categories": [
+			"Science Fiction",
+			"Adventure"
+		],
+		"description": "A new planet is colonized, but things are not as they seem.",
+		"authors": [
+			"Diana Roberts"
+		],
+		"price": 13,
+		"totalStock": 85,
+		"ratingAverage": 4.7,
+		"pages": 540,
+		"publicationDate": "2025-09-10T00:00:00.000Z"
+	},
+	{
+		"isbn": "fg311uvwxylop",
+		"name": "Starlight Chronicles",
+		"categories": [
+			"Science Fiction",
+			"Epic"
+		],
+		"description": "A multi-generational saga of a family exploring the stars.",
+		"authors": [
+			"Henry Scott"
+		],
+		"price": 22,
+		"totalStock": 25,
+		"ratingAverage": 4.8,
+		"pages": 750,
+		"publicationDate": "2025-01-13T00:00:00.000Z"
+	},
+	{
+		"isbn": "xy411ghijklop",
+		"name": "Astral Beacon",
+		"categories": [
+			"Science Fiction",
+			"Fantasy"
+		],
+		"description": "A mystical space journey through different dimensions.",
+		"authors": [
+			"Lucy Brown"
+		],
+		"price": 18,
+		"totalStock": 45,
+		"ratingAverage": 4.3,
+		"pages": 470,
+		"publicationDate": "2024-08-20T00:00:00.000Z"
+	},
+	{
+		"isbn": "vw221lmnqrst",
+		"name": "Nova's Quest",
+		"categories": [
+			"Science Fiction",
+			"Fantasy"
+		],
+		"description": "A young explorer unlocks the power of ancient star magic.",
+		"authors": [
+			"Peter Green"
+		],
+		"price": 11,
+		"totalStock": 75,
+		"ratingAverage": 4.5,
+		"pages": 400,
+		"publicationDate": "2023-09-29T00:00:00.000Z"
+	},
+	{
+		"isbn": "cd223ghijklop",
+		"name": "Galactic Wasteland",
+		"categories": [
+			"Science Fiction",
+			"Dystopian"
+		],
+		"description": "A bleak future where humanity struggles to survive on dying planets.",
+		"authors": [
+			"Mark Bennett"
+		],
+		"price": 16,
+		"totalStock": 60,
+		"ratingAverage": 4.2,
+		"pages": 530,
+		"publicationDate": "2025-04-19T00:00:00.000Z"
+	},
+	{
+		"isbn": "ghu44x6tvb6n",
+		"name": "The Dream",
+		"categories": [
+			"Fantasy",
+			"Romance"
+		],
+		"description": "A captivating story of adventure and mystery for book 1.",
+		"authors": [
+			"Michael Smith"
+		],
+		"price": 12,
+		"totalStock": 18,
+		"ratingAverage": 4.8,
+		"pages": 396,
+		"imageCover": "dream.png",
+		"publicationDate": "2024-10-01T16:41:46.334734"
+	},
+	{
+		"isbn": "au2ru270axqt",
+		"name": "Alone",
+		"categories": [
+			"Mystery",
+			"Romance"
+		],
+		"description": "A captivating story of adventure and mystery for book 2.",
+		"authors": [
+			"Sarah Johnson"
+		],
+		"price": 21,
+		"totalStock": 17,
+		"ratingAverage": 4.9,
+		"pages": 514,
+		"imageCover": "alone.jpeg",
+		"publicationDate": "2024-10-01T16:41:46.334785"
+	},
+	{
+		"isbn": "gj59icje284f",
+		"name": "Eye",
+		"categories": [
+			"Romance",
+			"Thriller"
+		],
+		"description": "A captivating story of adventure and mystery for book 3.",
+		"authors": [
+			"Alice Brown"
+		],
+		"price": 22,
+		"totalStock": 47,
+		"ratingAverage": 4.5,
+		"pages": 299,
+		"imageCover": "eye.png",
+		"publicationDate": "2024-10-03T16:41:46.334815"
+	},
+	{
+		"isbn": "e7flkon9ke9n",
+		"name": "Pencil",
+		"categories": [
+			"Fantasy",
+			"Mystery"
+		],
+		"description": "A captivating story of adventure and mystery for book 4.",
+		"authors": [
+			"John Doe"
+		],
+		"price": 11,
+		"totalStock": 44,
+		"ratingAverage": 4.5,
+		"pages": 481,
+		"imageCover": "pencil.jpeg",
+		"publicationDate": "2024-10-03T16:41:46.334833"
+	},
+	{
+		"isbn": "xyx3qyjgomae",
+		"name": "Prayer",
+		"categories": [
+			"Fantasy",
+			"Mystery"
+		],
+		"description": "A captivating story of adventure and mystery for book 5.",
+		"authors": [
+			"Alice Brown"
+		],
+		"price": 29,
+		"totalStock": 50,
+		"ratingAverage": 4.7,
+		"pages": 300,
+		"imageCover": "prayer.png",
+		"publicationDate": "2024-10-03T16:41:46.334850"
+	},
+	{
+		"isbn": "x9r30y4ij3wh",
+		"name": "Puzzle",
+		"categories": [
+			"Fantasy",
+			"Mystery"
+		],
+		"description": "A captivating story of adventure and mystery for book 6.",
+		"authors": [
+			"John Doe"
+		],
+		"price": 17,
+		"totalStock": 20,
+		"ratingAverage": 4.6,
+		"pages": 431,
+		"imageCover": "puzzle.png",
+		"publicationDate": "2024-10-02T16:41:46.334864"
+	},
+	{
+		"isbn": "vbugz3slexsu",
+		"name": "sword",
+		"categories": [
+			"Fantasy",
+			"Romance"
+		],
+		"description": "A captivating story of adventure and mystery for book 7.",
+		"authors": [
+			"Michael Smith"
+		],
+		"price": 19,
+		"totalStock": 28,
+		"ratingAverage": 4.6,
+		"pages": 557,
+		"imageCover": "sword.jpeg",
+		"publicationDate": "2024-10-03T16:41:46.334882"
+	},
+	{
+		"isbn": "279uhh4mu0f9",
+		"name": "The Invisible Man",
+		"categories": [
+			"Romance",
+			"Mystery"
+		],
+		"description": "A captivating story of adventure and mystery for book 8.",
+		"authors": [
+			"John Doe"
+		],
+		"price": 19,
+		"totalStock": 48,
+		"ratingAverage": 4.5,
+		"pages": 384,
+		"imageCover": "the-invisible-man.jpeg",
+		"publicationDate": "2024-10-03T16:41:46.334901"
+	},
+	{
+		"isbn": "fnjgsrqt2ow6",
+		"name": "Elevate Your Life",
+		"categories": [
+			"Thriller",
+			"Romance"
+		],
+		"description": "A captivating story of adventure and mystery for book 9.",
+		"authors": [
+			"Michael Smith"
+		],
+		"price": 18,
+		"totalStock": 12,
+		"ratingAverage": 5.0,
+		"pages": 269,
+		"imageCover": "elevate-your-life.png",
+		"publicationDate": "2024-10-02T16:41:46.334918"
+	},
+	{
+		"isbn": "ltpdc5yz90by",
+		"name": "I will Always Love You",
+		"categories": [
+			"Romance",
+			"Thriller"
+		],
+		"description": "A captivating story of adventure and mystery for book 10.",
+		"authors": [
+			"Alice Brown"
+		],
+		"price": 30,
+		"totalStock": 33,
+		"ratingAverage": 4.7,
+		"pages": 422,
+		"imageCover": "love-you.png",
+		"publicationDate": "2024-10-03T16:41:46.334933"
+	}
+]

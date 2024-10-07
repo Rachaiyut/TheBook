@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  postgres:
+    image: "postgres:16.4"
+    container_name: postgresdb
+    shm_size: 128mb
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=book_shop
+      - POSTGRES_USER=charut
+      - POSTGRES_PASSWORD=Charutwbi@2001
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: backend
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    volumes:
+      - /app/node_modules
+      - backend_images:/app/public/images
+      - ./server:/app
+    env_file:
+      - ./server/.env
+    depends_on:
+      - postgres
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: frontend
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client/src:/app/src
+    command: ["npm", "run", "dev"]
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+volumes:
+  postgresql:
+  backend_images:

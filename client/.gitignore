@@ -1,0 +1,31 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Output directoey
+node_modules
+dist
+dist-ssr
+*.local
+
+# @vitjs/vit temporary directory
+.vit
+
+# public
+public
+assets
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+.eslintcache
