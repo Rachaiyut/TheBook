@@ -1,3 +1,4 @@
+
 export const TYPES = {
     Express: Symbol.for("Express"),
     App: Symbol.for("App"),
@@ -13,7 +14,8 @@ export const TYPES = {
     Login: Symbol.for("login"),
     GetAllBooks: Symbol.for("GetAllBooks"),
     GetBook: Symbol.for("GetBook"),
-    GetTop5Book: Symbol.for("GetTop5Books"),
+    GetTop5Books: Symbol.for("GetTop5Books"),
+    GetNewBooks: Symbol.for("GetNewBooks"),
     CreateBook: Symbol.for("CreateBook"),
     UpdateBook: Symbol.for("UpdateBook"),
     GetAllUsers: Symbol.for("GetAllUsers"),
