@@ -1,13 +1,12 @@
 
-function Search() {
+function Search({ register }) {
 
     return (
         <input
-            type="text"
+            className="focus:outline-none w-96 px-2 py-1 text-xs"
             placeholder="Title, author, keyword or ISBN"
-            // value={searchQuery}
-            // onChange={handleInputChange}
-            className="w-96 px-2 py-1 text-xs"
+            type="text"
+            {...register('book')}
         />
     )
 }

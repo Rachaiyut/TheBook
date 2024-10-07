@@ -17,8 +17,8 @@ function AppRoutes() {
                 <Route index path="/my-account/order" element={<Order />} />
                 <Route index path="/my-account/wishlist" element={<Wishlist />} />
             </Route>
-            <Route path="/:test" element={<AppLayout />}>
-                <Route></Route>
+            <Route path="/result" element={<AppLayout />}>
+                <Route index path='/result/:slug' />
             </Route>
         </Routes >
     )

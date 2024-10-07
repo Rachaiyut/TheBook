@@ -1,17 +1,10 @@
-import { useState } from "react";
+function Dropdown({ register }) {
 
-function Dropdown() {
-    const [selectedProduct, setSelectedProduct] = useState('Select Products');
-
-    const handleProductChange = (e) => {
-        setSelectedProduct(e.target.value);
-    }
 
     return (
         <select
-            className="w-40 px-2 py-1 text-xs"
-            value={selectedProduct}
-            onChange={handleProductChange}
+            className="focus:outline-none w-40 px-2 py-1 text-xs"
+            {...register('genres')}
         >
             <option>Select Products</option>
             <option value="Books">Books</option>
