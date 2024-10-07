@@ -1,0 +1,26 @@
+# Node modules
+node_modules
+
+# Build output
+dist
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# Dockerfile and Docker-related files (optional)
+Dockerfile
+.dockerignore
+
+# Environment variable files
+.env
+
+# Git files
+.git
+.gitignore
+
+# OS-specific files
+.DS_Store
+Thumbs.db
