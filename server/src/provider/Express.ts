@@ -65,7 +65,7 @@ class Express {
                     data: null,
                     errors: [
                         {
-                            "code": "",
+                            "code": err.statusCode,
                             "message": err.message
                         }
                     ]

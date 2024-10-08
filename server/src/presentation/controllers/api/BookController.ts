@@ -1,5 +1,3 @@
-// import path from "path";
-
 // Express
 import { Request, Response } from "express";
 
@@ -9,10 +7,22 @@ import { TYPES } from "@inversify/types";
 import { controller, httpGet, httpPatch, httpPost } from "inversify-express-utils";
 
 //Use-Cases
-import { CreateBook, GetAllBooks, GetBook, UpdateBook, GetTop5Books, GetNewBooks } from "@application/use-cases/book/index";
+import {
+    CreateBook,
+    GetAllBooks,
+    GetBook,
+    UpdateBook,
+    GetTop5Books,
+    GetNewBooks
+} from "@application/use-cases/book/index";
+
+// Interface
 import { IBookDTO } from "@application/dtos/index";
-import { MulterMiddleware, RolesMiddleware } from "@presentation/middlewares/index";
 import { IQueryParams } from "@domain/interfaces/vendors";
+
+// Middleware
+import { MulterMiddleware, RolesMiddleware } from "@presentation/middlewares/index";
+
 
 const upload = MulterMiddleware;
 
@@ -73,12 +83,14 @@ class BookController {
         })
     }
 
+
     @httpGet(
         '/:isbn'
     )
     public async getBook(req: Request<{ isbn: string }>, res: Response) {
         const isbn = req.params.isbn;
-        const books = await this._getBook.execute(isbn)
+
+        const books = await this._getBook.execute(isbn);
 
         res.status(200).json({
             success: true,
@@ -97,6 +109,7 @@ class BookController {
         RolesMiddleware(["admin", "user"])
     )
     public async getAllBooks(req: Request, res: Response) {
+
         const books = await this._getAllBooks.execute();
 
         res.status(200).json({
@@ -109,6 +122,7 @@ class BookController {
             }
         })
     }
+
 
     @httpPatch('/:isbn')
     public async updateBook(req: Request<{ isbn: string }>, res: Response) {
