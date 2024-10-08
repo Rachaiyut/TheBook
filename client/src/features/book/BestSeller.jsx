@@ -79,27 +79,3 @@ function BestSeller() {
 }
 
 export default BestSeller;
-
-// <Carousel className='bg-[#f1f1f1] pt-8 pb-8' responsive={responsive}>
-// {status === "loading" ? (
-//     <Loader />
-// ) : (
-//     books.length > 0 ? (
-//         books.map((bookItem) => (
-//             <div className="flex items-center justify-center flex-col gap-2" key={bookItem._id}>
-//                 <div className='flex justify-center items-center'>
-//                     <img
-//                         className="h-72 text-center"
-//                         src={`http://127.0.0.1:3000/img/books/${bookItem.imageCover}`}
-//                         alt={bookItem.name}
-//                     />
-//                 </div>
-//                 <p>{bookItem.name}</p>
-//                 <p>{bookItem.authors.join(', ')}</p>
-//             </div>
-//         ))
-//     ) : (
-//         <p>No books available.</p>
-//     )
-// )}
-// </Carousel>

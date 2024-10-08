@@ -25,8 +25,6 @@ const responsive = {
 const NewBook = () => {
     const { isLoading, data } = useGetBooks(); // Correct destructuring
 
-    console.log(data, isLoading);
-
     return (
         <section className='text-spaceCadet bg-moonLily pb-16'>
             <h2 className="max-w-[1440px] mx-auto px-4 pt-4 pb-4 text-2xl font-bold">
