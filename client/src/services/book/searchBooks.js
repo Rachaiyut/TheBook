@@ -2,7 +2,7 @@
 export const searchBook = async (data) => {
     const { genres, book } = data;
 
-    const response = await fetch(`http://localhost:8000/api/v1/books/${book}`);
+    const response = await fetch(`http://localhost:8000/api/v1/books?name=${book}`);
 
     if (!response.ok) {
         throw new Error('Network Error');
