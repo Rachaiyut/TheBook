@@ -21,7 +21,7 @@ import { IBookDTO } from "@application/dtos/index";
 import { IQueryParams } from "@domain/interfaces/vendors";
 
 // Middleware
-import { MulterMiddleware, RolesMiddleware } from "@presentation/middlewares/index";
+import { MulterMiddleware } from "@presentation/middlewares/index";
 
 
 const upload = MulterMiddleware;
@@ -103,14 +103,12 @@ class BookController {
 
 
     @httpGet(
-        '/',
-        TYPES.JwtMiddleware,
-        TYPES.ProtectMiddleware,
-        RolesMiddleware(["admin", "user"])
+        '/'
     )
-    public async getAllBooks(req: Request, res: Response) {
+    public async getAllBooks(req: Request<unknown, unknown, unknown, IQueryParams>, res: Response) {
+        const params = req.query;
 
-        const books = await this._getAllBooks.execute();
+        const books = await this._getAllBooks.execute(params);
 
         res.status(200).json({
             success: true,

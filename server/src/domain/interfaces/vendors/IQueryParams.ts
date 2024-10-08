@@ -1,5 +1,5 @@
 interface IQueryParams {
-    title?: string;
+    name?: string;
     author?: string;
     genre?: string;
     minPrice?: number;

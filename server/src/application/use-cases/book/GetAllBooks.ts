@@ -7,6 +7,9 @@ import { IBookDTO } from "@application/dtos";
 //Service
 import { BookService } from "@application/services/api";
 
+// Interface
+import { IQueryParams } from "@domain/interfaces/vendors";
+
 @injectable()
 class GetAllBooks {
 
@@ -18,8 +21,8 @@ class GetAllBooks {
         this._bookService = bookService;
     }
 
-    public async execute(): Promise<IBookDTO[]> {
-        const books = await this._bookService.getAllBooks();
+    public async execute(params: IQueryParams): Promise<IBookDTO[]> {
+        const books = await this._bookService.getAllBooks(params);
 
         return books
     }
