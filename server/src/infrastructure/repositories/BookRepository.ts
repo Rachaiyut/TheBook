@@ -21,7 +21,7 @@ import { IQueryParams } from "@domain/interfaces/vendors";
 class BookRepository {
 
 
-    private _bookModel: typeof BookModel;
+    private readonly _bookModel: typeof BookModel;
 
 
     constructor(
@@ -69,6 +69,8 @@ class BookRepository {
 
     public async getAllBooks(limit: number = 10, offset: number = 0): Promise<Book[]> {
         const books = await this._bookModel.findAll({ limit, offset });
+
+        console.log(books)
 
         return books.map((book) => BookMapper.toEntityFromModel(book))
     }

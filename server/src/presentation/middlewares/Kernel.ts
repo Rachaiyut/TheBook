@@ -1,7 +1,7 @@
 import { Application } from "express";
 
 import CORS from "./cors/CORS";
-import Http from "./http/http.middleware";
+import Http from "./http/HttpMiddleware";
 import Statics from "./static/Statics";
 
 // Config
