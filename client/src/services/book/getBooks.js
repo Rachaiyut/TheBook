@@ -24,3 +24,7 @@ export const getNewBooks = async () => {
     return result;
 
 }
+
+export const getBooks = async () => {
+    
+}

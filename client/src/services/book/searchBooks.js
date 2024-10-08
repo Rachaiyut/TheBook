@@ -2,7 +2,6 @@
 export const searchBook = async (data) => {
     const { genres, book } = data;
 
-
     const response = await fetch(`http://localhost:8000/api/v1/books/${book}`);
 
     if (!response.ok) {
@@ -11,5 +10,6 @@ export const searchBook = async (data) => {
 
     const result = await response.json()
 
-    return result;
+
+    return result.data;
 };
