@@ -1,6 +1,9 @@
 import { injectable, inject } from "inversify";
 import { TYPES } from "@inversify/types";
 
+// Interface
+import { IQueryParams } from "@domain/interfaces/vendors";
+
 //Entitie
 import { Book } from "@domain/entites";
 
@@ -15,7 +18,6 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
 //Mapper
 import { BookMapper } from "@application/mappers/BookMapper";
-import { IQueryParams } from "@domain/interfaces/vendors";
 
 @injectable()
 class BookService {
@@ -72,8 +74,8 @@ class BookService {
     }
 
 
-    public async getAllBooks(): Promise<IBookDTO[]> {
-        const books = await this._bookRepository.getAllBooks();
+    public async getAllBooks(params: IQueryParams): Promise<IBookDTO[]> {
+        const books = await this._bookRepository.getAllBooks(params);
 
         return books.map((book) => BookMapper.toDto(book));
     }

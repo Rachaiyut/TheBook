@@ -67,10 +67,32 @@ class BookRepository {
     }
 
 
-    public async getAllBooks(limit: number = 10, offset: number = 0): Promise<Book[]> {
-        const books = await this._bookModel.findAll({ limit, offset });
+    public async getAllBooks(params: IQueryParams): Promise<Book[]> {
+        const whereClause: { [k: string]: unknown } = {};
+        const limit = params.limit;
 
-        console.log(books)
+        if (params.name) {
+            whereClause.name = { [Op.iLike]: `${params.name}%` }
+        }
+
+        if (params.genre) {
+            whereClause.categories = params.genre;
+        }
+
+        if (params.minPrice) {
+            whereClause.price = { [Op.gte]: params.minPrice };
+        }
+
+        if (params.maxPrice) {
+            whereClause.price = { [Op.lte]: params.maxPrice };
+        }
+
+        const books = await this._bookModel.findAll({
+            where: whereClause,
+            limit
+
+        });
+
 
         return books.map((book) => BookMapper.toEntityFromModel(book))
     }
