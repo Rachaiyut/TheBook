@@ -1,21 +1,31 @@
 import { useState } from "react";
 
+import { useNavigate } from 'react-router-dom';
+
 import { useForm } from "react-hook-form";
 import { useSearchBook } from "./reactQuery/useSearchBook";
-import { FaSearch } from "react-icons/fa";
 
+// UI
 import Dropdown from "../../ui/DropDown";
 import Search from "../../ui/Search";
 import ResultDropDown from "./ResultDropDown";
+import SearchButton from "../../ui/SearchButton";
 
 function SearchBar() {
     const [isDropdownVisible, setDropdownVisible] = useState(false);
-    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const { register, handleSubmit, reset } = useForm();
     const { searchBook, books } = useSearchBook();
 
     const onSubmit = (data) => {
         searchBook(data);
+        navigate(`/result/${data.book}`, { state: { books } })
+        reset()
     };
+
+    const handleSearhChange = (data) => {
+        searchBook({ genre: "", book: data.target.value });
+    }
 
     const handleMouseEnter = () => {
         setDropdownVisible(true);
@@ -36,16 +46,13 @@ function SearchBar() {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <Dropdown register={register} />
-                <Search register={register} />
-                <button className="bg-black p-3" type="submit">
-                    <FaSearch className="text-white text-xs" />
-                </button>
+                <Search
+                    register={register}
+                    onSearchChange={handleSearhChange}
+                />
+                <SearchButton />
             </form>
-            {isDropdownVisible && books && books.length > 0 && (
-                <div className="absolute z-10 w-full">
-                    <ResultDropDown books={books} />
-                </div>
-            )}
+            {isDropdownVisible && books && books.length > 0 && <ResultDropDown books={books} />}
         </div>
     );
 }

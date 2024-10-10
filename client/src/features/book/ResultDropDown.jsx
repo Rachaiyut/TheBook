@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
 
 function ResultDropDown({ books }) {
+
     return (
-        <ul
-            role="listbox"
-            tabIndex={0}
-            className="focus:outline-none py-4 pl-5 text-xs bg-gray-200 w-full"
-        >
-            {books && books.length > 0 ? (
-                books.map((book) => (
+        <div className="absolute z-10 w-full">
+            <ul
+                role="listbox"
+                tabIndex={0}
+                className="focus:outline-none py-4 pl-5 text-xs bg-gray-200 w-full"
+            >
+                {books.map((book) => (
                     <li
                         key={book.isbn}
                         role="option"
@@ -17,11 +18,9 @@ function ResultDropDown({ books }) {
                     >
                         {book.name}
                     </li>
-                ))
-            ) : (
-                <li>No books available.</li>
-            )}
-        </ul>
+                ))}
+            </ul>
+        </div>
     );
 }
 

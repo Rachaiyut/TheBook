@@ -14,6 +14,10 @@ class Local {
         const jwtExpire = process.env.JWT_EXPIRE!;
         const jwtCookieExpire = process.env.JWT_COOKIE_EXPIRES!;
 
+        const googleId = process.env.GOOGLE_ID!;
+        const googleSecret = process.env.GOOGLE_SECRRET!;
+        const googleCallback = process.env.GOOGLE_CALLBACK!;
+
         const maxUploadLimit = process.env.APP_MAX_UPLOAD_LIMIT!
         const maxParameterLimit = parseInt(process.env.APP_MAX_PARAMETER_LIMIT!)
 
@@ -27,6 +31,9 @@ class Local {
             jwtSecret,
             jwtExpire,
             jwtCookieExpire,
+            googleId,
+            googleSecret,
+            googleCallback,
             maxUploadLimit,
             maxParameterLimit,
             url,

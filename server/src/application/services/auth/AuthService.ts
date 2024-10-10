@@ -21,6 +21,7 @@ import { UserRepository } from "@infrastructure/repositories/index";
 //Entity
 import { User } from "@domain/entites/index";
 
+
 @injectable()
 class AuthService {
 
@@ -30,6 +31,7 @@ class AuthService {
     private _jwtService: JWTService;
 
     private _userRepository: UserRepository;
+
 
 
     constructor(
@@ -42,6 +44,7 @@ class AuthService {
         this._passwordService = passwordService;
         this._jwtService = jwtService;
         this._userRepository = userRepository;
+
     }
 
 

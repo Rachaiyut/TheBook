@@ -15,7 +15,7 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 @injectable()
 class UserRepository {
 
-    private _userModel: typeof UserModel;
+    private readonly _userModel: typeof UserModel;
 
     constructor(
         @inject(TYPES.UserModel) userModel: typeof UserModel
@@ -58,7 +58,22 @@ class UserRepository {
             return null;
         }
 
+
     }
+
+
+    // public async findUserByGoogleId(googleId: string): Promise<User | null> {
+    //     const user = await this._userModel.findOne({
+    //         where: { googleId }
+    //     });
+
+    //     if (user) {
+    //         return UserMapper.toEntityFromModel(user);
+    //     } else {
+    //         return null;
+    //     }
+
+    // }
 
     public async updateUserByPK(userId: string, user: User): Promise<User> {
         const userModel = UserMapper.toPersistenceModel(user);

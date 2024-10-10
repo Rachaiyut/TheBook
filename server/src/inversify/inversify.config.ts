@@ -54,47 +54,62 @@ import {
     ProtectMiddleware,
 } from "@presentation/middlewares/index";
 
+import GoogleStragy from "@infrastructure/services/auth/strategies/googleStrategy";
+import Passport from "@infrastructure/services/auth/passport/passport";
+
 
 export class DIContainer {
+
+
     public container: Container;
+
 
     constructor() {
         this.container = new Container();
         this.configure();
     }
 
+
     private configure() {
-        //Provider    
+        // Provider    
         this.configureApp()
         this.configureExpress();
 
-        //Repositpry
+        // Repositpry
         this.configureRepository();
 
-        //Model
+        // Model
         this.configureModels();
 
-        //Services
+        // Services
         this.configureServices();
+
+        // Services
+        this.configureOuterService();
 
         //Usecase
         this.configureUsecase();
 
-        //Middleware
+        // Middleware
         this.middleware();
     }
+
 
     private configureExpress() {
         this.container.bind<Express>(TYPES.Express).to(Express);
     }
 
+
     private configureApp() {
 
-        this.container.bind<App>(TYPES.App).toDynamicValue(context => {
-            const express = context.container.get<Express>(TYPES.Express);
-            return new App(express);
-        });
+        // this.container.bind<App>(TYPES.App).toDynamicValue(context => {
+        //     const express = context.container.get<Express>(TYPES.Express);
+        //     return new App(express);
+        // });
+
+        this.container.bind<App>(TYPES.App).to(App)
     }
+
 
     private configureModels() {
         this.container.bind<typeof BookModel>(TYPES.BookModel).toConstantValue(BookModel);
@@ -103,12 +118,14 @@ export class DIContainer {
         this.container.bind<typeof OrderItemsModel>(TYPES.OrderItemsModel).toConstantValue(OrderItemsModel);
     }
 
+
     private configureRepository() {
         this.container.bind<BookRepository>(TYPES.BookRepository).to(BookRepository);
         this.container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository);
         this.container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepository);
         this.container.bind<OrderItemsRepository>(TYPES.OrderItemsRepository).to(OrderItemsRepository)
     }
+
 
     private configureServices() {
         this.container.bind<UserService>(TYPES.UserService).to(UserService);
@@ -119,6 +136,12 @@ export class DIContainer {
         this.container.bind<AuthService>(TYPES.AuthService).to(AuthService);
         this.container.bind<RoleService>(TYPES.RoleService).to(RoleService);
     }
+
+
+    private configureOuterService() {
+        this.container.bind<GoogleStragy>(TYPES.GoogleStragy).to(GoogleStragy);
+    }
+
 
     private configureUsecase() {
         //Auth
@@ -146,9 +169,11 @@ export class DIContainer {
     private middleware() {
         this.container.bind<JwtMiddleware>(TYPES.JwtMiddleware).to(JwtMiddleware);
         this.container.bind<ProtectMiddleware>(TYPES.ProtectMiddleware).to(ProtectMiddleware);
+        this.container.bind<Passport>(TYPES.Passport).to(Passport)
     }
 
     public getContainer() {
+        console.log("Returning DI container");
         return this.container;
     }
 }

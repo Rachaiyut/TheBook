@@ -1,14 +1,22 @@
+import PropTypes from 'prop-types';
 
-function Search({ register }) {
+function Search({ register, onSearchChange }) {
 
     return (
         <input
-            className="focus:outline-none w-96 px-2 py-1 text-xs"
-            placeholder="Title, author, keyword or ISBN"
             type="text"
-            {...register('book')}
+            {...register('book', {
+                onChange: onSearchChange
+            })}
+            className="focus:outline-none w-96 px-2 py-1 text-xs"
+            placeholder="Name, author, keyword or ISBN"
         />
     )
 }
 
-export default Search
+Search.propTypes = {
+    register: PropTypes.func.isRequired,
+    onSearchChange: PropTypes.func.isRequired,
+};
+
+export default Search 

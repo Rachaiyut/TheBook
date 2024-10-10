@@ -1,4 +1,3 @@
-
 export const TYPES = {
     Express: Symbol.for("Express"),
     App: Symbol.for("App"),
@@ -34,4 +33,6 @@ export const TYPES = {
     UserController: Symbol.for("UserController"),
     JwtMiddleware: Symbol.for("JwtMiddleware"),
     ProtectMiddleware: Symbol.for("ProtectMiddlware"),
+    Passport: Symbol.for("Passport"),
+    GoogleStragy: Symbol.for("GoogleStragy")
 };

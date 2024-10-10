@@ -10,6 +10,5 @@ export const searchBook = async (data) => {
 
     const result = await response.json()
 
-
     return result.data;
 };

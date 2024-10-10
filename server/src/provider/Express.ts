@@ -31,6 +31,7 @@ class Express {
 
         this.server = new InversifyExpressServer(DIContainer.getContainer(), router, { rootPath: "/api/v1" });
 
+    
         this.mountMiddlewares();
         this.errorHandling();
 
@@ -71,6 +72,7 @@ class Express {
                     ]
                 });
             });
+
         });
     }
 }

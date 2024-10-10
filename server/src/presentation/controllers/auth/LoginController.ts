@@ -3,7 +3,10 @@ import { Request, Response } from "express";
 //Inversfiy
 import { inject } from "inversify";
 import { TYPES } from "@inversify/types";
-import { controller, httpPost } from "inversify-express-utils";
+import { controller, httpPost, httpGet } from "inversify-express-utils";
+
+// Passport
+import passport from 'passport';
 
 //DTO
 import ILoginDTO from "@application/dtos/auth/ILoginDTO";
@@ -16,13 +19,16 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 @controller('/auth')
 class LoginController {
 
-    private _loginUsecase: LoginUsecase
+
+    private readonly _loginUsecase: LoginUsecase
+
 
     constructor(
         @inject(TYPES.Login) loginUsecase: LoginUsecase
     ) {
         this._loginUsecase = loginUsecase
     }
+
 
     @httpPost("/login")
     public async login(req: Request<unknown, unknown, ILoginDTO>, res: Response) {
@@ -43,6 +49,29 @@ class LoginController {
             success: true,
             data: result
         })
+    }
+
+
+    @httpGet("/login/google")
+    public googleLogin(req: Request, res: Response) {
+        passport.authenticate('google', {
+            scope: ['profile', 'email']
+        })(req, res);
+    }
+
+    @httpGet(
+        "/google/callback",
+        passport.authenticate('google', {
+            failureRedirect: "http://localhost:5173", // Redirect on failure
+            session: false
+        })
+    )
+    public googleCallback(req: Request, res: Response) {
+        // If authentication is successful, this function will be called after passport.authenticate
+        console.log("Test");
+
+        res.redirect("http://localhost:5173");
+
     }
 
 }
