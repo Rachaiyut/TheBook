@@ -8,6 +8,7 @@ export class UserMapper {
     public static toDto(user: Partial<User>): IUserDTO {
         return {
             userId: user.userId!,
+            googleId: user.googleId!,
             name: user.name!,
             email: user.email!,
             password: user.password!,
@@ -26,6 +27,7 @@ export class UserMapper {
     public static toEntity(dto: IUserDTO): User {
         return new User(
             dto.userId,
+            dto.googleId,
             dto.name,
             dto.email,
             dto.password,
@@ -40,6 +42,7 @@ export class UserMapper {
 
         return new User(
             userModel.dataValues.userId,
+            userModel.dataValues.googleId,
             userModel.dataValues.name,
             userModel.dataValues.email,
             userModel.dataValues.password,
@@ -54,6 +57,7 @@ export class UserMapper {
     public static toPersistenceModel(user: User): UserModel {
         return UserModel.build({
             userId: user.userId,
+            googleId: user.googleId,
             name: user.name,
             email: user.email,
             password: user.password,

@@ -62,18 +62,18 @@ class UserRepository {
     }
 
 
-    // public async findUserByGoogleId(googleId: string): Promise<User | null> {
-    //     const user = await this._userModel.findOne({
-    //         where: { googleId }
-    //     });
+    public async findUserByGoogleId(googleId: string): Promise<User | null> {
+        const user = await this._userModel.findOne({
+            where: { googleId }
+        });
 
-    //     if (user) {
-    //         return UserMapper.toEntityFromModel(user);
-    //     } else {
-    //         return null;
-    //     }
+        if (user) {
+            return UserMapper.toEntityFromModel(user);
+        } else {
+            return null;
+        }
 
-    // }
+    }
 
     public async updateUserByPK(userId: string, user: User): Promise<User> {
         const userModel = UserMapper.toPersistenceModel(user);

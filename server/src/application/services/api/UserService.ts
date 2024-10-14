@@ -34,8 +34,11 @@ class UserService {
 
 
     public async createNewUser(registerDTO: IRegisterDTO): Promise<IUserDTO> {
+        const googleId = registerDTO.googleId ? registerDTO.googleId : "";
+
         const newUser = new User(
             uuidv4(),
+            googleId,
             registerDTO.name,
             registerDTO.email,
             registerDTO.password,
@@ -60,15 +63,15 @@ class UserService {
     }
 
 
-    // public async getUserByGoogleId(googleId: string): Promise<IUserDTO | null> {
-    //     const user = await this._userRepository.findByGoogleId(googleId)
+    public async getUserByGoogleId(googleId: string): Promise<IUserDTO | null> {
+        const user = await this._userRepository.findUserByGoogleId(googleId)
 
-    //     if (user) {s
-    //         return UserMapper.toDto(user)
-    //     } else {
-    //         return null
-    //     }
-    // }
+        if (user) {
+            return UserMapper.toDto(user)
+        } else {
+            return null
+        }
+    }
 
 
     public async getAllUsers(limit: number = 10, offset: number = 0): Promise<IUserDTO[]> {
@@ -97,6 +100,7 @@ class UserService {
             userId,
             UserMapper.toEntity({
                 userId: userModel.userId,
+                googleId: userModel.googleId,
                 name: userDTO.name ?? userModel.name,
                 email: userDTO.email ?? userModel.email,
                 password: userDTO.password ?? userModel.password,

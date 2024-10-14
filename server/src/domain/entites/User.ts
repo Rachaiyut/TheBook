@@ -6,6 +6,7 @@ import UserRole from "./UserRole";
 
 class User implements IUser {
 	userId: string;
+	googleId: string;
 	name: string;
 	email: string;
 	password: string;
@@ -15,6 +16,7 @@ class User implements IUser {
 
 	constructor(
 		userId: string,
+		googleId: string,
 		name: string,
 		email: string,
 		password: string,
@@ -23,6 +25,7 @@ class User implements IUser {
 		photo?: string,
 	) {
 		this.userId = userId;
+		this.googleId = googleId;
 		this.name = name;
 		this.email = email;
 		this.password = password;

@@ -15,7 +15,7 @@ class Local {
         const jwtCookieExpire = process.env.JWT_COOKIE_EXPIRES!;
 
         const googleId = process.env.GOOGLE_ID!;
-        const googleSecret = process.env.GOOGLE_SECRRET!;
+        const googleSecret = process.env.GOOGLE_SECRET!;
         const googleCallback = process.env.GOOGLE_CALLBACK!;
 
         const maxUploadLimit = process.env.APP_MAX_UPLOAD_LIMIT!

@@ -41,8 +41,6 @@ class RegisterController {
 
         const result = await this._registerUsecase.execute(req.body);
 
-        console.log("From regisyer controller", result)
-
         res.cookie("jwt", result.token)
 
         res.status(201).json({

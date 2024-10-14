@@ -67,8 +67,7 @@ class LoginController {
         })
     )
     public googleCallback(req: Request, res: Response) {
-        // If authentication is successful, this function will be called after passport.authenticate
-        console.log("Test");
+        console.log("From Login controller", req.user)
 
         res.redirect("http://localhost:5173");
 

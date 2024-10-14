@@ -10,7 +10,7 @@ import {
 	Attribute,
 	PrimaryKey,
 	ColumnName,
-	Table, 
+	Table,
 	Default,
 	BeforeCreate
 } from '@sequelize/core/decorators-legacy';
@@ -33,6 +33,10 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 	@ColumnName('user_id')
 	@PrimaryKey
 	declare userId: string
+
+	@Attribute(DataTypes.TEXT)
+	@ColumnName("google_id")
+	declare googleId: string 
 
 	@Attribute(DataTypes.STRING)
 	declare name: string
