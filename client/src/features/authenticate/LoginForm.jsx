@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { useOptionalForm } from "../../contexts/OptionalFormContext";
 
@@ -67,12 +69,16 @@ function OptionSignUp() {
                     <span className='bg-[#f1f1f1] px-2 text-xs sm:text-sm text-center relative z-10'>or</span>
                 </div>
 
-                <div className="flex justify-center gap-6 mt-6">
+                <div className="flex justify-center gap-6 mt-6 ">
                     <div className="px-4 py-3 rounded-md bg-red-400 text-white flex items-center justify-center shadow-md hover:bg-red-500 transition duration-150">
-                        <FaGoogle className="text-lg" />
+                        <Link to={"http://localhost:8000/api/v1/auth/login/google"}>
+                            <FaGoogle className="text-lg" />
+                        </Link>
                     </div>
                     <div className="px-4 py-3 rounded-md bg-blue-600 text-white flex items-center justify-center shadow-md hover:bg-blue-700 transition duration-150">
-                        <FaFacebookF className="text-lg" />
+                        <Link>
+                            <FaFacebookF className="text-lg" />
+                        </Link>
                     </div>
                 </div>
 
