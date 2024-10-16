@@ -35,7 +35,7 @@ const Modal = forwardRef(function Modal(props, ref) {
             className='container max-w-[443px] min-h-[513px] bg-[#f1f1f1] rounded-md shadow-lg overflow-hidden'
         >
 
-            {isLoginFormVisible && <FormLogin />}
+            {isLoginFormVisible && <FormLogin handleHide={handleHide} />}
 
             {isSignUpFormVisible && <FormSignUp />}
 

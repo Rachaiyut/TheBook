@@ -1,8 +1,48 @@
+import { useEffect } from "react";
+
+// React Router Dom
+import { useNavigate } from "react-router-dom";
+
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { registerRedux } from "./redux/authSlice";
+
+// Context
 import { useOptionalForm } from "../../contexts/OptionalFormContext";
 
+// React Hook Form
+import { useForm } from "react-hook-form";
+
+// UI
+import Loader from "../../ui/Loader";
+
 function SignUp() {
+    const { loading, userInfo, error, success } = useSelector((state) => state.auth)
+    const dispatch = useDispatch();
+    const { register, handleSubmit, reset } = useForm()
+
+    const navigate = useNavigate();
 
     const { showLoginForm } = useOptionalForm();
+
+
+    const submitForm = (data) => {
+
+        data.email = data.email.toLowerCase()
+
+        dispatch(registerRedux(data))
+        reset();
+    }
+
+    useEffect(() => {
+
+        if (success) return navigate('/my-account')
+
+
+    }, [userInfo, loading, success, error, navigate])
+
+
+    if (loading) return <Loader />
 
     return (
         <>
@@ -11,7 +51,7 @@ function SignUp() {
                 <div className='flex flex-col items-start gap-4'>
                     <form
                         className="w-full"
-                    // onSubmit={handleSubmitLogin}
+                        onSubmit={handleSubmit(submitForm)}
                     >
                         <div className="mb-2">
                             <label htmlFor="user-email" className="block text-sm font-medium text-gray-700 uppercase mb-2">Email:</label>
@@ -19,10 +59,9 @@ function SignUp() {
                                 type="email"
                                 id="user-email"
                                 name="email"
-                                // value={data.email}
+                                {...register('email')}
                                 placeholder="example@yahoo.com"
                                 className="w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
-                            // onChange={handleChange}
                             />
                             <div id="user-email" className="sr-only">
                                 Please enter a valid username. It must contain at least 6 characters.
@@ -34,9 +73,8 @@ function SignUp() {
                                 type="password"
                                 id="password"
                                 name="password"
-                                // value={data.password}
+                                {...register('password')}
                                 className="w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            // onChange={handleChange}
                             />
                             <div id="user-password" className="sr-only">
                                 Your password should be more than 6 characters.

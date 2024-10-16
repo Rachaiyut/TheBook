@@ -1,9 +1,13 @@
 import { Outlet } from "react-router-dom"
+
+import withAuthGuard from "../hoc/withAuthGuard"
+
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 import SideBar from "./Sidebar"
 
 function AppLayout() {
+
     return (
         <>
             <Navbar />
@@ -19,4 +23,4 @@ function AppLayout() {
     )
 }
 
-export default AppLayout   
+export default withAuthGuard(AppLayout)   

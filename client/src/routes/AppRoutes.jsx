@@ -12,16 +12,17 @@ function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" index element={<Home />} />
             <Route path="/my-account" element={<AppLayout />}>
-                <Route index path="/my-account" element={<Account />} />
-                <Route index path="/my-account/order" element={<Order />} />
-                <Route index path="/my-account/wishlist" element={<Wishlist />} />
+                <Route path='account' index element={<Account />} />
+                <Route path="order" element={<Order />} />
+                <Route path="wishlist" element={<Wishlist />} />
             </Route>
             <Route path="/result" element={<AppLayout />}>
-                <Route index path='/result/:slug' element={<ResultBook />} />
+                <Route path=':slug' element={<ResultBook />} />
             </Route>
-        </Routes >
+        </Routes>
+
     )
 }
 

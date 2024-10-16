@@ -4,8 +4,6 @@ function ResultBook() {
     const location = useLocation();
     const { books } = location.state || {};
 
-    console.log(books);
-
     return (
         <div className="w-full mx-auto pl-4 md:pl-12 lg:pl-16">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-x-8 gap-y-16 justify-items-center">

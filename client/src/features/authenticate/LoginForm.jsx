@@ -1,19 +1,40 @@
-import { useState } from "react";
+// React Roueter Dom
+import { Link, useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "./redux/authSlice";
 
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
+// React Hook Form
+import { useForm } from "react-hook-form";
+
+// Context
 import { useOptionalForm } from "../../contexts/OptionalFormContext";
 
-function OptionSignUp() {
-    const [data, setData] = useState({ email: "", password: "" });
+// UI
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import Loader from "../../ui/Loader";
 
-    // Context API
+function LoginForm({ handleHide }) {
+    const { loading } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
+
+    const { register, handleSubmit, reset } = useForm()
     const { showSignUpForm } = useOptionalForm();
 
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
+    const navigate = useNavigate()
+
+    const submitForm = async (data) => {
+        const resultAction = await dispatch(loginRedux(data));
+        reset();
+        handleHide();
+
+        if (loginRedux.fulfilled.match(resultAction)) {
+            navigate('/my-account/account');
+        }
     }
+
+    if (loading) return <Loader />
 
     return (
         <>
@@ -22,17 +43,17 @@ function OptionSignUp() {
                 <div className='flex flex-col items-start gap-4'>
                     <form
                         className="w-full"
+                        onSubmit={handleSubmit(submitForm)}
                     >
                         <div className="mb-2">
                             <label htmlFor="user-email" className="block text-sm font-medium text-gray-700 uppercase mb-2">Email:</label>
                             <input
+                                className="w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
                                 type="email"
                                 id="user-email"
                                 name="email"
-                                value={data.email}
+                                {...register('email')}
                                 placeholder="example@yahoo.com"
-                                className="w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
-                                onChange={handleChange}
                             />
                             <div id="user-email" className="sr-only">
                                 Please enter a valid username. It must contain at least 6 characters.
@@ -41,12 +62,11 @@ function OptionSignUp() {
                         <div className="mb-6">
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700 uppercase mb-2">Password:</label>
                             <input
+                                className="w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                 type="password"
                                 id="password"
                                 name="password"
-                                value={data.password}
-                                className="w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                onChange={handleChange}
+                                {...register('password')}
                             />
                             <div id="user-password" className="sr-only">
                                 Your password should be more than 6 characters.
@@ -83,11 +103,9 @@ function OptionSignUp() {
                 </div>
 
                 <div className='flex justify-center items-center py-full sm:py-6 text-sm'>
-                    {/* Noncompliant: ambiguous spacing */}
                     Don’t have an account?
                     <button
                         className='text-blue-500 ml-1'
-                        // onClick={() => dispatch({ type: "signup", payload: true })} 
                         onClick={() => showSignUpForm()}
                     >
                         Sign up
@@ -99,4 +117,4 @@ function OptionSignUp() {
     )
 }
 
-export default OptionSignUp
+export default LoginForm

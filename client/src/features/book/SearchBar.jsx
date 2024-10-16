@@ -46,12 +46,10 @@ function SearchBar() {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <Dropdown register={register} />
-                <Search
-                    register={register}
-                    onSearchChange={handleSearhChange}
-                />
+                <Search register={register} onSearchChange={handleSearhChange} />
                 <SearchButton />
             </form>
+            
             {isDropdownVisible && books && books.length > 0 && <ResultDropDown books={books} />}
         </div>
     );

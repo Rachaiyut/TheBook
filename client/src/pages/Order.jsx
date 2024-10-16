@@ -2,36 +2,6 @@ import Table from "../ui/Table";
 
 function Order() {
     return (
-        // <section className="w-full">
-        //     <div className="h-full grid grid-flow-row-dense grid-cols-3 gap-8 px-8">
-        //         <div className="col-span-2">
-        //             <Table>
-        //                 <Table.Header>
-        //                     <th className="py-4 px-6 text-left">Cabin</th>
-        //                     <th className="py-4 px-6 text-left">Capacity</th>
-        //                     <th className="py-4 px-6 text-left">Price</th>
-        //                     <th className="py-4 px-6 text-left">Discount</th>
-        //                     <th className="py-4 px-6 text-left"></th>
-        //                 </Table.Header>
-        //                 <Table.Body>
-        //                     <Table.Row>
-        //                         <td className="py-3 px-4 text-left">Deluxe</td>
-        //                         <td className="py-3 px-4 text-left">4</td>
-        //                         <td className="py-3 px-4 text-left">$200</td>
-        //                         <td className="py-3 px-4 text-left">10%</td>
-        //                         <td className="py-3 px-4 text-left">Action</td>
-        //                     </Table.Row>
-        //                 </Table.Body>
-        //             </Table>
-        //         </div>
-
-        //         <div className="min-w-full bg-white border border-gray-200 overflow-hidden">
-        //             <div className="py-4 px-8">
-        //                 Bill Address
-        //             </div>
-        //         </div>
-        //     </div>
-        // </section>
         <section className="min-h-screen bg-gray-100 py-8">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
