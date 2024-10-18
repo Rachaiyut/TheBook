@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const withAuthGuard = (WrappedComponent) => {
     const HOC = (props) => {
-        const { token } = useSelector((state) => state.auth);
+        const token = localStorage.getItem('token');
         const navigate = useNavigate();
 
         useEffect(() => {
@@ -15,8 +14,6 @@ const withAuthGuard = (WrappedComponent) => {
 
         return token ? <WrappedComponent {...props} /> : null;
     };
-
-    // HOC.displayName = `withAuthGuard(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
     return HOC;
 };

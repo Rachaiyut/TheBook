@@ -15,8 +15,6 @@ const registerUser = async ({ name, email, password }) => {
         config
     )
 
-    console.log(user)
-
     return user;
 }
 

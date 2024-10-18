@@ -8,6 +8,8 @@ import AppRoutes from "./routes/AppRoutes"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
+// import { ToastContainer } from 'react-toastify';
+
 // ui
 import Loader from './ui/Loader';
 
@@ -27,6 +29,8 @@ function App() {
 					<AppRoutes />
 				</Router>
 			</Suspense>
+
+			{/* <ToastContainer /> */}
 		</QueryClientProvider>
 	)
 }

@@ -37,7 +37,7 @@ const Modal = forwardRef(function Modal(props, ref) {
 
             {isLoginFormVisible && <FormLogin handleHide={handleHide} />}
 
-            {isSignUpFormVisible && <FormSignUp />}
+            {isSignUpFormVisible && <FormSignUp handleHide={handleHide} />}
 
             <div className='absolute top-4 right-4'>
                 <button onClick={handleHide}>

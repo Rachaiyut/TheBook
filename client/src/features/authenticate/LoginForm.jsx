@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 // React Roueter Dom
 import { Link, useNavigate } from "react-router-dom";
 
@@ -39,7 +41,7 @@ function LoginForm({ handleHide }) {
     return (
         <>
             <section className='pt-12 px-12 pb-5'>
-                <h1 className='text-3xl text-center font-bold p-6 mb-4'>Log in to Books</h1>
+                <h1 className='text-3xl text-center font-bold p-6 mb-4'>Login</h1>
                 <div className='flex flex-col items-start gap-4'>
                     <form
                         className="w-full"
@@ -103,7 +105,7 @@ function LoginForm({ handleHide }) {
                 </div>
 
                 <div className='flex justify-center items-center py-full sm:py-6 text-sm'>
-                    Don’t have an account?
+                    Don’t have an Account ?
                     <button
                         className='text-blue-500 ml-1'
                         onClick={() => showSignUpForm()}
@@ -116,5 +118,10 @@ function LoginForm({ handleHide }) {
         </>
     )
 }
+
+LoginForm.propTypes = {
+    handleHide: PropTypes.func.isRequired
+};
+
 
 export default LoginForm

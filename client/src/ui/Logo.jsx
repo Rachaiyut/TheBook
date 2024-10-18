@@ -8,7 +8,7 @@ function Logo() {
             className="font-bold text-2xl md:text-5xl cursor-pointer"
             onClick={() => navigate('/home')}
         >
-            Book
+            TheBooks
         </h1>
     )
 }

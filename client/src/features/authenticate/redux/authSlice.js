@@ -8,9 +8,11 @@ export const registerRedux = createAsyncThunk(
     async ({ name, email, password }, { rejectWithValue }) => {
         try {
 
-            const user = await registerUser({ name, email, password })
+            const { data } = await registerUser({ name, email, password })
 
-            return user.data
+            localStorage.setItem('token', data.data.token)
+
+            return data
 
         } catch (error) {
             if (error.response && error.response.data.message) {
@@ -30,6 +32,7 @@ export const loginRedux = createAsyncThunk(
             const { data } = await loginUser({ email, password })
 
             localStorage.setItem('token', data.data.token)
+
             return data
 
         } catch (error) {
@@ -86,11 +89,12 @@ const authSlice = createSlice({
             .addCase(registerRedux.fulfilled, (state, action) => {
                 state.loading = false;
                 state.userInfo = action.payload.data
+                state.token = action.payload.data.token
                 state.success = true;
             })
             .addCase(registerRedux.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.error;
+                state.error = action.payload;
             })
             .addCase(loginRedux.pending, (state) => {
                 state.loading = true;
@@ -110,5 +114,7 @@ const authSlice = createSlice({
 
     }
 })
+
+export const { logout } = authSlice.actions
 
 export default authSlice.reducer;
