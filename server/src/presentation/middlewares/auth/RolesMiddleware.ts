@@ -19,7 +19,7 @@ const RolesMiddleware = (requiredRoles: string[]) => {
         if (!isRuleRequire) {
             return next(ErrorFactory.createError("Permission", "You do not have permission to perform this action"));
         }
-
+ 
         next();
     };
 };

@@ -16,7 +16,7 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 @injectable()
 class ProtectMiddleware extends BaseMiddleware {
 
- 
+
     private _userService: UserService;
 
     constructor(
@@ -34,7 +34,7 @@ class ProtectMiddleware extends BaseMiddleware {
     public async protect(req: Request, res: Response, next: NextFunction) {
         const decode = req.token!;
 
-        const currentUser = await this._userService.getUser(decode.data as string);
+        const currentUser = await this._userService.getUser(decode as string);
 
         if (!currentUser) {
             next(ErrorFactory.createError("NotFound", "This user is not found."));

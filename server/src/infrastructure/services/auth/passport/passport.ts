@@ -30,7 +30,6 @@ class Passport {
 
     public mountPackage(_app: Application): Application {
         _app = _app.use(passport.initialize());
-        _app = _app.use(passport.session());
 
         this.mountStragies();
 

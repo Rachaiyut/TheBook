@@ -28,7 +28,7 @@ class UserController {
         this._updateUser = updateUser;
         this._deleteUser = deleteUser;
     }
-
+ 
 
     @httpGet(
         '/',

@@ -14,7 +14,7 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 class JwtMiddleware extends BaseMiddleware {
 
 
-    private _jwtService: JWTService;
+    private readonly _jwtService: JWTService;
 
 
     constructor(
@@ -30,39 +30,37 @@ class JwtMiddleware extends BaseMiddleware {
     }
 
 
-    public async verifyToken(req: Request, res: Response, next: NextFunction) {
-
-        const token = await this.getToken(req, res, next);
-
-        const decoded = await this._jwtService.verify(token)
-
-        if (!decoded) {
-            next(ErrorFactory.createError("Token", "Token is invalid or expired"))
-        }
-
-        req.token = decoded!;
-
-        next();
-    }
-
-
-    public getToken(req: Request, res: Response, next: NextFunction) {
+    public getToken(req: Request) {
         let token;
 
-        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        if (req.headers.authorization?.startsWith('Bearer')) {
             token = req.headers.authorization.split(' ')[1];
         } else if (req.cookies.jwt) {
             token = req.cookies.jwt;
         }
 
         if (!token) {
-            next(ErrorFactory.createError("Login", "You are not logged in!"))
+            throw ErrorFactory.createError("Login", "You are not logged in!");
         }
 
-        return token;
 
+        return token;
     }
 
+
+    public async verifyToken(req: Request, res: Response, next: NextFunction) {
+        try {
+            const token = this.getToken(req);
+
+            const decoded = await this._jwtService.verify(token);
+
+            req.token = decoded as string;
+
+            next();
+        } catch (error) {
+            next(error);
+        }
+    }
 
 }
 

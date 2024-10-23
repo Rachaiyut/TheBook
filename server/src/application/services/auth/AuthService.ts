@@ -83,7 +83,6 @@ class AuthService {
         return UserMapper.toUserResponseDTO(newUser, token)
     }
 
-
 }
 
 export default AuthService;

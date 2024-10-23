@@ -53,8 +53,6 @@ class GoogleStragy {
                 const user = await this._userService.getUserByGoogleId(profile.id);
                 let newUser
 
-                console.log(profile)
-
                 // This will invoke if user is not exist
                 if (!user) {
                     newUser = await this._authService.register({

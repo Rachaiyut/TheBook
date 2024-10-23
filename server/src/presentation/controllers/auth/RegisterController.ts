@@ -8,12 +8,14 @@ import {
 
 import { TYPES } from "@inversify/types";
 
-//Usecase
+// Usecase
 import { Register as RegisterUsecase } from "@application/use-cases/auth/index";
 
-//Error Utilities
+// Error Utilities
 import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
+// Config
+import Local from "@shared/Local";
 
 @controller("/auth")
 class RegisterController {
@@ -41,7 +43,13 @@ class RegisterController {
 
         const result = await this._registerUsecase.execute(req.body);
 
-        res.cookie("jwt", result.token)
+        res.cookie("jwt", result.token, {
+            httpOnly: true,
+            sameSite: 'strict',
+            expires: new Date(
+                Date.now() + +Local.config().jwtCookieExpire * 24 * 60 * 60 * 1000
+            )
+        })
 
         res.status(201).json({
             success: true,

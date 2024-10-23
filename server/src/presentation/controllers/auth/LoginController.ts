@@ -43,7 +43,14 @@ class LoginController {
 
         const result = await this._loginUsecase.execute(body);
 
-        res.cookie("jwt", result.token);
+        res.cookie("jwt", result.token, {
+            httpOnly: true,
+            sameSite: "strict",
+            // expires: new Date(
+            //     Date.now() + +Local.config().jwtCookieExpire * 24 * 60 * 60 * 1000
+            // )
+            maxAge: 10 * 1000
+        });
 
         res.status(200).json({
             success: true,
@@ -59,10 +66,11 @@ class LoginController {
         })(req, res);
     }
 
+
     @httpGet(
         "/google/callback",
         passport.authenticate('google', {
-            failureRedirect: "http://localhost:5173", // Redirect on failure
+            failureRedirect: "http://localhost:5173",
             session: false
         })
     )
