@@ -54,7 +54,7 @@ class JwtMiddleware extends BaseMiddleware {
 
             const decoded = await this._jwtService.verify(token);
 
-            req.token = decoded as string;
+            req.token = decoded;
 
             next();
         } catch (error) {

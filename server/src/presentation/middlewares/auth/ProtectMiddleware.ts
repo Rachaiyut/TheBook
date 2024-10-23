@@ -6,7 +6,7 @@ import { TYPES } from "@inversify/types";
 import { BaseMiddleware } from "inversify-express-utils";
 
 
-import { IAuthenticatedUser } from "@domain/interfaces/vendors";
+import { CustomJwtPayload, IAuthenticatedUser } from "@domain/interfaces/vendors";
 
 //Services
 import { UserService } from "@application/services/api/index";
@@ -17,7 +17,7 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 class ProtectMiddleware extends BaseMiddleware {
 
 
-    private _userService: UserService;
+    private readonly _userService: UserService;
 
     constructor(
         @inject(TYPES.UserService) userService: UserService
@@ -32,9 +32,9 @@ class ProtectMiddleware extends BaseMiddleware {
     }
 
     public async protect(req: Request, res: Response, next: NextFunction) {
-        const decode = req.token!;
+        const decoded = req.token as CustomJwtPayload;
 
-        const currentUser = await this._userService.getUser(decode as string);
+        const currentUser = await this._userService.getUser(decoded.data);
 
         if (!currentUser) {
             next(ErrorFactory.createError("NotFound", "This user is not found."));

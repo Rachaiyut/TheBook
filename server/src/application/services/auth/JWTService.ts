@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 
 //JWT
-import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 // Config
 import Local from "@shared/Local";
@@ -25,25 +25,12 @@ class JWTService {
     public sign(id: string) {
         const { secret } = this.getJWTConfig();
 
-        return jwt.sign({ data: id }, secret, { expiresIn: "10s" })
+        return jwt.sign({ data: id }, secret, { expiresIn: "10s" }) 
 
     }
 
 
-    // public verify(token: string) {
-    //     const { secret } = this.getJWTConfig();
-
-    //     const decoded = jwt.verify(token, secret);
-
-    //     if (!decoded) {
-    //         throw ErrorFactory.createError("Token", "Token is invalid or expired");
-    //     }
-
-    //     return decoded;
-    // }
-
-
-    public async verify(token: string) {
+    public async verify(token: string): Promise<string | JwtPayload | undefined> {
         const { secret } = this.getJWTConfig();
 
         return new Promise((resolve, reject) => {
@@ -56,29 +43,6 @@ class JWTService {
             });
         });
     }
-
-
-    // public async verify(token: string) {
-    //     const { secret } = this.getJWTConfig();
-
-    //     const decoded = await new Promise<JwtPayload | null>((resolve, reject) => {
-    //         jwt.verify(token, secret, (err: VerifyErrors | unknown, decoded: JwtPayload | unknown) => {
-    //             if (err) {
-    //                 reject(E);
-    //             }
-
-    //             resolve(decoded as JwtPayload);
-    //         });
-    //     });
-
-    //     if (!decoded) {
-    //         throw ErrorFactory.createError("Token", "Token is invalid or expired");
-
-    //     }
-
-    //     return decoded;
-
-    // };
 
 
 }
