@@ -36,7 +36,7 @@ import {
 } from "@application/services/auth/index";
 
 //Use-Cases
-import { Register, Login } from "@application/use-cases/auth/index";
+import { Register, Login, RefreshToken } from "@application/use-cases/auth/index";
 import { DeleteUser, GetAllUsers, UpdateUser } from "@application/use-cases/user/index";
 import {
     CreateBook,
@@ -147,6 +147,7 @@ export class DIContainer {
         //Auth
         this.container.bind<Register>(TYPES.Register).to(Register);
         this.container.bind<Login>(TYPES.Login).to(Login)
+        this.container.bind<RefreshToken>(TYPES.RefreshToken).to(RefreshToken)
 
         //User
         this.container.bind<GetAllUsers>(TYPES.GetAllUsers).to(GetAllUsers);

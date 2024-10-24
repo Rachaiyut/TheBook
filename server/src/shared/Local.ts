@@ -10,8 +10,9 @@ class Local {
         const port = process.env.PORT!;
         const postgresUrl = process.env.POSTGRES_URL;
 
-        const jwtSecret = process.env.JWT_SECRET!;
-        const jwtExpire = process.env.JWT_EXPIRE!;
+        const jwtAccessSecret = process.env.JWT_ACCESS_SECRET!;
+        const jwtRefreshSecret = process.env.JWT_EXPIRE!;
+        const jwtExpire = process.env.JWT_REFRESH_EXPIRE!;
         const jwtCookieExpire = process.env.JWT_COOKIE_EXPIRES!;
 
         const googleId = process.env.GOOGLE_ID!;
@@ -28,7 +29,8 @@ class Local {
         return {
             port,
             postgresUrl,
-            jwtSecret,
+            jwtAccessSecret,
+            jwtRefreshSecret,
             jwtExpire,
             jwtCookieExpire,
             googleId,

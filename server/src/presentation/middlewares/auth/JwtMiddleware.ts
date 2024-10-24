@@ -10,6 +10,9 @@ import { BaseMiddleware } from "inversify-express-utils";
 import { JWTService } from "@application/services/auth";
 import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
+// Utils
+import asyncHandler from "@shared/utils/asyncHandler";
+
 @injectable()
 class JwtMiddleware extends BaseMiddleware {
 
@@ -25,43 +28,66 @@ class JwtMiddleware extends BaseMiddleware {
     }
 
 
-    public handler(req: Request, res: Response, next: NextFunction): void {
-        this.verifyToken(req, res, next);
+    public async handler(req: Request, res: Response, next: NextFunction) {
+        await this.verifyToken(req, res, next);
     }
 
 
     public getToken(req: Request) {
-        let token;
+        let accessToken = '';
+        let refreshToken = '';
 
         if (req.headers.authorization?.startsWith('Bearer')) {
-            token = req.headers.authorization.split(' ')[1];
-        } else if (req.cookies.jwt) {
-            token = req.cookies.jwt;
+            accessToken = req.headers.authorization.split(' ')[1];
+        } else if (req.cookies.accessToken) {
+            accessToken = req.cookies.accessToken;
         }
 
-        if (!token) {
+        if (req.cookies.refreshToken || req.body.refreshToken) {
+            refreshToken = req.cookies.refreshToken || req.body.refreshToken;
+        }
+
+        if (!accessToken && !refreshToken) {
             throw ErrorFactory.createError("Login", "You are not logged in!");
         }
 
-
-        return token;
+        return { accessToken, refreshToken };
     }
 
 
     public async verifyToken(req: Request, res: Response, next: NextFunction) {
-        try {
-            const token = this.getToken(req);
-
-            const decoded = await this._jwtService.verify(token);
-
-            req.token = decoded;
-
-            next();
-        } catch (error) {
-            next(error);
+        if (req.body.refreshToken) {
+            await this.verifyRefreshToken(req, res, next);
+        } else {
+            await this.verifyAccessToken(req, res, next);
         }
     }
 
+
+    public verifyAccessToken = asyncHandler(
+        async (req: Request, res: Response, next: NextFunction) => {
+            const { accessToken } = this.getToken(req);
+
+            const decodedAccessToken = await this._jwtService.verifyAccessToken(accessToken);
+
+            req.token = decodedAccessToken;
+
+            next();
+        }
+    );
+
+
+    public verifyRefreshToken = asyncHandler(
+        async (req: Request, res: Response, next: NextFunction) => {
+            const { refreshToken } = this.getToken(req);
+
+            const decodedRefreshToken = await this._jwtService.verifyRefreshToken(refreshToken);
+ 
+            req.token = decodedRefreshToken;
+
+            next();
+        }
+    );
 }
 
 export default JwtMiddleware;

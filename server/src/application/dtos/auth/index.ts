@@ -1,6 +1,5 @@
 import ILoginDTO from "./ILoginDTO";
 import IRegisterDTO from "./IRegisterDTO";
-import IUserLoginResponseDTO from "./ILoginResponseDTO";
-import IUserRegisterResponseDTO from "./IUserRegisterResponseDTO";
+import IAuthResponseDTO from "./IAuthResponseDTO";
 
-export { ILoginDTO, IRegisterDTO, IUserLoginResponseDTO, IUserRegisterResponseDTO, }
+export { ILoginDTO, IRegisterDTO, IAuthResponseDTO }

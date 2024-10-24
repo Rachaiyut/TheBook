@@ -2,7 +2,7 @@ import { injectable, inject } from "inversify";
 import { TYPES } from "@inversify/types";
 
 //DTO
-import { ILoginDTO, IRegisterDTO, IUserLoginResponseDTO, IUserRegisterResponseDTO } from "@application/dtos/auth/index";
+import { IAuthResponseDTO, ILoginDTO, IRegisterDTO } from "@application/dtos/auth/index";
 
 //Mapper
 import { UserMapper } from "@application/mappers/UserMapper";
@@ -26,12 +26,10 @@ import { User } from "@domain/entites/index";
 class AuthService {
 
 
-    private _userService: UserService;
-    private _passwordService: PasswordService;
-    private _jwtService: JWTService;
-
-    private _userRepository: UserRepository;
-
+    private readonly _userService: UserService;
+    private readonly _passwordService: PasswordService;
+    private readonly _jwtService: JWTService;
+    private readonly _userRepository: UserRepository;
 
 
     constructor(
@@ -48,7 +46,7 @@ class AuthService {
     }
 
 
-    public async login(loginDTO: ILoginDTO): Promise<IUserLoginResponseDTO> {
+    public async login(loginDTO: ILoginDTO): Promise<IAuthResponseDTO> {
 
         const user: User | null = await this._userRepository.findUserByEmail(loginDTO.email);
 
@@ -62,13 +60,14 @@ class AuthService {
             throw ErrorFactory.createError("Login", "Password is not correct");
         }
 
-        const token = this._jwtService.sign(user.userId);
+        const accessToken = this._jwtService.generateAccessToken(user.userId);
+        const refreshToken = this._jwtService.genrerefreshToken(user.userId);
 
-        return UserMapper.toUserResponseDTO(UserMapper.toDto(user), token)
+        return UserMapper.toUserResponseDTO(UserMapper.toDto(user), accessToken, refreshToken)
     }
 
 
-    public async register(registerDTO: IRegisterDTO): Promise<IUserRegisterResponseDTO> {
+    public async register(registerDTO: IRegisterDTO): Promise<IAuthResponseDTO> {
 
         const isEmailExist = await this._userRepository.findUserByEmail(registerDTO.email);
 
@@ -78,9 +77,32 @@ class AuthService {
 
         const newUser = await this._userService.createNewUser(registerDTO);
 
-        const token = this._jwtService.sign(newUser.userId)
+        const accessToken = this._jwtService.generateAccessToken(newUser.userId)
+        const refreshToken = this._jwtService.genrerefreshToken(newUser.userId);
 
-        return UserMapper.toUserResponseDTO(newUser, token)
+        return UserMapper.toUserResponseDTO(newUser, accessToken, refreshToken)
+    }
+
+
+    public async refreshToken(refreshToken: string) {
+
+        if (!refreshToken) {
+            throw ErrorFactory.createError("Login", "You are not logged in!")
+        }
+
+        const decoded = await this._jwtService.verifyRefreshToken(refreshToken);
+
+        if (!decoded) {
+            throw ErrorFactory.createError("Token", "Your session is expired or invalid");
+        }
+
+        const user = await this._userService.getUser(decoded.data)
+
+
+        const newAccessToken = this._jwtService.generateAccessToken(user.userId);
+        const newRefreshToken = this._jwtService.genrerefreshToken(user.userId);
+
+        return UserMapper.toUserResponseDTO(user, newAccessToken, newRefreshToken)
     }
 
 }

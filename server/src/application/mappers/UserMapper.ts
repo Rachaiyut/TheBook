@@ -1,7 +1,8 @@
 import { User } from "@domain/entites/index";
-import { IUserDTO, IUserRegisterResponseDTO } from "@application/dtos/index";
+import { IUserDTO } from "@application/dtos/index";
 import { UserModel } from "@infrastructure/models/index";
 import { UserRole } from "@domain/interfaces/entities";
+import { IAuthResponseDTO } from "@application/dtos/auth";
 
 export class UserMapper {
     // Convert Domain Entity to DTO
@@ -62,7 +63,7 @@ export class UserMapper {
             email: user.email,
             password: user.password,
             passwordChangeAt: user.passwordChangeAt,
-            roles: user.roles!.map((role) => {
+            roles: user.roles.map((role) => {
                 if (role === "user" || role === "admin") {
                     return role;
                 }
@@ -73,12 +74,13 @@ export class UserMapper {
     }
 
     // Convert Domain Entity to Specific DTO
-    static toUserResponseDTO(user: IUserDTO, token: string): IUserRegisterResponseDTO {
+    static toUserResponseDTO(user: IUserDTO, accessToken: string, refreshToken: string): IAuthResponseDTO {
         return {
             name: user.name,
             email: user.email,
             roles: user.roles,
-            token: token
+            accessToken: accessToken,
+            refreshToken: refreshToken
         };
     }
 }

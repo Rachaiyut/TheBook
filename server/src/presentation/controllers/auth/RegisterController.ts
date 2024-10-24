@@ -20,7 +20,7 @@ import Local from "@shared/Local";
 @controller("/auth")
 class RegisterController {
 
-    private _registerUsecase: RegisterUsecase
+    private readonly _registerUsecase: RegisterUsecase
 
 
     constructor(
@@ -43,7 +43,15 @@ class RegisterController {
 
         const result = await this._registerUsecase.execute(req.body);
 
-        res.cookie("jwt", result.token, {
+        res.cookie("accessToken", result.accessToken, {
+            httpOnly: true,
+            sameSite: 'strict',
+            expires: new Date(
+                Date.now() + +Local.config().jwtCookieExpire * 24 * 60 * 60 * 1000
+            )
+        })
+
+        res.cookie("refreshToken", result.refreshToken, {
             httpOnly: true,
             sameSite: 'strict',
             expires: new Date(

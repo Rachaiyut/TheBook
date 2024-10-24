@@ -14,36 +14,58 @@ class JWTService {
 
 
     private getJWTConfig() {
-        const secret = Local.config().jwtSecret;
+        const accessTokenSecret = Local.config().jwtAccessSecret;
+        const refreshTokenSecret = Local.config().jwtRefreshSecret;
         const expire = Local.config().jwtExpire;
         const cookieExpire = Local.config().jwtCookieExpire;
 
-        return { secret, expire, cookieExpire };
+        return { accessTokenSecret, refreshTokenSecret, expire, cookieExpire };
     }
 
 
-    public sign(id: string) {
-        const { secret } = this.getJWTConfig();
+    public generateAccessToken(id: string) {
+        const { accessTokenSecret } = this.getJWTConfig();
 
-        return jwt.sign({ data: id }, secret, { expiresIn: "10s" }) 
+        return jwt.sign({ data: id }, accessTokenSecret, { expiresIn: "10s" })
 
     }
 
 
-    public async verify(token: string): Promise<string | JwtPayload | undefined> {
-        const { secret } = this.getJWTConfig();
+    public genrerefreshToken(id: string) {
+        const { refreshTokenSecret } = this.getJWTConfig();
+
+        return jwt.sign({ data: id }, refreshTokenSecret, { expiresIn: "30s" })
+    }
+
+
+    public async verifyAccessToken(token: string): Promise<JwtPayload | undefined> {
+        const { accessTokenSecret } = this.getJWTConfig();
 
         return new Promise((resolve, reject) => {
-            jwt.verify(token, secret, (err, decoded) => {
+            jwt.verify(token, accessTokenSecret, (err, decoded) => {
                 if (err) {
                     return reject(ErrorFactory.createError("Token", err.message));
                 }
 
-                resolve(decoded);
+                resolve(decoded as JwtPayload);
             });
         });
     }
 
+
+    public async verifyRefreshToken(token: string): Promise<JwtPayload | undefined> {
+        const { refreshTokenSecret } = this.getJWTConfig();
+
+        return new Promise((resolve, reject) => {
+            jwt.verify(token, refreshTokenSecret, (err, decoded) => {
+                if (err) {
+                    return reject(ErrorFactory.createError("Token", err.message));
+                }
+
+                resolve(decoded as JwtPayload);
+            });
+        });
+    }
 
 }
 
