@@ -11,7 +11,7 @@ import {
     ColumnName,
     Table,
     Default,
-    NotNull,
+    NotNull,  
 } from '@sequelize/core/decorators-legacy';
 import { injectable } from 'inversify';
 

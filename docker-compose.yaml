@@ -10,6 +10,17 @@ services:
       - POSTGRES_DB=book_shop
       - POSTGRES_USER=charut
       - POSTGRES_PASSWORD=Charutwbi@2001
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: charuj44@yahoo.com
+      PGADMIN_DEFAULT_PASSWORD: Charutwbi@2001
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
   backend:
     build:
       context: ./server
@@ -44,4 +55,5 @@ services:
 
 volumes:
   postgresql:
+  pgadmin-data:
   backend_images:

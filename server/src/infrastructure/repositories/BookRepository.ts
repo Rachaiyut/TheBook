@@ -5,7 +5,7 @@ import { TYPES } from "@inversify/types";
 import { Op } from '@sequelize/core';
 
 //Model
-import { BookModel } from "@infrastructure/models/index";
+import { BookModel, GenreModel } from "@infrastructure/models/index";
 
 //Entite
 import Book from "@domain/entites/Book";
@@ -43,9 +43,20 @@ class BookRepository {
     public async findBookByISBN(isbn: string): Promise<Book | null> {
         const isBookExist = await this._bookModel.findOne(
             {
-                where: { isbn: isbn }
+                where: { isbn: isbn },
+                include: {
+                    model: GenreModel,
+                    through: { attributes: [] }, // Exclude BookGenreModel data
+                    attributes: ['name']
+                },
+                nest: true
             }
         );
+
+        if (isBookExist !== null) {
+            const plainBook = JSON.parse(JSON.stringify(isBookExist.get({ plain: true })))
+            console.log(plainBook)
+        }
 
         return isBookExist ? BookMapper.toEntityFromModel(isBookExist) : null;
     }

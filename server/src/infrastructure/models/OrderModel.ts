@@ -15,7 +15,7 @@ import {
     BelongsTo,
     NotNull,
     BelongsToMany,
-} from '@sequelize/core/decorators-legacy';
+} from '@sequelize/core/decorators-legacy'; 
 
 import { injectable } from 'inversify';
 import UserModel from './UserModel';
@@ -31,7 +31,7 @@ class OrderModel extends Model<InferAttributes<OrderModel>, InferCreationAttribu
 
     @Attribute(DataTypes.UUID.V4)
     @Default(sql.uuidV4)
-    @ColumnName('order_id')
+    @ColumnName('order_id') 
     @PrimaryKey
     declare orderId?: string
 

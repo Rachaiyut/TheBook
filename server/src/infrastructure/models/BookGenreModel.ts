@@ -16,20 +16,26 @@ import { injectable } from 'inversify';
 
 @injectable()
 @Table({
-    tableName: 'genres',
+    tableName: 'book_genres',
     timestamps: false
 })
-class GenreModel extends Model<InferAttributes<GenreModel>, InferCreationAttributes<GenreModel>> {
+class BookGenreModel extends Model<InferAttributes<BookGenreModel>, InferCreationAttributes<BookGenreModel>> {
+
+    @Attribute(DataTypes.INTEGER)
+    @ColumnName('book_genre_id') 
+    @AutoIncrement
+    @PrimaryKey
+    declare bookGenreId?: number
+
+    @Attribute(DataTypes.STRING)
+    @ColumnName('isbn')
+    declare isbn: string
 
     @Attribute(DataTypes.INTEGER)
     @ColumnName('genre_id')
-    @AutoIncrement
-    @PrimaryKey
     declare genreId: number
 
-    @Attribute(DataTypes.STRING)
-    declare name: string
+
 }
 
-export default GenreModel;
- 
+export default BookGenreModel;

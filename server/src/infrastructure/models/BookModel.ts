@@ -11,9 +11,13 @@ import {
     Table,
     Default,
     BeforeCreate,
+    BelongsToMany
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
+import GenreModel from './GenreModel';
+import BookGenreModel from './BookGenreModel';
+import { NonAttribute } from 'sequelize';
 
 @injectable()
 @Table({
@@ -31,6 +35,13 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
 
     @Attribute(DataTypes.ARRAY(DataTypes.STRING))
     declare categories: string[]
+
+    @BelongsToMany(() => GenreModel, {
+        through: () => BookGenreModel,
+        foreignKey: "isbn",
+        otherKey: "genre_id"
+    })
+    declare genre?: NonAttribute<GenreModel[]>
 
     @Attribute(DataTypes.TEXT)
     declare description: string
@@ -51,7 +62,7 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
     declare ratingAverage: number
 
     @Attribute(DataTypes.INTEGER)
-    declare pages: number
+    declare pages: number 
 
     @Attribute(DataTypes.STRING)
     @ColumnName('image_cover')

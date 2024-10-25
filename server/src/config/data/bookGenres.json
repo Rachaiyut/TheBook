@@ -1,0 +1,22 @@
+[
+    {
+        "bookGenreId": 1,
+        "isbn": "ab114xyzres",
+        "genreId": "2" 
+    },
+    {
+        "bookGenreId": 2,
+        "isbn": "ab114xyzres",
+        "genreId": "10" 
+    },
+    {
+        "bookGenreId": 3,
+        "isbn": "ab114xyzres",
+        "genreId": "11" 
+    },
+    {
+        "bookGenreId": 4,
+        "isbn": "ab114xyzres",
+        "genreId": "8" 
+    }
+]

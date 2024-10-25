@@ -41,7 +41,7 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 	@Attribute(DataTypes.STRING)
 	declare name: string
 
-	@Attribute(DataTypes.STRING)
+	@Attribute(DataTypes.STRING) 
 	declare email: string
 
 	@Attribute(DataTypes.STRING)

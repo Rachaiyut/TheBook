@@ -63,11 +63,12 @@ export class BookMapper {
 
 
     // Convert Domain Entity to Sequelize Model for persistence
-    public static toPersistenceModel(book: Book): BookModel {
+    public static toPersistenceModel(book: Book): Omit<BookModel, "genre"> {
         return BookModel.build({
             isbn: book.isbn,
             name: book.name,
             categories: book.categories,
+            genre: [],
             description: book.description,
             authors: book.authors,
             price: book.price,
