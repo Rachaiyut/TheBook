@@ -61,7 +61,7 @@ class BookController {
         const body = {
             isbn: req.body.isbn,
             name: req.body.name,
-            categories: req.body.categories,
+            genre: req.body.genre,
             description: req.body.description,
             authors: req.body.authors,
             totalStock: req.body.totalStock,

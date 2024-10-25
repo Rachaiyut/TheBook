@@ -1,10 +1,11 @@
 //Interface
 import { IBook } from "@domain/interfaces/entities";
+import Genre from "./Genre";
 
 class Book implements IBook {
     isbn: string;
     name: string;
-    categories: string[];
+    genre: Genre[];
     description: string;
     authors: string[];
     price: number;
@@ -18,7 +19,7 @@ class Book implements IBook {
     constructor(
         isbn: string,
         name: string,
-        categories: string[],
+        genre: Genre[],
         description: string,
         authors: string[],
         price: number,
@@ -31,7 +32,7 @@ class Book implements IBook {
     ) {
         this.isbn = isbn;
         this.name = name;
-        this.categories = categories;
+        this.genre = genre;
         this.description = description;
         this.authors = authors;
         this.price = price;

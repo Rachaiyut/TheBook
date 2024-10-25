@@ -41,21 +41,23 @@ class BookRepository {
 
 
     public async findBookByISBN(isbn: string): Promise<Book | null> {
+        let plainBook
+
         const isBookExist = await this._bookModel.findOne(
             {
                 where: { isbn: isbn },
                 include: {
                     model: GenreModel,
                     through: { attributes: [] }, // Exclude BookGenreModel data
-                    attributes: ['name']
+                    attributes: ['genreId', 'name']
                 },
                 nest: true
             }
         );
 
         if (isBookExist !== null) {
-            const plainBook = JSON.parse(JSON.stringify(isBookExist.get({ plain: true })))
-            console.log(plainBook)
+            plainBook = JSON.parse(JSON.stringify(isBookExist.get({ plain: true })));
+            plainBook.genre = plainBook.genre.map((genre: { name: string }) => genre.name);            
         }
 
         return isBookExist ? BookMapper.toEntityFromModel(isBookExist) : null;

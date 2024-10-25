@@ -1,7 +1,9 @@
+import IGenreDTO from "../genre/IGenreDTO";
+
 interface IBookDTO {
     isbn: string;
     name: string;
-    categories: string[];
+    genre: IGenreDTO[];
     description: string,
     authors: string[],
     price: number,

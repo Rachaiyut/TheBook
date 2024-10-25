@@ -1,4 +1,3 @@
-import OrderItems from "./OrderItems";
 
 class Order {
 

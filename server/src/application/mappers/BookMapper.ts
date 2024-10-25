@@ -1,13 +1,14 @@
 import { Book } from "@domain/entites/index";
 import { IBookDTO } from "@application/dtos";
 import { BookModel } from "@infrastructure/models";
+import { GenreMapper } from "./GenreMapper";
 
 export class BookMapper {
     public static toDto(book: Partial<Book>): IBookDTO {
         return {
             isbn: book.isbn!,
             name: book.name!,
-            categories: book.categories || [],
+            genre: book.genre || [],
             description: book.description || '',
             authors: book.authors || [],
             price: book.price || 0,
@@ -24,10 +25,11 @@ export class BookMapper {
 
     // Convert DTO to Domain Entitys
     public static toEntity(dto: Partial<IBookDTO>): Book {
+
         return new Book(
             dto.isbn!,
             dto.name!,
-            dto.categories!,
+            dto.genre!.map(genre => GenreMapper.toEntity(genre)),
             dto.description!,
             dto.authors!,
             dto.price!,
@@ -44,10 +46,12 @@ export class BookMapper {
     // Convert Sequelize Model to Domain Entity
     public static toEntityFromModel(bookModel: BookModel): Book {
 
+        const genre = bookModel.genre?.map(genre => GenreMapper.toEntityFromModel(genre))
+
         return new Book(
             bookModel.dataValues.isbn,
             bookModel.dataValues.name,
-            bookModel.dataValues.categories,
+            genre,
             bookModel.dataValues.description,
             bookModel.dataValues.authors,
             bookModel.dataValues.price,
@@ -63,12 +67,11 @@ export class BookMapper {
 
 
     // Convert Domain Entity to Sequelize Model for persistence
-    public static toPersistenceModel(book: Book): Omit<BookModel, "genre"> {
+    public static toPersistenceModel(book: Book): BookModel {
         return BookModel.build({
             isbn: book.isbn,
             name: book.name,
-            categories: book.categories,
-            genre: [],
+            genre: book.genre.map(genre => GenreMapper.toPersistenceModel(genre)),
             description: book.description,
             authors: book.authors,
             price: book.price,

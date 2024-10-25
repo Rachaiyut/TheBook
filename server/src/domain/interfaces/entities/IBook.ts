@@ -1,7 +1,9 @@
+import IGenre from "./IGenre";
+
 export interface IBook {
     isbn: string;
     name: string;
-    categories: string[];
+    genre: IGenre[];
     description: string,
     authors: string[],
     totalStock: number,

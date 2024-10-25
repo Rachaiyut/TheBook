@@ -18,6 +18,7 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
 //Mapper
 import { BookMapper } from "@application/mappers/BookMapper";
+import { GenreMapper } from "@application/mappers/GenreMapper";
 
 @injectable()
 class BookService {
@@ -43,7 +44,7 @@ class BookService {
         const newBook = new Book(
             book.isbn,
             book.name,
-            book.categories,
+            book.genre.map(genre => GenreMapper.toEntity(genre)),
             book.description,
             book.authors,
             book.price,
@@ -94,7 +95,7 @@ class BookService {
             BookMapper.toEntity({
                 isbn: isExistBook.isbn,
                 name: bookDTO.name ?? isExistBook.name,
-                categories: bookDTO.categories ?? isExistBook.categories,
+                genre: bookDTO.genre.map(genre => GenreMapper.toEntity(genre)) ?? isExistBook.genre,
                 description: bookDTO.description ?? isExistBook.description,
                 authors: bookDTO.authors ?? isExistBook.authors,
                 price: bookDTO.price ?? isExistBook.price,
