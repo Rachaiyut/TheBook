@@ -89,7 +89,7 @@ class BookRepository {
         }
 
         if (params.genre) {
-            whereClause.categories = params.genre;
+            whereClause.genre = params.genre;
         }
 
         if (params.minPrice) {
@@ -127,7 +127,7 @@ class BookRepository {
                         [Op.gte]: firstDay,
                         [Op.lte]: lastDay
                     }
-                }
+                } 
             },
             limit: queryParams.limit
         })

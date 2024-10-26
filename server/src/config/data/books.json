@@ -2,9 +2,6 @@
 	{
 		"isbn": "ab114xyzres",
 		"name": "Galactic Voyage",
-		"categories": [
-			"Science Fiction"
-		],
 		"description": "An epic space saga exploring distant galaxies and alien civilizations.",
 		"authors": [
 			"Jane Doe"
@@ -18,10 +15,6 @@
 	{
 		"isbn": "ac224abcqtu",
 		"name": "Starry Horizon",
-		"categories": [
-			"Science Fiction",
-			"Adventure"
-		],
 		"description": "A thrilling adventure through uncharted star systems.",
 		"authors": [
 			"John Smith"
@@ -35,10 +28,6 @@
 	{
 		"isbn": "fg214defuvw",
 		"name": "Dark Matter Chronicles",
-		"categories": [
-			"Science Fiction",
-			"Thriller"
-		],
 		"description": "A dark and suspenseful story of a scientist's dangerous discovery.",
 		"authors": [
 			"Alice Brown"
@@ -51,10 +40,7 @@
 	},
 	{
 		"isbn": "kl991rstjwx",
-		"name": "Quantum Shift",
-		"categories": [
-			"Science Fiction"
-		],
+		"name": "Quantum Shift",	
 		"description": "A quantum physicist unlocks the secret to faster-than-light travel.",
 		"authors": [
 			"George Miller"
@@ -68,10 +54,6 @@
 	{
 		"isbn": "ty345lmnuvw",
 		"name": "Alien Encounters",
-		"categories": [
-			"Science Fiction",
-			"Mystery"
-		],
 		"description": "Strange signals from space lead to an unexpected discovery.",
 		"authors": [
 			"Sarah Connor"
@@ -85,9 +67,6 @@
 	{
 		"isbn": "gh342ijklop",
 		"name": "Exoplanet Odyssey",
-		"categories": [
-			"Science Fiction"
-		],
 		"description": "A team of explorers ventures to a mysterious exoplanet.",
 		"authors": [
 			"Rebecca White"
@@ -101,10 +80,6 @@
 	{
 		"isbn": "qr567defxyz",
 		"name": "Nebula's Heart",
-		"categories": [
-			"Science Fiction",
-			"Romance"
-		],
 		"description": "Love blossoms amidst a galaxy at war.",
 		"authors": [
 			"Michael Grey"
@@ -118,10 +93,6 @@
 	{
 		"isbn": "uv923ghiklmn",
 		"name": "Galactic Outlaws",
-		"categories": [
-			"Science Fiction",
-			"Adventure"
-		],
 		"description": "A band of outlaws takes on the corrupt Galactic Federation.",
 		"authors": [
 			"Ethan Black"
@@ -135,10 +106,6 @@
 	{
 		"isbn": "lm394opqstuv",
 		"name": "Asteroid City",
-		"categories": [
-			"Science Fiction",
-			"Mystery"
-		],
 		"description": "A remote mining colony on an asteroid hides dark secrets.",
 		"authors": [
 			"Sophia Adams"
@@ -152,10 +119,6 @@
 	{
 		"isbn": "xy712ghikrst",
 		"name": "Galactic Guardians",
-		"categories": [
-			"Science Fiction",
-			"Action"
-		],
 		"description": "An elite force is formed to protect the galaxy from an ancient enemy.",
 		"authors": [
 			"Chris Thompson"
@@ -169,9 +132,6 @@
 	{
 		"isbn": "op123fghijqwx",
 		"name": "Voyage to the Stars",
-		"categories": [
-			"Science Fiction"
-		],
 		"description": "A ship on a one-way journey to the edge of the known universe.",
 		"authors": [
 			"Laura Diaz"
@@ -185,10 +145,6 @@
 	{
 		"isbn": "ab298xyzklmn",
 		"name": "Galactic Revolt",
-		"categories": [
-			"Science Fiction",
-			"Action"
-		],
 		"description": "Rebels rise against a tyrannical interstellar government.",
 		"authors": [
 			"Frank Moore"
@@ -202,10 +158,6 @@
 	{
 		"isbn": "kl990fghijlmn",
 		"name": "Lunar Legacy",
-		"categories": [
-			"Science Fiction",
-			"Adventure"
-		],
 		"description": "An ancient alien artifact is discovered on the moon.",
 		"authors": [
 			"Natalie King"
@@ -219,10 +171,6 @@
 	{
 		"isbn": "qw134pqrstuxyz",
 		"name": "Planetfall",
-		"categories": [
-			"Science Fiction",
-			"Adventure"
-		],
 		"description": "A new planet is colonized, but things are not as they seem.",
 		"authors": [
 			"Diana Roberts"
@@ -236,10 +184,6 @@
 	{
 		"isbn": "fg311uvwxylop",
 		"name": "Starlight Chronicles",
-		"categories": [
-			"Science Fiction",
-			"Epic"
-		],
 		"description": "A multi-generational saga of a family exploring the stars.",
 		"authors": [
 			"Henry Scott"
@@ -253,10 +197,6 @@
 	{
 		"isbn": "xy411ghijklop",
 		"name": "Astral Beacon",
-		"categories": [
-			"Science Fiction",
-			"Fantasy"
-		],
 		"description": "A mystical space journey through different dimensions.",
 		"authors": [
 			"Lucy Brown"
@@ -270,10 +210,6 @@
 	{
 		"isbn": "vw221lmnqrst",
 		"name": "Nova's Quest",
-		"categories": [
-			"Science Fiction",
-			"Fantasy"
-		],
 		"description": "A young explorer unlocks the power of ancient star magic.",
 		"authors": [
 			"Peter Green"
@@ -287,10 +223,6 @@
 	{
 		"isbn": "cd223ghijklop",
 		"name": "Galactic Wasteland",
-		"categories": [
-			"Science Fiction",
-			"Dystopian"
-		],
 		"description": "A bleak future where humanity struggles to survive on dying planets.",
 		"authors": [
 			"Mark Bennett"
@@ -304,10 +236,6 @@
 	{
 		"isbn": "ghu44x6tvb6n",
 		"name": "The Dream",
-		"categories": [
-			"Fantasy",
-			"Romance"
-		],
 		"description": "A captivating story of adventure and mystery for book 1.",
 		"authors": [
 			"Michael Smith"
@@ -322,10 +250,6 @@
 	{
 		"isbn": "au2ru270axqt",
 		"name": "Alone",
-		"categories": [
-			"Mystery",
-			"Romance"
-		],
 		"description": "A captivating story of adventure and mystery for book 2.",
 		"authors": [
 			"Sarah Johnson"
@@ -340,10 +264,6 @@
 	{
 		"isbn": "gj59icje284f",
 		"name": "Eye",
-		"categories": [
-			"Romance",
-			"Thriller"
-		],
 		"description": "A captivating story of adventure and mystery for book 3.",
 		"authors": [
 			"Alice Brown"
@@ -358,10 +278,6 @@
 	{
 		"isbn": "e7flkon9ke9n",
 		"name": "Pencil",
-		"categories": [
-			"Fantasy",
-			"Mystery"
-		],
 		"description": "A captivating story of adventure and mystery for book 4.",
 		"authors": [
 			"John Doe"
@@ -376,10 +292,6 @@
 	{
 		"isbn": "xyx3qyjgomae",
 		"name": "Prayer",
-		"categories": [
-			"Fantasy",
-			"Mystery"
-		],
 		"description": "A captivating story of adventure and mystery for book 5.",
 		"authors": [
 			"Alice Brown"
@@ -394,10 +306,6 @@
 	{
 		"isbn": "x9r30y4ij3wh",
 		"name": "Puzzle",
-		"categories": [
-			"Fantasy",
-			"Mystery"
-		],
 		"description": "A captivating story of adventure and mystery for book 6.",
 		"authors": [
 			"John Doe"
@@ -412,10 +320,6 @@
 	{
 		"isbn": "vbugz3slexsu",
 		"name": "sword",
-		"categories": [
-			"Fantasy",
-			"Romance"
-		],
 		"description": "A captivating story of adventure and mystery for book 7.",
 		"authors": [
 			"Michael Smith"
@@ -430,10 +334,6 @@
 	{
 		"isbn": "279uhh4mu0f9",
 		"name": "The Invisible Man",
-		"categories": [
-			"Romance",
-			"Mystery"
-		],
 		"description": "A captivating story of adventure and mystery for book 8.",
 		"authors": [
 			"John Doe"
@@ -448,10 +348,6 @@
 	{
 		"isbn": "fnjgsrqt2ow6",
 		"name": "Elevate Your Life",
-		"categories": [
-			"Thriller",
-			"Romance"
-		],
 		"description": "A captivating story of adventure and mystery for book 9.",
 		"authors": [
 			"Michael Smith"
@@ -466,10 +362,6 @@
 	{
 		"isbn": "ltpdc5yz90by",
 		"name": "I will Always Love You",
-		"categories": [
-			"Romance",
-			"Thriller"
-		],
 		"description": "A captivating story of adventure and mystery for book 10.",
 		"authors": [
 			"Alice Brown"
