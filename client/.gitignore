@@ -12,9 +12,6 @@ dist-ssr
 # @vitjs/vit temporary directory
 .vit
 
-# public
-public
-assets
 
 # Editor directories and files
 .vscode/*
