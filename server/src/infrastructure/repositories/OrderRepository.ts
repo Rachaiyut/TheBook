@@ -53,6 +53,18 @@ class OrderRepository {
 
         console.log(orderItems)
     }
+
+
+    public async getOrder(orderId: string) {
+
+        const isOrderExist = await this._orderModel.findOne(
+            {
+                where: { orderId }
+            }
+        )
+
+        return isOrderExist ? OrderMapper.toEntityFromModel(isOrderExist) : null
+    }
 }
 
 export default OrderRepository;

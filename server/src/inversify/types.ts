@@ -1,3 +1,4 @@
+
 export const TYPES = {
     Express: Symbol.for("Express"),
     App: Symbol.for("App"),
@@ -26,6 +27,7 @@ export const TYPES = {
     UserService: Symbol.for("UserService"),
     OrderService: Symbol.for("OrderService"),
     GetAllOrder: Symbol.for("GetAllOrder"),
+    GetOrder: Symbol.for("GetPrrder"),
     AuthService: Symbol.for("AuthService"),
     JWTService: Symbol.for("JWTService"),
     PasswordService: Symbol.for("PasswordService"),

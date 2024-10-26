@@ -46,7 +46,7 @@ import {
     GetTop5Books,
     GetNewBooks
 } from "@application/use-cases/book/index";
-import { CreateOrder, GetAllOrder } from "@application/use-cases/order/index";
+import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order/index";
 
 //Middlewares
 import {
@@ -165,6 +165,7 @@ export class DIContainer {
         //Order
         this.container.bind<CreateOrder>(TYPES.CreateOrder).to(CreateOrder);
         this.container.bind<GetAllOrder>(TYPES.GetAllOrder).to(GetAllOrder);
+        this.container.bind<GetOrder>(TYPES.GetOrder).to(GetOrder);
     }
 
     private middleware() {

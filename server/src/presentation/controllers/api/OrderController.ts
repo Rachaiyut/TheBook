@@ -6,21 +6,26 @@ import { TYPES } from "@inversify/types";
 import { controller, httpPost, httpGet } from "inversify-express-utils";
 
 //Use-Cases
-import { CreateOrder, GetAllOrder } from "@application/use-cases/order";
+import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order";
 
 
 @controller("/orders")
 class OrderController {
 
-    private _creatOrder: CreateOrder
-    private _getAllOrder: GetAllOrder
+
+    private readonly _creatOrder: CreateOrder
+    private readonly _getAllOrder: GetAllOrder
+    private readonly _getOrder: GetOrder
+
 
     constructor(
         @inject(TYPES.CreateOrder) createOrder: CreateOrder,
-        @inject(TYPES.GetAllOrder) getAllOrder: GetAllOrder
+        @inject(TYPES.GetAllOrder) getAllOrder: GetAllOrder,
+        @inject(TYPES.GetOrder) getOrder: GetOrder
     ) {
         this._creatOrder = createOrder;
         this._getAllOrder = getAllOrder;
+        this._getOrder = getOrder
     }
 
 
@@ -36,14 +41,32 @@ class OrderController {
         })
     }
 
+
     @httpGet('/')
-    public async fidnAllOrder(req: Request, res: Response) {
+    public async findAllOrder(req: Request, res: Response) {
 
         await this._getAllOrder.execute();
 
         res.status(201).json({
             success: true,
         })
+    }
+
+
+    @httpGet('/orderId')
+    public async findOrder(req: Request<{ orderId: string }>, res: Response) {
+        const orderId = req.params.orderId
+
+        const order = await this._getOrder.execute(orderId);
+
+        res.status(200).json({
+            success: true,
+            code: 200,
+            data: order,
+            errors: [],
+            meta: {}
+        })
+
     }
 
 }

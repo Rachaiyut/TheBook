@@ -1,15 +1,18 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "@inversify/types";
 
-//DTO
+// DTO
 import { IOrderDTO, IOrderItemsDTO } from "@application/dtos";
 
-//Repositories
+// Repositories
 import { OrderRepository, OrderItemsRepository } from "@infrastructure/repositories/index";
 
 // Mappers
 import { OrderMapper } from "@application/mappers/OrderMapper";
 import OrderItemsMapper from "@application/mappers/OrderItemsMapper";
+
+// Error handling
+import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
 
 @injectable()
@@ -55,6 +58,19 @@ class OrderService {
 
     public async getAllOrders() {
         await this._orderRepository.getAll();
+    }
+
+
+    public async getOrder(orderId: string) {
+
+        const order = await this._orderRepository.getOrder(orderId);
+
+        if (!order) {
+            throw ErrorFactory.createError("NotFound", 'This order id is not found')
+        }
+
+
+        return OrderMapper.toDto(order)
     }
 
 }

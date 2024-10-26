@@ -5,7 +5,9 @@ import { OrderService } from "@application/services/api";
 @injectable()
 class GetAllOrder {
 
+    
     private _orderService: OrderService
+
 
     constructor(
         @inject(TYPES.OrderService) orderService: OrderService
