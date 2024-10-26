@@ -3,26 +3,36 @@ import "reflect-metadata";
 // file
 import { readFileSync } from 'fs';
 
+import path from "path";
+
 // Sequelize
 import { Sequelize } from "@sequelize/core";
 import { PostgresDialect } from '@sequelize/postgres';
 
 // Models
+import { BookModel, BookGenreModel, UserModel, GenreModel } from "@infrastructure/models/index";
+
 // import BookModel from "../../infrastructure/models/BookModel";
-import BookGenreModel from "../../infrastructure/models/BookGenreModel"
+// import BookGenreModel from "../../infrastructure/models/BookGenreModel"
 // import UserModel from "../../infrastructure/models/UserModel"
+// import GenreModel from "../../infrastructure/models/GenreModel"
+
 
 // Read JSON FILE
-// const books = JSON.parse(
-//     readFileSync(`${__dirname}/books.json`, 'utf-8')
-// )
+const books = JSON.parse(
+    readFileSync(path.join('/app/src/config/json', 'books.json'), 'utf-8')
+)
 
-// const genre = JSON.parse(
-//     readFileSync(`${__dirname}/genres.json`, 'utf-8')
-// )
+const genres = JSON.parse(
+    readFileSync(path.join('/app/src/config/json', 'genres.json'), 'utf-8')
+)
 
-const bookGenre = JSON.parse(
-    readFileSync(`${__dirname}/bookGenres.json`, 'utf-8')
+const bookGenres = JSON.parse(
+    readFileSync(path.join('/app/src/config/json', 'bookGenres.json'), 'utf-8')
+)
+
+const users = JSON.parse(
+    readFileSync(path.join('/app/src/config/json', 'users.json'), 'utf-8')
 )
 
 // Database Connect
@@ -37,7 +47,7 @@ async function init() {
         port: 5432,
         clientMinMessages: 'notice',
         schema: 'public',
-        models: [BookGenreModel]
+        models: [BookGenreModel, GenreModel, BookModel, UserModel]
     })
 
     try {
@@ -49,14 +59,27 @@ async function init() {
     }
 }
 
+
 // Import Data
 const importData = async () => {
     try {
+        let results = []
+
         init();
-        // const result = await BookModel.bulkCreate(books);
-        // const result = await GenreModel.bulkCreate(genre)
-        const result = await BookGenreModel.bulkCreate(bookGenre)
-        console.log(result)
+
+        const promises = [
+            BookModel.bulkCreate(books),
+            GenreModel.bulkCreate(genres),
+            BookGenreModel.bulkCreate(bookGenres),
+            UserModel.bulkCreate(users),
+        ];
+
+        for (const model of promises) {
+            results.push(await model)
+        }
+
+        console.log(results)
+        
     } catch (err) {
         console.log(err);
     }

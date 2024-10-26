@@ -9,7 +9,8 @@
 		"test": "tsc && ./node_modules/.bin/mocha dist/**/*.spec.js",
 		"lint": "tslint 'src/**/*.ts' --fix",
 		"clean": "rm -rf dist || rmdir /s /q dist",
-		"start": "node dist"
+		"start": "node dist",
+		"import-data": "ts-node -r tsconfig-paths/register src/config/data/import_dev-data.ts --import"
 	},
 	"keywords": [],
 	"author": "",
