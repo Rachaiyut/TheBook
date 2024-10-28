@@ -1,8 +1,9 @@
+import Book from "./Book";
 
 class Order {
 
     private _orderId?: string;
-    // private _orderItems: OrderItems[]
+    private _orderItems?: Book[]
 
     private constructor(
         public status: string,
@@ -24,6 +25,14 @@ class Order {
 
     public getOrderId() {
         return this._orderId;
+    }
+
+    public setOrderItems(orderItems: Book[]) {
+        this._orderItems = orderItems;
+    }
+
+    public getOrderItems() {
+        return this._orderItems;
     }
 
     // Example method to update order status

@@ -1,6 +1,7 @@
-import { Order } from "@domain/entites/index";
+import { Book, Order } from "@domain/entites/index";
 import { IOrderDTO } from "@application/dtos/index";
 import { OrderModel } from "@infrastructure/models/index";
+import { BookMapper } from "./BookMapper";
 
 export class OrderMapper {
     // Convert Domain Entity to DTO
@@ -24,13 +25,16 @@ export class OrderMapper {
 
     // Convert Sequelize Model to Domain Entity
     public static toEntityFromModel(orderModel: OrderModel): Order {
+        const orderItems = orderModel.orderItems?.map((orderItem) => BookMapper.toEntityFromModel(orderItem))
+
         const newOrder = Order.create(
             orderModel.status,
             orderModel.totalAmount,
-            orderModel.userId
+            orderModel.userId,
         );
 
         newOrder.setOrderId(orderModel.orderId!);
+        newOrder.setOrderItems(orderItems!)
 
         return newOrder;
     }

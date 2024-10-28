@@ -27,7 +27,7 @@ import { OrderItemsModel, BookModel } from '@infrastructure/models/index';
     tableName: "orders",
     timestamps: false,
 })
-class OrderModel extends Model<InferAttributes<OrderModel>, InferCreationAttributes<OrderModel>> {
+class OrderModel extends Model {
 
     @Attribute(DataTypes.UUID.V4)
     @Default(sql.uuidV4)
@@ -52,7 +52,7 @@ class OrderModel extends Model<InferAttributes<OrderModel>, InferCreationAttribu
         foreignKey: 'order_id',
         otherKey: 'isbn',
     })
-    declare orderItems?: OrderItemsModel[]
+    declare orderItems?: BookModel[]
 
     //FK
     @Attribute(DataTypes.UUID.V4)

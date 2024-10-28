@@ -1,6 +1,7 @@
 //Interface
 import { IBook } from "@domain/interfaces/entities";
 import Genre from "./Genre";
+import OrderItems from "./OrderItems";
 
 class Book implements IBook {
     isbn: string;
@@ -15,6 +16,7 @@ class Book implements IBook {
     imageCover: string;
     publicationDate: Date;
     slug: string;
+    private _orderItem?: OrderItems
 
     constructor(
         isbn: string,
@@ -42,6 +44,15 @@ class Book implements IBook {
         this.imageCover = imageCover;
         this.publicationDate = publicationDate;
         this.slug = slug;
+    }
+
+    public setOrderItem(orderItem: OrderItems) {
+        this._orderItem = orderItem;
+    }
+
+
+    public getOrderItem() {
+        return this._orderItem;
     }
 
 }

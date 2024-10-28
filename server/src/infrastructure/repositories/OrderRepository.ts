@@ -26,7 +26,7 @@ class OrderRepository {
         const orderModel = OrderMapper.toPersistenceModel(order)
 
         const newOrder = await OrderModel.create({
-            userId: orderModel.userId,
+            userId: orderModel.userId,  
             status: orderModel.status,
             totalAmount: orderModel.totalAmount,
         });
@@ -45,16 +45,14 @@ class OrderRepository {
                 {
                     association: 'orderItems',
                     required: true
-                }
+                },
             ]
         })
 
-        const order = result.map((item) => item.dataValues)
-        console.log(order)
+        const test = result.map((item) => OrderMapper.toEntityFromModel(item))
+        // console.log(test.map(item => item.getOrderItems()))
 
-        const orderItems = result.map((item) => item.dataValues.orderItems?.map(item => item.dataValues))
-
-        console.log(orderItems)
+        // const data = JSON.stringify(result, null, 2);
 
     }
 
