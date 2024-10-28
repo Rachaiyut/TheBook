@@ -49,9 +49,13 @@ class OrderRepository {
             ]
         })
 
-        const orderItems = result.map((item) => console.log(item.orderItems))
+        const order = result.map((item) => item.dataValues)
+        console.log(order)
+
+        const orderItems = result.map((item) => item.dataValues.orderItems?.map(item => item.dataValues))
 
         console.log(orderItems)
+
     }
 
 
