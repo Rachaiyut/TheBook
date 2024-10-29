@@ -18,6 +18,7 @@ import { injectable } from 'inversify';
 import GenreModel from './GenreModel';
 import BookGenreModel from './BookGenreModel';
 import { NonAttribute } from 'sequelize';
+import OrderItemsModel from './OrderItemModel';
 
 @injectable()
 @Table({
@@ -71,6 +72,8 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
 
     @Attribute(DataTypes.STRING)
     declare slug: string
+
+    OrderItemsModel?: OrderItemsModel;
 
     @BeforeCreate()
     static async slug(bookModel: BookModel) {

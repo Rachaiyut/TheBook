@@ -27,6 +27,9 @@ export class OrderMapper {
     public static toEntityFromModel(orderModel: OrderModel): Order {
         const orderItems = orderModel.orderItems?.map((orderItem) => BookMapper.toEntityFromModel(orderItem))
 
+        const junctionTable = orderModel.orderItems?.map((orderItem) => orderItem.dataValues.OrderItemsModel)
+        console.log(junctionTable?.map(item => item?.dataValues))
+
         const newOrder = Order.create(
             orderModel.status,
             orderModel.totalAmount,
