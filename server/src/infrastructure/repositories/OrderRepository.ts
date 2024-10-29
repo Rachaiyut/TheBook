@@ -26,7 +26,7 @@ class OrderRepository {
         const orderModel = OrderMapper.toPersistenceModel(order)
 
         const newOrder = await OrderModel.create({
-            userId: orderModel.userId,  
+            userId: orderModel.userId,
             status: orderModel.status,
             totalAmount: orderModel.totalAmount,
         });
@@ -40,7 +40,7 @@ class OrderRepository {
 
 
     public async getAll() {
-        const result = await this._orderModel.findAll({
+        const orders = await this._orderModel.findAll({
             include: [
                 {
                     association: 'orderItems',
@@ -49,11 +49,7 @@ class OrderRepository {
             ]
         })
 
-        const test = result.map((item) => OrderMapper.toEntityFromModel(item))
-        // console.log(test.map(item => item.getOrderItems()))
-
-        // const data = JSON.stringify(result, null, 2);
-
+        return orders.map((order) => OrderMapper.toEntityFromModel(order))
     }
 
 

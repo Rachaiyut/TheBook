@@ -1,9 +1,10 @@
 import Book from "./Book";
+import OrderItems from "./OrderItems";
 
 class Order {
 
     private _orderId?: string;
-    private _orderItems?: Book[]
+    private _bookItems?: Book[]
 
     private constructor(
         public status: string,
@@ -27,13 +28,22 @@ class Order {
         return this._orderId;
     }
 
-    public setOrderItems(orderItems: Book[]) {
-        this._orderItems = orderItems;
+    public setBookItems(orderItems: Book[]) {
+        this._bookItems = orderItems;
     }
 
-    public getOrderItems() {
-        return this._orderItems;
+    public getBookItems() {
+        return this._bookItems;
     }
+
+    public setOrderItem(order: OrderItems[]){
+        this.getBookItems()?.flatMap(item => item.setOrderItem(order[0]))
+    }
+
+    public getOrderItem() {
+        return this.getBookItems()?.flatMap(item => item.getOrderItem())
+    }
+
 
     // Example method to update order status
     public updateStatus(newStatus: string): void {

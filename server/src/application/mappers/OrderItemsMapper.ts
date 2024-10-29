@@ -28,10 +28,10 @@ class OrderItemsMapper {
     // Convert Sequelize Model to Domain Entity
     public static toEntityFromModel(orderModel: OrderItemsModel): OrderItems {
         return OrderItems.create(
-            orderModel.isbn,
-            orderModel.orderId,
-            orderModel.quantity,
-            orderModel.price,
+            orderModel.dataValues.isbn,
+            orderModel.dataValues.orderId,
+            orderModel.dataValues.quantity,
+            orderModel.dataValues.price,
         );
     }
 
