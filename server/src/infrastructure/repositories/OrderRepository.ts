@@ -6,7 +6,7 @@ import { Order } from "@domain/entites/index";
 import { OrderMapper } from "@application/mappers/OrderMapper";
 
 // Models
-import { OrderModel } from "@infrastructure/models/index";
+import { BookModel, OrderModel } from "@infrastructure/models/index";
 
 // Error
 import ErrorFactory from "@domain/exceptions/ErrorFactory";
@@ -39,15 +39,17 @@ class OrderRepository {
     }
 
 
-    public async getAll() {
+    public async getAll(): Promise<Order[]> {
         const orders = await this._orderModel.findAll({
             include: [
                 {
                     association: 'orderItems',
-                    required: true
+                    attributes: ['isbn', 'name', 'price', 'imageCover'],
+                    required: true,
                 },
             ]
         })
+
 
         return orders.map((order) => OrderMapper.toEntityFromModel(order))
     }
