@@ -7,10 +7,7 @@ A brief description of your project, including its purpose and main features.
 - [Project Structure](#project-structure)
 - [Server Setup](#server-setup)
   - [Mock Data Configuration](#mock-data-configuration)
-- [Client Setup](#client-setup)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Project Structure
 
@@ -49,4 +46,4 @@ To use the mock data in this application for insert data into database, follow t
 3. **Import the Mock Data: Now, you can import the mock data into database. To do this, execute the following command:**
 
    ```bash
-   ts-node server/config/data/import_dev-data.ts --import
+   ts-node -r tsconfig-paths/register src/config/data/import_dev-data.ts --import
