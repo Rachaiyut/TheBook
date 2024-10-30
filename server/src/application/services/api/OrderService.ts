@@ -58,7 +58,7 @@ class OrderService {
     public async getAllOrders(): Promise<IOrderDetailDTO[]> {
         const orderEntity = await this._orderRepository.getAll();
 
-        return orderEntity.map((order) => OrderMapper.toOrderDeatilDTO(order));
+        return orderEntity.map((order) => OrderMapper.toOrderDetailDTO(order));
     }
 
 
