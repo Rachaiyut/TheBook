@@ -57,7 +57,7 @@ class OrderService {
 
 
     public async getAllOrders() {
-        await this._orderRepository.getAll();
+        const orderEntity = await this._orderRepository.getAll();
     }
 
 

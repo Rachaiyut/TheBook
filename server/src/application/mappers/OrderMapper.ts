@@ -27,33 +27,27 @@ export class OrderMapper {
     // Convert Sequelize Model to Domain Entity
     public static toEntityFromModel(orderModel: OrderModel): Order {
 
-        // Map order items from OrderModel to Book domain entities
-        const bookItems = orderModel.orderItems?.map((orderItem) => BookMapper.toEntityFromModel(orderItem))
+        const bookEntity = orderModel.orderItems?.map((orderItem) => {
 
-        // Map items from the junction table (OrderItemsModel) to OrderItem entities
-        const orderItemRecords = orderModel.orderItems?.map((orderItem) => orderItem.dataValues.OrderItemsModel)!
-        const orderItems = orderItemRecords?.map(item => OrderItemsMapper.toEntityFromModel(item!))
+            const bookItem = BookMapper.toEntityFromModel(orderItem)
 
-        const newOrder = Order.create(
+            const orderItems = OrderItemsMapper.toEntityFromModel(orderItem.dataValues.OrderItemsModel!)
+            
+            bookItem.setOrderItem(orderItems)
+
+            return bookItem
+        })
+
+        const orderEntity = Order.create(
             orderModel.status,
             orderModel.totalAmount,
-            orderModel.userId,
+            orderModel.userId, 
         );
 
-        newOrder.setOrderId(orderModel.orderId!);
-        newOrder.setBookItems(bookItems!)
-        newOrder.setOrderItem(orderItems)
-
-        console.log(newOrder)
-        console.log(newOrder)
-
-        console.log("Order Book")
-        console.log(newOrder.getBookItems())
-
-        console.log("Order Item")
-        console.log(newOrder.getOrderItem())
-
-        return newOrder;
+        orderEntity.setOrderId(orderModel.orderId!);
+        orderEntity.setBookItems(bookEntity!)
+       
+        return orderEntity;
     }
 
     // Convert Domain Entity to Sequelize Model for persistence

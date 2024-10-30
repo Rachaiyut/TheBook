@@ -7,7 +7,7 @@ class Order {
     private _bookItems?: Book[]
 
     private constructor(
-        public status: string,
+        public status: string, 
         public totalAmount: number,
         public userId: string,
     ) { }
@@ -36,12 +36,8 @@ class Order {
         return this._bookItems;
     }
 
-    public setOrderItem(order: OrderItems[]){
-        this.getBookItems()?.flatMap(item => item.setOrderItem(order[0]))
-    }
-
-    public getOrderItem() {
-        return this.getBookItems()?.flatMap(item => item.getOrderItem())
+    public setOrderItem(order: OrderItems){
+        const orderItem = new OrderItems(order.isbn, order.isbn, order.quantity, order.price);
     }
 
 
