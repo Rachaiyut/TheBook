@@ -1,5 +1,5 @@
-import { Book, Order } from "@domain/entites/index";
-import { IOrderDTO } from "@application/dtos/index";
+import { Book, Order, OrderItems } from "@domain/entites/index";
+import { IOrderDetailDTO, IOrderDTO } from "@application/dtos/index";
 import { OrderModel } from "@infrastructure/models/index";
 import { BookMapper } from "./BookMapper";
 import OrderItemsMapper from "./OrderItemsMapper";
@@ -13,6 +13,21 @@ export class OrderMapper {
             totalAmount: order.totalAmount!,
             userId: order.userId!,
         };
+    }
+
+
+    public static toOrderDeatilDTO(order: Order): IOrderDetailDTO {
+
+        return {
+            orderId: order.getOrderId()!,
+            status: order.status,
+            totalAmount: order.totalAmount,
+            userId: order.userId,
+            orderItems: order.getBookItems()?.map(item => OrderItemsMapper.toDto(item.getOrderItem()!))!,
+            books: order.getBookItems()?.map((item) => BookMapper.toDto(item))!
+        }
+
+    
     }
 
     // Convert DTO to Domain Entity

@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "@inversify/types";
 
 // DTO
-import { IOrderDTO, IOrderItemsDTO } from "@application/dtos";
+import { IOrderDetailDTO, IOrderDTO, IOrderItemsDTO } from "@application/dtos";
 
 // Repositories
 import { OrderRepository, OrderItemsRepository } from "@infrastructure/repositories/index";
@@ -52,12 +52,13 @@ class OrderService {
         const orderItemsEntity = orderItems.map((item) => OrderItemsMapper.toEntity(item))
 
         await this._orderItemsRepositoty.creteOrderItems(orderId, orderItemsEntity)
-
     }
 
 
-    public async getAllOrders() {
+    public async getAllOrders(): Promise<IOrderDetailDTO[]> {
         const orderEntity = await this._orderRepository.getAll();
+
+        return orderEntity.map((order) => OrderMapper.toOrderDeatilDTO(order));
     }
 
 

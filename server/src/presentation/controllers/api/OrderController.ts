@@ -45,10 +45,11 @@ class OrderController {
     @httpGet('/')
     public async findAllOrder(req: Request, res: Response) {
 
-        await this._getAllOrder.execute();
+        const allOrder = await this._getAllOrder.execute();
 
         res.status(201).json({
             success: true,
+            data: allOrder
         })
     }
 
