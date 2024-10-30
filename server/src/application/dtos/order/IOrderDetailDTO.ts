@@ -1,13 +1,15 @@
-import IBookDTO from "../book/IBookDTO";
-import IOrderItemsDTO from "../orderItems/IOrderItemsDTO";
-
 interface IOrderDetailDTO {
     orderId: string,
     status: string,
     totalAmount: number,
     userId: string
-    orderItems: IOrderItemsDTO[],
-    books: Array<Pick<IBookDTO, "isbn" | "name" | "price" | "imageCover">>;
+    orderItems: {
+        bookName: string | null;
+        bookPrice: number | null;
+        bookImageCover: string | null;
+        quantity: number;
+        price: number;
+    }[]
 }
 
 export default IOrderDetailDTO; 

@@ -25,13 +25,12 @@ export class OrderMapper {
         const status = order.status;
         const totalAmount = order.totalAmount;
         const userId = order.userId;
-    
-        const orderItems: IOrderItemsDTO[] = order.getBookItems()?.map(item => 
+
+        const orderItems = order.getBookItems()?.map(item =>
             OrderItemsMapper.toDto(item.getOrderItem()!)
         ) || [];
-    
-        const books: Array<Pick<IBookDTO, "isbn" | "name" | "price" | "imageCover">> = 
-            order.getBookItems()?.map(item => {
+
+        const books = order.getBookItems()?.map(item => {
                 const bookDto = BookMapper.toDto(item);
                 return {
                     isbn: bookDto.isbn,
@@ -40,14 +39,25 @@ export class OrderMapper {
                     imageCover: bookDto.imageCover,
                 };
             }) || [];
-    
+
+        const combinedData = orderItems.map(item => {
+            const book = books.find(b => b.isbn === item.isbn);
+            return {
+                bookName: book ? book.name : null, 
+                bookPrice: book ? book.price : null,
+                bookImageCover: book ? book.imageCover : null,
+                quantity: item.quantity,
+                price: item.price
+            };
+        });
+
+
         return {
             orderId,
             status,
             totalAmount,
             userId,
-            orderItems,
-            books,
+            orderItems: combinedData
         };
     }
 
@@ -70,7 +80,7 @@ export class OrderMapper {
             const bookItem = BookMapper.toEntityFromModel(orderItem)
 
             const orderItems = OrderItemsMapper.toEntityFromModel(orderItem.dataValues.OrderItemsModel!)
-            
+
             bookItem.setOrderItem(orderItems)
 
             return bookItem
@@ -79,12 +89,12 @@ export class OrderMapper {
         const orderEntity = Order.create(
             orderModel.status,
             orderModel.totalAmount,
-            orderModel.userId, 
+            orderModel.userId,
         );
 
         orderEntity.setOrderId(orderModel.orderId!);
         orderEntity.setBookItems(bookEntity!)
-       
+
         return orderEntity;
     }
 
