@@ -6,8 +6,8 @@ import { IOrderDetailDTO } from "@application/dtos";
 @injectable()
 class GetAllOrder {
 
-    
-    private _orderService: OrderService
+
+    private _orderService: OrderService   
 
 
     constructor(
@@ -18,12 +18,12 @@ class GetAllOrder {
     }
 
 
-    public async execute(): Promise<IOrderDetailDTO[]> {
-       const result = await this._orderService.getAllOrders();
+    public async execute(userId: string): Promise<IOrderDetailDTO[]> {
+        const result = await this._orderService.getAllOrders(userId);
 
-       return result
+        return result
     }
 
 }
 
-export default GetAllOrder
+export default GetAllOrder 

@@ -12,7 +12,8 @@ class Local {
 
         const jwtAccessSecret = process.env.JWT_ACCESS_SECRET!;
         const jwtRefreshSecret = process.env.JWT_EXPIRE!;
-        const jwtExpire = process.env.JWT_REFRESH_EXPIRE!;
+        const jwtAccessExpire = process.env.JWT_ACCESS_EXPIRE!
+        const jwtRefreshExpire = process.env.JWT_REFRESH_EXPIRE!;
         const jwtCookieExpire = process.env.JWT_COOKIE_EXPIRES!;
 
         const googleId = process.env.GOOGLE_ID!;
@@ -31,7 +32,8 @@ class Local {
             postgresUrl,
             jwtAccessSecret,
             jwtRefreshSecret,
-            jwtExpire,
+            jwtAccessExpire,
+            jwtRefreshExpire,
             jwtCookieExpire,
             googleId,
             googleSecret,

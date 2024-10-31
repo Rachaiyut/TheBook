@@ -14,13 +14,17 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
 @injectable()
 class OrderRepository {
+
+
     private _orderModel: typeof OrderModel;
+
 
     constructor(
         @inject(TYPES.OrderModel) orderModel: typeof OrderModel,
     ) {
         this._orderModel = orderModel;
     }
+
 
     public async create(order: Omit<Order, "orderItems">): Promise<string> {
         const orderModel = OrderMapper.toPersistenceModel(order)
@@ -39,16 +43,23 @@ class OrderRepository {
     }
 
 
-    public async getAll(): Promise<Order[]> {
+    public async getAll(userId: string): Promise<Order[]> {
         const orders = await this._orderModel.findAll({
+            where: { userId },
             include: [
                 {
                     association: 'orderItems',
                     attributes: ['isbn', 'name', 'price', 'imageCover'],
-                    required: true,
+                    through: {
+                        attributes: {
+                            exclude: ['userId']
+                        }
+                    }
                 },
             ]
         })
+
+        console.log(orders)
 
 
         return orders.map((order) => OrderMapper.toEntityFromModel(order))

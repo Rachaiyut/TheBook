@@ -24,7 +24,6 @@ export class OrderMapper {
         const orderId = order.getOrderId()!;
         const status = order.status;
         const totalAmount = order.totalAmount;
-        const userId = order.userId;
 
         const orderItems = order.getBookItems()?.map(item =>
             OrderItemsMapper.toDto(item.getOrderItem()!)
@@ -56,7 +55,6 @@ export class OrderMapper {
             orderId,
             status,
             totalAmount,
-            userId,
             orderItems: combinedData
         };
     }
