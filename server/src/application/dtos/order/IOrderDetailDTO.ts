@@ -2,7 +2,6 @@ interface IOrderDetailDTO {
     orderId: string,
     status: string,
     totalAmount: number,
-    userId: string
     orderItems: {
         bookName: string | null;
         bookPrice: number | null;

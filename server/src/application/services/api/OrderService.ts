@@ -18,9 +18,11 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 @injectable()
 class OrderService {
 
+
     private _orderRepository: OrderRepository;
     private _orderItemsRepositoty: OrderItemsRepository;
 
+    
     constructor(
         @inject(TYPES.OrderRepository) orderRepository: OrderRepository,
         @inject(TYPES.OrderItemsRepository) orderItemsRepository: OrderItemsRepository
@@ -55,8 +57,8 @@ class OrderService {
     }
 
 
-    public async getAllOrders(): Promise<IOrderDetailDTO[]> {
-        const orderEntity = await this._orderRepository.getAll();
+    public async getAllOrders(userId: string): Promise<IOrderDetailDTO[]> {
+        const orderEntity = await this._orderRepository.getAll(userId);
 
         return orderEntity.map((order) => OrderMapper.toOrderDetailDTO(order));
     }

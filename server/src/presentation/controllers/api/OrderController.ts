@@ -38,14 +38,15 @@ class OrderController {
         res.status(201).json({
             success: true,
             data: order
-        })
+        }) 
     }
 
 
-    @httpGet('/')
-    public async findAllOrder(req: Request, res: Response) {
+    @httpGet('/:userId')
+    public async getAllOrderByUser(req: Request<{ userId: string }>, res: Response) {
+        const userId = req.params.userId;
 
-        const allOrder = await this._getAllOrder.execute();
+        const allOrder = await this._getAllOrder.execute(userId);
 
         res.status(201).json({
             success: true,
@@ -55,7 +56,7 @@ class OrderController {
 
 
     @httpGet('/orderId')
-    public async findOrder(req: Request<{ orderId: string }>, res: Response) {
+    public async getOrder(req: Request<{ orderId: string }>, res: Response) {
         const orderId = req.params.orderId
 
         const order = await this._getOrder.execute(orderId);
