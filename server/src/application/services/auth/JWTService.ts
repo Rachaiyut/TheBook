@@ -16,25 +16,32 @@ class JWTService {
     private getJWTConfig() {
         const accessTokenSecret = Local.config().jwtAccessSecret;
         const refreshTokenSecret = Local.config().jwtRefreshSecret;
-        const expire = Local.config().jwtExpire;
+        const jwtAccessExpire = Local.config().jwtAccessExpire;
+        const jwtRefreshExpire = Local.config().jwtRefreshExpire;
         const cookieExpire = Local.config().jwtCookieExpire;
 
-        return { accessTokenSecret, refreshTokenSecret, expire, cookieExpire };
+        return { 
+            accessTokenSecret, 
+            refreshTokenSecret, 
+            jwtAccessExpire, 
+            jwtRefreshExpire,
+            cookieExpire 
+        };
     }
 
 
     public generateAccessToken(id: string) {
-        const { accessTokenSecret } = this.getJWTConfig();
+        const { accessTokenSecret, jwtAccessExpire } = this.getJWTConfig();
 
-        return jwt.sign({ data: id }, accessTokenSecret, { expiresIn: "10s" })
+        return jwt.sign({ data: id }, accessTokenSecret, { expiresIn: jwtAccessExpire })
 
     }
 
 
     public genrerefreshToken(id: string) {
-        const { refreshTokenSecret } = this.getJWTConfig();
+        const { refreshTokenSecret, jwtRefreshExpire  } = this.getJWTConfig();
 
-        return jwt.sign({ data: id }, refreshTokenSecret, { expiresIn: "30s" })
+        return jwt.sign({ data: id }, refreshTokenSecret, { expiresIn: jwtRefreshExpire })
     }
 
 

@@ -34,7 +34,7 @@ class UserController {
         '/',
         TYPES.JwtMiddleware,
         TYPES.ProtectMiddleware,
-        RolesMiddleware(["admin", "user"])
+        RolesMiddleware(["admin", "user"]) 
     )
     public async getAllUsers(req: Request, res: Response) {
         const result = await this._getAllUser.execute();
