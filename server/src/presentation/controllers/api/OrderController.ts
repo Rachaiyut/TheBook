@@ -49,7 +49,7 @@ class OrderController {
 
 
     @httpGet('/:userId')
-    public async getAllOrderByUser(req: Request<{ userId: string }>, res: Response) {
+    public async getAllOrdersByUser(req: Request<{ userId: string }>, res: Response) {
         const userId = req.params.userId;
 
         const allOrder = await this._getAllOrder.execute(userId);

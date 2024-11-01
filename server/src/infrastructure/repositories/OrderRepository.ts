@@ -43,7 +43,7 @@ class OrderRepository {
     }
 
 
-    public async getAll(userId: string): Promise<Order[]> {
+    public async getAllOrdersByUser(userId: string): Promise<Order[]> {
         const orders = await this._orderModel.findAll({
             where: { userId },
             include: [
@@ -58,9 +58,6 @@ class OrderRepository {
                 },
             ]
         })
-
-        console.log(orders)
-
 
         return orders.map((order) => OrderMapper.toEntityFromModel(order))
     }

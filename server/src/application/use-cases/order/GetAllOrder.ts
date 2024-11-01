@@ -19,7 +19,7 @@ class GetAllOrder {
 
 
     public async execute(userId: string): Promise<IOrderDetailDTO[]> {
-        const result = await this._orderService.getAllOrders(userId);
+        const result = await this._orderService.getAllOrdersByUser(userId);
 
         return result
     }

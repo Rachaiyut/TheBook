@@ -50,15 +50,15 @@ class OrderService {
     }
 
 
-    public async createOrderItems(orderId: string, orderItems: IOrderItemsDTO[]) {
+    public async createOrdersItems(orderId: string, orderItems: IOrderItemsDTO[]) {
         const orderItemsEntity = orderItems.map((item) => OrderItemsMapper.toEntity(item))
 
         await this._orderItemsRepositoty.creteOrderItems(orderId, orderItemsEntity)
     }
 
 
-    public async getAllOrders(userId: string): Promise<IOrderDetailDTO[]> {
-        const orderEntity = await this._orderRepository.getAll(userId);
+    public async getAllOrdersByUser(userId: string): Promise<IOrderDetailDTO[]> {
+        const orderEntity = await this._orderRepository.getAllOrdersByUser(userId);
 
         return orderEntity.map((order) => OrderMapper.toOrderDetailDTO(order));
     }
