@@ -35,7 +35,7 @@ class OrderService {
     public async create(order: IOrderDTO): Promise<string> {
 
         const orderId = await this.createOrder(order);
-        await this.createOrderItems(orderId, order.orderItems);
+        await this.createOrdersItems(orderId, order.orderItems);
 
         return orderId
     }

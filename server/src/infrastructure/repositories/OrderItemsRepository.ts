@@ -9,7 +9,7 @@ import { OrderItemsModel } from "@infrastructure/models/index";
 
 // Error
 import ErrorFactory from "@domain/exceptions/ErrorFactory";
- 
+
 @injectable()
 class OrderItemsRepository {
 
