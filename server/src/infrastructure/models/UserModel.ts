@@ -12,7 +12,8 @@ import {
 	ColumnName,
 	Table,
 	Default,
-	BeforeCreate
+	BeforeCreate,
+	BeforeBulkCreate
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -62,6 +63,14 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 	static async hashPassword(userModel: UserModel) {
 		const salt = await bcrypt.genSalt(10);
 		userModel.password = await bcrypt.hash(userModel.password, salt)
+	}
+
+	@BeforeBulkCreate()
+	static async hashPasswords(userModel: UserModel[]) {
+		for (const user of userModel) {
+			const salt = await bcrypt.genSalt(10);
+			user.password = await bcrypt.hash(user.password, salt)
+		}
 	}
 }
 

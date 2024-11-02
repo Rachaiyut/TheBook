@@ -11,7 +11,8 @@ import {
     Table,
     Default,
     BeforeCreate,
-    BelongsToMany
+    BelongsToMany,
+    BeforeBulkCreate
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -48,7 +49,7 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
     declare authors: string[]
 
     @Attribute(DataTypes.DOUBLE)
-    declare price: number
+    declare price: number  
 
     @Attribute(DataTypes.INTEGER)
     @ColumnName('total_stock')
@@ -78,6 +79,13 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
     @BeforeCreate()
     static async slug(bookModel: BookModel) {
         bookModel.slug = bookModel.name.toLowerCase().replace(/\s+/g, '-')
+    }
+
+    @BeforeBulkCreate()
+    static async slugs(bookModel: BookModel[]) {
+        for (const book of bookModel) {
+            book.slug = book.name.toLowerCase().replace(/\s+/g, '-');
+        }
     }
 
 }

@@ -8,8 +8,9 @@ services:
       - postgresql:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=book_shop
-      - POSTGRES_USER=charut
-      - POSTGRES_PASSWORD=Charutwbi@2001
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345678
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4
@@ -18,9 +19,10 @@ services:
       - "5050:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: charuj44@yahoo.com
-      PGADMIN_DEFAULT_PASSWORD: Charutwbi@2001
+      PGADMIN_DEFAULT_PASSWORD: 12345678
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+
   backend:
     build:
       context: ./server
@@ -37,6 +39,14 @@ services:
       - ./server/.env
     depends_on:
       - postgres
+
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe_cli
+    env_file:
+      - ./server/.env  
+    entrypoint: ["/bin/sh", "-c", "tail -f /dev/null"]  
+
   frontend:
     build:
       context: ./client

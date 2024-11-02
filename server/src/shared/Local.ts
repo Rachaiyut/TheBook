@@ -8,10 +8,10 @@ class Local {
         dotenv.config({ path: path.join(__dirname, "../../.env") })
 
         const port = process.env.PORT!;
-        const postgresUrl = process.env.POSTGRES_URL;
+        const postgresUrl = process.env.POSTGRES_URL!;
 
         const jwtAccessSecret = process.env.JWT_ACCESS_SECRET!;
-        const jwtRefreshSecret = process.env.JWT_EXPIRE!;
+        const jwtRefreshSecret = process.env.JWT_ACCESS_REFRESH!;
         const jwtAccessExpire = process.env.JWT_ACCESS_EXPIRE!
         const jwtRefreshExpire = process.env.JWT_REFRESH_EXPIRE!;
         const jwtCookieExpire = process.env.JWT_COOKIE_EXPIRES!;
@@ -19,6 +19,8 @@ class Local {
         const googleId = process.env.GOOGLE_ID!;
         const googleSecret = process.env.GOOGLE_SECRET!;
         const googleCallback = process.env.GOOGLE_CALLBACK!;
+
+        const stripeKey = process.env.STRIPE_API_KEY!;
 
         const maxUploadLimit = process.env.APP_MAX_UPLOAD_LIMIT!
         const maxParameterLimit = parseInt(process.env.APP_MAX_PARAMETER_LIMIT!)
@@ -38,6 +40,7 @@ class Local {
             googleId,
             googleSecret,
             googleCallback,
+            stripeKey,
             maxUploadLimit,
             maxParameterLimit,
             url,

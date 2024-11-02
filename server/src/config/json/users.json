@@ -2,6 +2,7 @@
     {
         "name": "Rachaiyut Hayibilang",
         "email": "rachiyut.hayibilang@email.com",
-        "password": "12345678"
+        "password": "12345678",
+        "roles": ["user"]
     }
 ]

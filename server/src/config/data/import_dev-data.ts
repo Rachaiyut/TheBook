@@ -41,8 +41,8 @@ async function init() {
     const sequelize = new Sequelize({
         dialect: PostgresDialect,
         database: 'book_shop',
-        user: 'charut',
-        password: 'Charutwbi@2001',
+        user: 'postgres',
+        password: '12345678',
         host: 'postgresdb',
         port: 5432,
         clientMinMessages: 'notice',
@@ -68,10 +68,10 @@ const importData = async () => {
         init();
 
         const promises = [
-            BookModel.bulkCreate(books),
-            GenreModel.bulkCreate(genres),
-            BookGenreModel.bulkCreate(bookGenres),
-            UserModel.bulkCreate(users),
+            BookModel.bulkCreate(books, { hooks: true }),
+            GenreModel.bulkCreate(genres, { hooks: true }),
+            BookGenreModel.bulkCreate(bookGenres, { hooks: true }),
+            UserModel.bulkCreate(users, { hooks: true }),
         ];
 
         for (const model of promises) {
@@ -79,7 +79,7 @@ const importData = async () => {
         }
 
         console.log(results)
-        
+
     } catch (err) {
         console.log(err);
     }

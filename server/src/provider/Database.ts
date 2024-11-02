@@ -21,8 +21,8 @@ class Database {
         const sequelize = new Sequelize({
             dialect: PostgresDialect,
             database: 'book_shop',
-            user: 'charut',
-            password: 'Charutwbi@2001',
+            user: 'postgres',
+            password: '12345678',
             host: 'postgresdb',
             port: 5432,
             clientMinMessages: 'notice',
