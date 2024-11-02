@@ -1,62 +1,62 @@
 [
     {
-        "genreId": "1",
+        "genreId": 1,
         "name": "Drama"
     },
     {
-        "genreId": "2",
+        "genreId": 2,
         "name": "Mystery of the Lost Temple"
     },
     {
-        "genreId": "3",
+        "genreId": 3,
         "name": "Historic Chronicles"
     },
     {
-        "genreId": "4",
+        "genreId": 4,
         "name": "Cyberpunk Adventures"
     },
     {
-        "genreId": "5",
+        "genreId": 5,
         "name": "Fantasy Realms"
     },
     {
-        "genreId": "6",
+        "genreId": 6,
         "name": "Psychological Thriller"
     },
     {
-        "genreId": "7",
+        "genreId": 7,
         "name": "Romantic Odyssey"
     },
     {
-        "genreId": "8",
+        "genreId": 8,
         "name": "Horror Nightmares"
     },
     {
-        "genreId": "9",
+        "genreId": 9,
         "name": "Epic Battles"
     },
     {
-        "genreId": "10",
+        "genreId": 10,
         "name": "Science Exploration"
     },
     {
-        "genreId": "11",
+        "genreId": 11,
         "name": "Political Drama"
     },
     {
-        "genreId": "12",
+        "genreId": 12,
         "name": "Time Travel Tales"
     },
     {
-        "genreId": "13",
+        "genreId": 13,
         "name": "Alien Encounters"
     },
     {
-        "genreId": "14",
+        "genreId": 14,
         "name": "Dystopian Futures"
     },
     {
-        "genreId": "15",
+        "genreId": 15,
         "name": "Mythology and Legends"
     }
 ]

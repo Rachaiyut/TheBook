@@ -9,7 +9,8 @@ import {
     PrimaryKey,
     Table,
     AutoIncrement,
-    ColumnName
+    ColumnName,
+    Unique
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -25,7 +26,8 @@ class BookGenreModel extends Model<InferAttributes<BookGenreModel>, InferCreatio
     @ColumnName('book_genre_id') 
     @AutoIncrement
     @PrimaryKey
-    declare bookGenreId?: number
+    @Unique
+    declare bookGenreId: number
 
     @Attribute(DataTypes.STRING)
     @ColumnName('isbn')

@@ -47,7 +47,7 @@ async function init() {
         port: 5432,
         clientMinMessages: 'notice',
         schema: 'public',
-        models: [BookGenreModel, GenreModel, BookModel, UserModel]
+        models: [GenreModel, BookModel, BookGenreModel, UserModel]
     })
 
     try {
@@ -65,18 +65,20 @@ const importData = async () => {
     try {
         let results = []
 
-        init();
+        await init();
 
         const promises = [
             BookModel.bulkCreate(books, { hooks: true }),
             GenreModel.bulkCreate(genres, { hooks: true }),
-            BookGenreModel.bulkCreate(bookGenres, { hooks: true }),
             UserModel.bulkCreate(users, { hooks: true }),
         ];
 
         for (const model of promises) {
             results.push(await model)
         }
+
+        // Junction Table
+        await BookGenreModel.bulkCreate(bookGenres, { hooks: true }),
 
         console.log(results)
 

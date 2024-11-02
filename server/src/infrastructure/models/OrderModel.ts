@@ -15,6 +15,7 @@ import {
     BelongsTo,
     NotNull,
     BelongsToMany,
+    Unique,
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -33,6 +34,7 @@ class OrderModel extends Model {
     @Default(sql.uuidV4)
     @ColumnName('order_id')
     @PrimaryKey
+    @Unique
     declare orderId?: string
 
     @Attribute(DataTypes.STRING)

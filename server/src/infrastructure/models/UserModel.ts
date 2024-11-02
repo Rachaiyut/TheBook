@@ -13,7 +13,8 @@ import {
 	Table,
 	Default,
 	BeforeCreate,
-	BeforeBulkCreate
+	BeforeBulkCreate,
+	Unique
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -33,6 +34,7 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 	@Default(sql.uuidV4)
 	@ColumnName('user_id')
 	@PrimaryKey
+	@Unique
 	declare userId: string
 
 	@Attribute(DataTypes.TEXT)

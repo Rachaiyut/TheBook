@@ -12,7 +12,8 @@ import {
     Default,
     BeforeCreate,
     BelongsToMany,
-    BeforeBulkCreate
+    BeforeBulkCreate,
+    Unique
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -30,6 +31,7 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
 
     @Attribute(DataTypes.STRING)
     @PrimaryKey
+    @Unique
     declare isbn: string
 
     @Attribute(DataTypes.STRING)
@@ -49,7 +51,7 @@ class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttribute
     declare authors: string[]
 
     @Attribute(DataTypes.DOUBLE)
-    declare price: number  
+    declare price: number
 
     @Attribute(DataTypes.INTEGER)
     @ColumnName('total_stock')

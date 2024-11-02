@@ -11,7 +11,8 @@ import {
     ColumnName,
     Table,
     Default,
-    NotNull,  
+    NotNull,
+    Unique,  
 } from '@sequelize/core/decorators-legacy';
 import { injectable } from 'inversify';
 
@@ -26,6 +27,7 @@ class OrderItemsModel extends Model<InferAttributes<OrderItemsModel>, InferCreat
     @Default(sql.uuidV4)
     @ColumnName('order_item_id')
     @PrimaryKey
+    @Unique
     declare orderItemId?: string;
 
     @Attribute(DataTypes.INTEGER)

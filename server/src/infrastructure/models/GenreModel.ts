@@ -9,7 +9,8 @@ import {
     PrimaryKey,
     Table,
     AutoIncrement,
-    ColumnName
+    ColumnName,
+    Unique
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -25,6 +26,7 @@ class GenreModel extends Model<InferAttributes<GenreModel>, InferCreationAttribu
     @ColumnName('genre_id')
     @AutoIncrement
     @PrimaryKey
+    @Unique
     declare genreId: number
 
     @Attribute(DataTypes.STRING)
@@ -32,4 +34,3 @@ class GenreModel extends Model<InferAttributes<GenreModel>, InferCreationAttribu
 }
 
 export default GenreModel;
- 
