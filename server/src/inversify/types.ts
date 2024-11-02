@@ -27,7 +27,7 @@ export const TYPES = {
     UserService: Symbol.for("UserService"),
     OrderService: Symbol.for("OrderService"),
     GetAllOrder: Symbol.for("GetAllOrder"),
-    GetOrder: Symbol.for("GetPrrder"),
+    GetOrder: Symbol.for("GetOrder"),
     AuthService: Symbol.for("AuthService"),
     JWTService: Symbol.for("JWTService"),
     PasswordService: Symbol.for("PasswordService"),
@@ -37,5 +37,7 @@ export const TYPES = {
     JwtMiddleware: Symbol.for("JwtMiddleware"),
     ProtectMiddleware: Symbol.for("ProtectMiddlware"),
     Passport: Symbol.for("Passport"),
-    GoogleStragy: Symbol.for("GoogleStragy")
+    GoogleStragy: Symbol.for("GoogleStragy"),
+    StripeService: Symbol.for('StripeService'),
+    Checkout: Symbol.for("Checkout")
 };

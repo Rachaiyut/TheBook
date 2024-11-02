@@ -35,7 +35,7 @@ import {
     RoleService
 } from "@application/services/auth/index";
 
-//Use-Cases
+// Use-Cases
 import { Register, Login, RefreshToken } from "@application/use-cases/auth/index";
 import { DeleteUser, GetAllUsers, UpdateUser } from "@application/use-cases/user/index";
 import {
@@ -48,14 +48,19 @@ import {
 } from "@application/use-cases/book/index";
 import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order/index";
 
+// Outer Use-Cases
+import { Checkout } from "@application/use-cases/payment/index";
+
 //Middlewares
 import {
     JwtMiddleware,
     ProtectMiddleware,
 } from "@presentation/middlewares/index";
 
+// OuterService
 import GoogleStragy from "@infrastructure/services/auth/strategies/googleStrategy";
 import Passport from "@infrastructure/services/auth/passport/passport";
+import StripeService from "@infrastructure/services/Stripe/StripeService";
 
 
 export class DIContainer {
@@ -87,8 +92,11 @@ export class DIContainer {
         // Services
         this.configureOuterService();
 
-        //Usecase
+        // Usecase
         this.configureUsecase();
+
+        // Outer Use-Cases
+        this.configureOuterUsecase();
 
         // Middleware
         this.middleware();
@@ -140,6 +148,12 @@ export class DIContainer {
 
     private configureOuterService() {
         this.container.bind<GoogleStragy>(TYPES.GoogleStragy).to(GoogleStragy);
+        this.container.bind<StripeService>(TYPES.StripeService).to(StripeService);
+    }
+
+
+    private configureOuterUsecase() {
+        this.container.bind<Checkout>(TYPES.Checkout).to(Checkout);
     }
 
 
