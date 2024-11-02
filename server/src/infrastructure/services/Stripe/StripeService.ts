@@ -1,11 +1,9 @@
 import { injectable } from 'inversify';
 
-import Stripe from 'stripe';
-
 import Local from '@shared/Local';
 
-
-const stripe = new Stripe('');
+import Stripe from 'stripe';
+const stripe = new Stripe(Local.config().stripeSecretKey);
 
 @injectable()
 class StripeService {
