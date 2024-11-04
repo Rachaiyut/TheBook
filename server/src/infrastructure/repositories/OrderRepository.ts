@@ -65,11 +65,20 @@ class OrderRepository {
 
     public async getOrder(orderId: string) {
 
-        const isOrderExist = await this._orderModel.findOne(
-            {
-                where: { orderId }
-            }
-        )
+        const isOrderExist = await this._orderModel.findOne({
+            where: { orderId },
+            include: [
+                {
+                    association: 'orderItems',
+                    attributes: ['isbn', 'name', 'price', 'imageCover'],
+                    through: {
+                        attributes: {
+                            exclude: ['userId']
+                        }
+                    }
+                },
+            ]
+        })
 
         return isOrderExist ? OrderMapper.toEntityFromModel(isOrderExist) : null
     }

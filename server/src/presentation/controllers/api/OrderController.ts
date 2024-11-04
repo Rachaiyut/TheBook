@@ -5,8 +5,10 @@ import { inject } from "inversify";
 import { TYPES } from "@inversify/types";
 import { controller, httpPost, httpGet } from "inversify-express-utils";
 
-//Use-Cases
-import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order";
+// Use-Cases
+import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order/index";
+
+// Middlewares
 import { RolesMiddleware } from "@presentation/middlewares";
 
 
@@ -48,7 +50,7 @@ class OrderController {
     }
 
 
-    @httpGet('/:userId')
+    @httpGet('/user/:userId')
     public async getAllOrdersByUser(req: Request<{ userId: string }>, res: Response) {
         const userId = req.params.userId;
 
@@ -57,11 +59,11 @@ class OrderController {
         res.status(201).json({
             success: true,
             data: allOrder
-        })
+        }) 
     }
 
 
-    @httpGet('/orderId')
+    @httpGet('/:orderId')
     public async getOrder(req: Request<{ orderId: string }>, res: Response) {
         const orderId = req.params.orderId
 

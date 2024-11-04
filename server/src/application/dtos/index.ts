@@ -6,6 +6,7 @@ import IOrderDTO from "./order/IOrderDTO";
 import IOrderItemsDTO from "./orderItems/IOrderItemsDTO";
 import IGenreDTO from "./genre/IGenreDTO";
 import IOrderDetailDTO from "./order/IOrderDetailDTO";
+import IOrderLineItemDTO from "./order/IOrderLineItemDTO";
 
 export {
     IRegisterDTO,
@@ -16,4 +17,5 @@ export {
     IOrderDetailDTO,
     IOrderItemsDTO,
     IGenreDTO,
+    IOrderLineItemDTO
 }
