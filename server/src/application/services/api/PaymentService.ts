@@ -7,8 +7,6 @@ import { OrderService } from "@application/services/api/index";
 // Outer Service
 import StripeService from "@infrastructure/services/Stripe/StripeService";
 
-// Resitory
-import { OrderRepository } from "@infrastructure/repositories";
 
 
 @injectable()
@@ -47,15 +45,16 @@ class PaymentService {
 
         const orderId = await this._Striprservice.webhook(body, sig)
 
-        await this.handlePaymentSuccess(orderId);
+        const isSuccess = await this.handlePaymentSuccess(orderId!);
 
+        return isSuccess
 
     }
 
     public async handlePaymentSuccess(orderId: string) {
-        const update = await this._orderService.updateOrderStatus(orderId);
+        const isUpdateStatusSuccess = await this._orderService.updateOrderStatus(orderId);
 
-
+        return isUpdateStatusSuccess; 
     }
 
 }

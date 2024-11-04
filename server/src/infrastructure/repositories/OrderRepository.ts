@@ -23,7 +23,7 @@ class OrderRepository {
         @inject(TYPES.OrderModel) orderModel: typeof OrderModel,
     ) {
         this._orderModel = orderModel;
-    }
+    } 
 
 
     public async create(order: Omit<Order, "orderItems">): Promise<string> {
@@ -85,10 +85,8 @@ class OrderRepository {
 
 
     public async updateOrderByPk(orderId: string, order: Order) {
+        
         const orderModel = OrderMapper.toPersistenceModel(order);
-
-        console.log("Entity", order)
-        console.log("Model", orderModel.dataValues)
 
         const [updateRows, [updateOrder]] = await this._orderModel.update(orderModel.dataValues, {
             where: { orderId },

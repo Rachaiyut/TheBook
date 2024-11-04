@@ -12,8 +12,6 @@ import IOrderLineItemDTO from '@application/dtos/order/IOrderLineItemDTO';
 
 // Error
 import ErrorFactory from '@domain/exceptions/ErrorFactory';
-import { SHOW_CONSTRAINTS_QUERY_SUPPORTABLE_OPTIONS } from '@sequelize/core/_non-semver-use-at-your-own-risk_/abstract-dialect/query-generator-typescript.js';
-import asyncHandler from '@shared/utils/asyncHandler';
 
 
 @injectable()
@@ -60,37 +58,37 @@ class StripeService {
     }
 
 
-    public async webhook(payload: any, signature: string): Promise<string> {
-        
+    public async webhook(payload: any, signature: string) {
+
         let event;
         const { stripeWebhook } = this.getStripeConfig();
-    
+
         try {
             event = await stripe.webhooks.constructEventAsync(payload, signature, stripeWebhook);
         } catch (error) {
             throw ErrorFactory.createError("InvalidSignature", "Invalid signature or payload");
         }
-    
+
         if (!event || !event.type || !event.data) {
             throw ErrorFactory.createError("InvalidEvent", "Webhook event structure is invalid");
         }
-    
+
         switch (event.type) {
-            case 'checkout.session.completed':
+            case 'checkout.session.completed': {
 
                 const orderId = event.data.object.metadata?.orderId;
-                
+
                 if (orderId) {
                     return orderId;
                 } else {
                     throw ErrorFactory.createError("NotFound", "Order ID not found in event metadata");
                 }
-    
+            }
             default:
-                throw ErrorFactory.createError("UnsupportedEvent", `Unhandled event type: ${event.type}`);
+                throw ErrorFactory.createError("UnsupportedEvent", `Unhandled event type:`);
         }
     }
-    
+
 
 }
 
