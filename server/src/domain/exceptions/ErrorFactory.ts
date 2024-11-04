@@ -5,6 +5,9 @@ import DatabaseError from './errors/DatabaseError';
 import TokenError from './errors/TokenError';
 import { LoginError } from './errors/LoginError';
 import AuthorizationError from './errors/AuthorizationError';
+import WebhookVerificationFailed from './errors/Stripe/InvalidSignature';
+import InvalidEvent from './errors/Stripe/InvalidEvent';
+import UnsupportedEvent from './errors/Stripe/UnsubpportedEvent';
 
 class ErrorFactory {
 	static createError(type: string, message: string): Error {
@@ -23,6 +26,12 @@ class ErrorFactory {
 				return new TokenError(message);
 			case 'Permission':
 				return new AuthorizationError(message);
+			case 'InvalidSignature':
+				return new WebhookVerificationFailed(message);
+			case 'InvalidEvent':
+				return new InvalidEvent(message);
+			case 'UnsupportedEvent':
+				return new UnsupportedEvent(message);
 			default:
 				return new Error(message);
 		}
