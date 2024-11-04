@@ -37,8 +37,16 @@ import {
 } from "@application/services/auth/index";
 
 // Use-Cases
-import { Register, Login, RefreshToken } from "@application/use-cases/auth/index";
-import { DeleteUser, GetAllUsers, UpdateUser } from "@application/use-cases/user/index";
+import { 
+    Register, 
+    Login, 
+    RefreshToken 
+} from "@application/use-cases/auth/index";
+import { 
+    DeleteUser, 
+    GetAllUsers, 
+    UpdateUser 
+} from "@application/use-cases/user/index";
 import {
     CreateBook,
     GetAllBooks,
@@ -50,7 +58,8 @@ import {
 import {
     CreateOrder,
     GetAllOrder,
-    GetOrder
+    GetOrder,
+    UpdateOrder
 } from "@application/use-cases/order/index";
 
 // Outer Use-Cases
@@ -187,6 +196,7 @@ export class DIContainer {
         this.container.bind<CreateOrder>(TYPES.CreateOrder).to(CreateOrder);
         this.container.bind<GetAllOrder>(TYPES.GetAllOrder).to(GetAllOrder);
         this.container.bind<GetOrder>(TYPES.GetOrder).to(GetOrder);
+        this.container.bind<UpdateOrder>(TYPES.UpdateOrder).to(UpdateOrder);
     }
 
     private middleware() {

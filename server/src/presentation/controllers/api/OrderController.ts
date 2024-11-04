@@ -3,10 +3,15 @@ import { Request, Response } from "express";
 // Inversify
 import { inject } from "inversify";
 import { TYPES } from "@inversify/types";
-import { controller, httpPost, httpGet } from "inversify-express-utils";
+import { 
+    controller, 
+    httpPost, 
+    httpGet, 
+    httpPatch 
+} from "inversify-express-utils";
 
 // Use-Cases
-import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order/index";
+import { CreateOrder, GetAllOrder, GetOrder, UpdateOrder } from "@application/use-cases/order/index";
 
 // Middlewares
 import { RolesMiddleware } from "@presentation/middlewares";
@@ -23,17 +28,20 @@ class OrderController {
 
     private readonly _creatOrder: CreateOrder
     private readonly _getAllOrder: GetAllOrder
-    private readonly _getOrder: GetOrder
+    private readonly _getOrder: GetOrder;
+    private readonly _updateOrder: UpdateOrder; 
 
 
     constructor(
         @inject(TYPES.CreateOrder) createOrder: CreateOrder,
         @inject(TYPES.GetAllOrder) getAllOrder: GetAllOrder,
-        @inject(TYPES.GetOrder) getOrder: GetOrder
+        @inject(TYPES.GetOrder) getOrder: GetOrder,
+        @inject(TYPES.UpdateOrder) updateOrder: UpdateOrder,
     ) {
         this._creatOrder = createOrder;
         this._getAllOrder = getAllOrder;
-        this._getOrder = getOrder
+        this._getOrder = getOrder;
+        this._updateOrder = updateOrder;
     }
 
  
@@ -73,6 +81,25 @@ class OrderController {
             success: true,
             code: 200,
             data: order,
+            errors: [],
+            meta: {}
+        })
+
+    }
+
+    
+    @httpPatch('/:orderId')
+    public async updateBook(req: Request<{ orderId: string }>, res: Response) {
+        const orderId = req.params.orderId;
+        const body = req.body;
+
+        const book = await this._updateOrder.execute(orderId, body)
+
+        res.status(200).json({
+            success: true,
+            code: 200,
+            message: "Updated seccessfully",
+            data: book,
             errors: [],
             meta: {}
         })

@@ -34,8 +34,7 @@ class OrderModel extends Model {
     @Default(sql.uuidV4)
     @ColumnName('order_id')
     @PrimaryKey
-    @Unique
-    declare orderId?: string
+    declare orderId: string
 
     @Attribute(DataTypes.STRING)
     declare status: string

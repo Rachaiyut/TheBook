@@ -82,6 +82,27 @@ class OrderRepository {
 
         return isOrderExist ? OrderMapper.toEntityFromModel(isOrderExist) : null
     }
+
+
+    public async updateOrderByPk(orderId: string, order: Order) {
+        const orderModel = OrderMapper.toPersistenceModel(order);
+
+        console.log("Entity", order)
+        console.log("Model", orderModel.dataValues)
+
+        const [updateRows, [updateOrder]] = await this._orderModel.update(orderModel.dataValues, {
+            where: { orderId },
+            returning: true
+        });
+
+        if (updateRows === 0) {
+            throw ErrorFactory.createError("NotFound", "Failed to update")
+        }
+
+        return OrderMapper.toEntity(updateOrder);
+
+    }
+
 }
 
 export default OrderRepository;

@@ -28,6 +28,7 @@ export const TYPES = {
     PaymentService: Symbol.for("PaymentService"),
     GetAllOrder: Symbol.for("GetAllOrder"),
     GetOrder: Symbol.for("GetOrder"),
+    UpdateOrder: Symbol.for("UpdateOrder"),
     AuthService: Symbol.for("AuthService"),
     JWTService: Symbol.for("JWTService"),
     PasswordService: Symbol.for("PasswordService"),

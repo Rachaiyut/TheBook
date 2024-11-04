@@ -100,6 +100,7 @@ export class OrderMapper {
     // Convert Domain Entity to Sequelize Model for persistence
     public static toPersistenceModel(order: Omit<Order, "orderItems">): OrderModel {
         return OrderModel.build({
+            orderId: order.getOrderId(),
             status: order.status,
             totalAmount: order.totalAmount,
             userId: order.userId
