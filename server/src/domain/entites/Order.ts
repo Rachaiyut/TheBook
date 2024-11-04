@@ -41,12 +41,10 @@ class Order {
     }
 
 
-    // Example method to update order status
     public updateStatus(newStatus: string): void {
         this.status = newStatus;
     }
 
-    // Example method to update total amount
     public updateTotalAmount(newAmount: number): void {
         this.totalAmount = newAmount;
     }

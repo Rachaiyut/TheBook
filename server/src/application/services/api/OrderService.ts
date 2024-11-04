@@ -22,7 +22,7 @@ class OrderService {
     private _orderRepository: OrderRepository;
     private _orderItemsRepositoty: OrderItemsRepository;
 
-    
+
     constructor(
         @inject(TYPES.OrderRepository) orderRepository: OrderRepository,
         @inject(TYPES.OrderItemsRepository) orderItemsRepository: OrderItemsRepository
@@ -57,14 +57,14 @@ class OrderService {
     }
 
 
-    public async getAllOrdersByUser(userId: string): Promise<IOrderDetailDTO[]> {
+    public async getAllOrdersByUser(userId: string): Promise<IOrderDetailDTO[]> { 
         const orderEntity = await this._orderRepository.getAllOrdersByUser(userId);
 
         return orderEntity.map((order) => OrderMapper.toOrderDetailDTO(order));
     }
+ 
 
-
-    public async getOrder(orderId: string) {
+    public async getOrder(orderId: string): Promise<IOrderDetailDTO> {
 
         const order = await this._orderRepository.getOrder(orderId);
 
@@ -73,7 +73,16 @@ class OrderService {
         }
 
 
-        return OrderMapper.toDto(order)
+        return OrderMapper.toOrderDetailDTO(order)
+    }
+
+
+    public async updateOrderStatus(orderId: string) {
+        const orderEntity = await this._orderRepository.getOrder(orderId);
+
+        orderEntity?.updateStatus('paid');
+
+        
     }
 
 }

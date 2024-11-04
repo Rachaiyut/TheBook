@@ -1,14 +1,10 @@
+import IOrderLineItemDTO from "./IOrderLineItemDTO";
+
 interface IOrderDetailDTO {
     orderId: string,
     status: string,
     totalAmount: number,
-    orderItems: {
-        bookName: string | null;
-        bookPrice: number | null;
-        bookImageCover: string | null;
-        quantity: number;
-        price: number;
-    }[]
+    orderItems: IOrderLineItemDTO[]
 }
 
 export default IOrderDetailDTO; 
