@@ -6,7 +6,7 @@ import { TYPES } from "@inversify/types";
 import { PaymentService } from "@application/services/api/index";
 
 @injectable()
-class Checkout {
+class Webhook {
 
 
     private readonly _paymentService: PaymentService
@@ -16,8 +16,8 @@ class Checkout {
         this._paymentService = paymentService;
     }
 
-    public async execute(orderId: string) {
-        const result = await this._paymentService.chcekout(orderId);
+    public async execute(payload: any, signature: string) {
+        const result = await this._paymentService.webhook(payload, signature);
 
         return result;
     }
@@ -25,4 +25,4 @@ class Checkout {
 
 }
 
-export default Checkout
+export default Webhook
