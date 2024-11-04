@@ -20,6 +20,8 @@ import "@presentation/controllers/api/index"
 
 @injectable()
 class Express {
+
+
     public server: InversifyExpressServer
 
     constructor() {
@@ -31,7 +33,7 @@ class Express {
 
         this.server = new InversifyExpressServer(DIContainer.getContainer(), router, { rootPath: "/api/v1" });
 
-    
+
         this.mountMiddlewares();
         this.errorHandling();
 
@@ -40,9 +42,12 @@ class Express {
 
     private mountMiddlewares() {
         this.server.setConfig((app) => {
+
             Bootstrap.init(app)
+
         })
     }
+
 
     public init() {
         const port = Local.config().port
@@ -54,6 +59,7 @@ class Express {
             return console.log('Error', _error)
         })
     }
+
 
     private errorHandling() {
         this.server.setErrorConfig((app) => {

@@ -20,7 +20,8 @@ class Local {
         const googleSecret = process.env.GOOGLE_SECRET!;
         const googleCallback = process.env.GOOGLE_CALLBACK!;
 
-        const stripeSecretKey = process.env.STRIPE_SCRET_KEY!;
+        const stripeSecretKey = process.env.STRIPE_SECRET_KEY!;
+        const stripeWebhook = process.env.STRIPE_WEB_HOOK!
 
         const maxUploadLimit = process.env.APP_MAX_UPLOAD_LIMIT!
         const maxParameterLimit = parseInt(process.env.APP_MAX_PARAMETER_LIMIT!)
@@ -41,6 +42,7 @@ class Local {
             googleSecret,
             googleCallback,
             stripeSecretKey,
+            stripeWebhook,
             maxUploadLimit,
             maxParameterLimit,
             url,

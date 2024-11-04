@@ -1,4 +1,3 @@
-
 export const TYPES = {
     Express: Symbol.for("Express"),
     App: Symbol.for("App"),
@@ -26,6 +25,7 @@ export const TYPES = {
     BookService: Symbol.for("BookService"),
     UserService: Symbol.for("UserService"),
     OrderService: Symbol.for("OrderService"),
+    PaymentService: Symbol.for("PaymentService"),
     GetAllOrder: Symbol.for("GetAllOrder"),
     GetOrder: Symbol.for("GetOrder"),
     AuthService: Symbol.for("AuthService"),
@@ -39,5 +39,6 @@ export const TYPES = {
     Passport: Symbol.for("Passport"),
     GoogleStragy: Symbol.for("GoogleStragy"),
     StripeService: Symbol.for('StripeService'),
-    Checkout: Symbol.for("Checkout")
+    Checkout: Symbol.for("Checkout"),
+    Webhook: Symbol.for("Webhook")
 };

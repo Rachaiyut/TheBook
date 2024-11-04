@@ -26,7 +26,8 @@ import {
 import {
     BookService,
     UserService,
-    OrderService
+    OrderService,
+    PaymentService
 } from "@application/services/api/index";
 import {
     JWTService,
@@ -46,10 +47,14 @@ import {
     GetTop5Books,
     GetNewBooks
 } from "@application/use-cases/book/index";
-import { CreateOrder, GetAllOrder, GetOrder } from "@application/use-cases/order/index";
+import {
+    CreateOrder,
+    GetAllOrder,
+    GetOrder
+} from "@application/use-cases/order/index";
 
 // Outer Use-Cases
-import { Checkout } from "@application/use-cases/payment/index";
+import { Checkout, Webhook } from "@application/use-cases/payment/index";
 
 //Middlewares
 import {
@@ -143,6 +148,7 @@ export class DIContainer {
         this.container.bind<PasswordService>(TYPES.PasswordService).to(PasswordService);
         this.container.bind<AuthService>(TYPES.AuthService).to(AuthService);
         this.container.bind<RoleService>(TYPES.RoleService).to(RoleService);
+        this.container.bind<PaymentService>(TYPES.PaymentService).to(PaymentService);
     }
 
 
@@ -154,6 +160,7 @@ export class DIContainer {
 
     private configureOuterUsecase() {
         this.container.bind<Checkout>(TYPES.Checkout).to(Checkout);
+        this.container.bind<Webhook>(TYPES.Webhook).to(Webhook);
     }
 
 
@@ -189,7 +196,6 @@ export class DIContainer {
     }
 
     public getContainer() {
-        console.log("Returning DI container");
         return this.container;
     }
 }

@@ -18,6 +18,14 @@ class Kernel {
     public static init(_app: Application): Application {
         const PassportConfig = DIContainer.getContainer().get<Passport>(TYPES.Passport);
 
+
+        _app.get('/some-endpoint', (req, res, next) => {
+            const fullUrl = `${req.protocol}://${req.hostname}:${req.originalUrl}`;
+            console.log(fullUrl)
+
+            next()
+        });
+        
         
         // Check if CORS is enabled
         if (Local.config().isCORSEnabled) {

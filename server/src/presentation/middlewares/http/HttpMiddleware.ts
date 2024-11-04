@@ -9,9 +9,19 @@ class Http {
     public static mount(_app: Application): Application {
 
         // Enables the request body parser
-        _app.use(express.json({
-            limit: Local.config().maxUploadLimit
-        }));
+        _app.use((req, res, next) => {
+
+            console.log(req.originalUrl)
+
+            if (req.originalUrl === '/api/v1/payment/webhook') {
+                next();
+            } else {
+                express.json({
+                    limit: Local.config().maxUploadLimit,
+                })(req, res, next)
+            }
+
+        });
 
 
         _app.use(express.urlencoded({
@@ -20,7 +30,9 @@ class Http {
             extended: false
         }))
 
+
         _app.use(cookieParser())
+
 
         // Disable the x-powered-by header in response
         _app.disable('x-powered-by');

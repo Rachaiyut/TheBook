@@ -43,9 +43,11 @@ services:
   stripe-cli:
     image: stripe/stripe-cli
     container_name: stripe_cli
-    env_file:
-      - ./server/.env  
     entrypoint: ["/bin/sh", "-c", "tail -f /dev/null"]  
+    volumes:
+      - ~/.config/stripe:/root/.config/stripe
+    depends_on:
+      - backend
 
   frontend:
     build:
