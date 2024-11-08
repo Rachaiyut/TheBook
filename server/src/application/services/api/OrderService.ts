@@ -20,9 +20,8 @@ import { Order } from "@domain/entites";
 class OrderService {
 
 
-    private _orderRepository: OrderRepository;
-    private _orderItemsRepositoty: OrderItemsRepository;
-
+    private readonly _orderRepository: OrderRepository;
+    private readonly _orderItemsRepositoty: OrderItemsRepository;
 
     constructor(
         @inject(TYPES.OrderRepository) orderRepository: OrderRepository,
