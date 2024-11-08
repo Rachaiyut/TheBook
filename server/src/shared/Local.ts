@@ -20,6 +20,12 @@ class Local {
         const googleSecret = process.env.GOOGLE_SECRET!;
         const googleCallback = process.env.GOOGLE_CALLBACK!;
 
+        const host = process.env.HOST!;
+        const mailService = process.env.MAIL_SERVICE!;
+        const emailPort = process.env.EMAIL_PORT!;
+        const GmailUsername = process.env.GMAIL_USERNAME!;
+        const GooglePassword = process.env.GOOGLE_PASSWORD!;
+
         const stripeSecretKey = process.env.STRIPE_SECRET_KEY!;
         const stripeWebhook = process.env.STRIPE_WEB_HOOK!
 
@@ -41,6 +47,11 @@ class Local {
             googleId,
             googleSecret,
             googleCallback,
+            host,
+            mailService,
+            emailPort,
+            GmailUsername,
+            GooglePassword,
             stripeSecretKey,
             stripeWebhook,
             maxUploadLimit,

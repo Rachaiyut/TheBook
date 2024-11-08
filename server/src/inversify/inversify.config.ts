@@ -37,15 +37,15 @@ import {
 } from "@application/services/auth/index";
 
 // Use-Cases
-import { 
-    Register, 
-    Login, 
-    RefreshToken 
+import {
+    Register,
+    Login,
+    RefreshToken
 } from "@application/use-cases/auth/index";
-import { 
-    DeleteUser, 
-    GetAllUsers, 
-    UpdateUser 
+import {
+    DeleteUser,
+    GetAllUsers,
+    UpdateUser
 } from "@application/use-cases/user/index";
 import {
     CreateBook,
@@ -75,7 +75,10 @@ import {
 import GoogleStragy from "@infrastructure/services/auth/strategies/googleStrategy";
 import Passport from "@infrastructure/services/auth/passport/passport";
 import StripeService from "@infrastructure/services/Stripe/StripeService";
+import EmailService from "@application/services/api/EmailService";
+import EmailFactory from "@infrastructure/services/notification/email/factories/EmailFactory";
 
+import { LoginConfirmationEmail } from "@infrastructure/services/notification/email/service/auth/index";
 
 export class DIContainer {
 
@@ -103,7 +106,7 @@ export class DIContainer {
         // Services
         this.configureServices();
 
-        // Services
+        // Outer Services
         this.configureOuterService();
 
         // Usecase
@@ -111,6 +114,13 @@ export class DIContainer {
 
         // Outer Use-Cases
         this.configureOuterUsecase();
+
+        // Factory
+        this.configFactory();
+
+        // Stragies
+        this.stragies();
+
 
         // Middleware
         this.middleware();
@@ -164,6 +174,7 @@ export class DIContainer {
     private configureOuterService() {
         this.container.bind<GoogleStragy>(TYPES.GoogleStragy).to(GoogleStragy);
         this.container.bind<StripeService>(TYPES.StripeService).to(StripeService);
+        this.container.bind<EmailService>(TYPES.EmailService).to(EmailService)
     }
 
 
@@ -197,6 +208,14 @@ export class DIContainer {
         this.container.bind<GetAllOrder>(TYPES.GetAllOrder).to(GetAllOrder);
         this.container.bind<GetOrder>(TYPES.GetOrder).to(GetOrder);
         this.container.bind<UpdateOrder>(TYPES.UpdateOrder).to(UpdateOrder);
+    }
+
+    private configFactory() {
+        this.container.bind<EmailFactory>(TYPES.EmailFactory).to(EmailFactory);
+    }
+
+    private stragies() {
+        this.container.bind<LoginConfirmationEmail>(TYPES.LoginConfirmationEmail).to(LoginConfirmationEmail);
     }
 
     private middleware() {

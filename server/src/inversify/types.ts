@@ -41,5 +41,8 @@ export const TYPES = {
     GoogleStragy: Symbol.for("GoogleStragy"),
     StripeService: Symbol.for('StripeService'),
     Checkout: Symbol.for("Checkout"),
-    Webhook: Symbol.for("Webhook")
+    Webhook: Symbol.for("Webhook"),
+    EmailService: Symbol.for("EmailService"),
+    EmailFactory: Symbol.for("EmailFactory"),
+    LoginConfirmationEmail: Symbol.for("LoginConfirmationEmail"),
 };
