@@ -4,7 +4,6 @@ import CryptoService from "./CryptoService";
 
 class EncryptionService extends CryptoService {
 
-
     /**
      * Encrypts the provided data using AES-256-CBC.
      * @param data - The data to encrypt.
@@ -35,5 +34,6 @@ class EncryptionService extends CryptoService {
         return decrypted;
     }
 
-
 }
+
+export default EncryptionService;

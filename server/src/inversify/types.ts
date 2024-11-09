@@ -1,3 +1,4 @@
+
 export const TYPES = {
     Express: Symbol.for("Express"),
     App: Symbol.for("App"),
@@ -45,4 +46,8 @@ export const TYPES = {
     EmailService: Symbol.for("EmailService"),
     EmailFactory: Symbol.for("EmailFactory"),
     LoginConfirmationEmail: Symbol.for("LoginConfirmationEmail"),
+    RegisterConfirmationEmail: Symbol.for("RegisterConfirmationEmail"),
+    CryptoService: Symbol.for("CryptoService"),
+    EncryptionService: Symbol.for("EncryptionService"),
+    HashService: Symbol.for("HasService"),
 };

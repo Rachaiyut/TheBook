@@ -79,6 +79,7 @@ import EmailService from "@application/services/api/EmailService";
 import EmailFactory from "@infrastructure/services/notification/email/factories/EmailFactory";
 
 import { LoginConfirmationEmail } from "@infrastructure/services/notification/email/service/auth/index";
+import { CryptoService, EncryptionService, HashService } from "@infrastructure/services/crypto/index";
 
 export class DIContainer {
 
@@ -174,7 +175,10 @@ export class DIContainer {
     private configureOuterService() {
         this.container.bind<GoogleStragy>(TYPES.GoogleStragy).to(GoogleStragy);
         this.container.bind<StripeService>(TYPES.StripeService).to(StripeService);
-        this.container.bind<EmailService>(TYPES.EmailService).to(EmailService)
+        this.container.bind<EmailService>(TYPES.EmailService).to(EmailService);
+        // this.container.bind<CryptoService>(TYPES.CryptoService).to(CryptoService);
+        this.container.bind<EncryptionService>(TYPES.EncryptionService).to(EncryptionService);
+        this.container.bind<HashService>(TYPES.HashService).to(HashService);
     }
 
 

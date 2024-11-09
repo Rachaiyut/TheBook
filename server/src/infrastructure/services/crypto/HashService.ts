@@ -1,7 +1,13 @@
 import { createHash } from "crypto";
 
+// Inversify
+import { injectable } from "inversify";
+
+// Service
 import CryptoService from "./CryptoService";
 
+
+@injectable()
 class HashService extends CryptoService {
 
 
@@ -15,5 +21,7 @@ class HashService extends CryptoService {
         return createHash(algorithm).update(data).digest('hex');
     }
 
-    
+
 }
+
+export default HashService 
