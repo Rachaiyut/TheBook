@@ -10,6 +10,7 @@ export const TYPES = {
     UserRepository: Symbol.for("UserRepository"),
     OrderRepository: Symbol.for("OrderRepository"),
     OrderItemsRepository: Symbol.for("OrderItemsRepository"),
+    VerificationTokenModel: Symbol.for("VerificationTokenModel"),
     Register: Symbol.for("Register"),
     Login: Symbol.for("Login"),
     RefreshToken: Symbol.for("RefreshToken"),

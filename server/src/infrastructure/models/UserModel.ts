@@ -14,7 +14,8 @@ import {
 	Default,
 	BeforeCreate,
 	BeforeBulkCreate,
-	Unique
+	Unique,
+	HasMany
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
@@ -22,6 +23,8 @@ import { injectable } from 'inversify';
 import bcrypt from 'bcrypt';
 
 import { UserRole } from '@domain/interfaces/entities';
+import VerificationTokenModel from './VerificationTokenModel';
+import { NonAttribute } from 'sequelize';
 
 @injectable()
 @Table({
@@ -39,12 +42,12 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 
 	@Attribute(DataTypes.TEXT)
 	@ColumnName("google_id")
-	declare googleId: string 
+	declare googleId: string
 
 	@Attribute(DataTypes.STRING)
 	declare name: string
 
-	@Attribute(DataTypes.STRING) 
+	@Attribute(DataTypes.STRING)
 	declare email: string
 
 	@Attribute(DataTypes.STRING)
@@ -58,8 +61,15 @@ class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttribute
 	@Default([UserRole.User])
 	declare roles: Array<"user" | "admin">
 
-	@Attribute(DataTypes.STRING)
+	@Attribute(DataTypes.STRING)  
 	photo?: string;
+
+	@Attribute(DataTypes.BOOLEAN)
+	@Default(false)
+	declare verify: boolean
+
+	@HasMany(() => VerificationTokenModel, 'userId')
+	declare token: NonAttribute<VerificationTokenModel[]>
 
 	@BeforeCreate()
 	static async hashPassword(userModel: UserModel) {

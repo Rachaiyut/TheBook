@@ -8,7 +8,8 @@ import {
     OrderModel,
     OrderItemsModel,
     GenreModel,
-    BookGenreModel
+    BookGenreModel,
+    VerificationTokenModel,
 } from "@infrastructure/models/index";
 
 import Local from "@shared/Local";
@@ -27,7 +28,7 @@ class Database {
             port: 5432,
             clientMinMessages: 'notice',
             schema: 'public',
-            models: [UserModel, BookModel, OrderModel, OrderItemsModel, GenreModel, BookGenreModel]
+            models: [UserModel, BookModel, OrderModel, OrderItemsModel, GenreModel, BookGenreModel, VerificationTokenModel]
         })
 
         try {

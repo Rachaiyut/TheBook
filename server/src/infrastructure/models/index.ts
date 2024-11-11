@@ -4,6 +4,7 @@ import OrderModel from "./OrderModel";
 import OrderItemsModel from "./OrderItemModel";
 import GenreModel from "./GenreModel";
 import BookGenreModel from "./BookGenreModel";
+import VerificationTokenModel from "./VerificationTokenModel";
 
 export {
     UserModel,
@@ -11,5 +12,6 @@ export {
     OrderModel,
     OrderItemsModel,
     GenreModel,
-    BookGenreModel
+    BookGenreModel,
+    VerificationTokenModel
 }

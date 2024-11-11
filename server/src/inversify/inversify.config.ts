@@ -11,7 +11,8 @@ import {
     UserModel,
     BookModel,
     OrderModel,
-    OrderItemsModel
+    OrderItemsModel,
+    VerificationTokenModel
 } from "@infrastructure/models/index";
 
 //Repositories
@@ -150,6 +151,7 @@ export class DIContainer {
         this.container.bind<typeof UserModel>(TYPES.UserModel).toConstantValue(UserModel);
         this.container.bind<typeof OrderModel>(TYPES.OrderModel).toConstantValue(OrderModel);
         this.container.bind<typeof OrderItemsModel>(TYPES.OrderItemsModel).toConstantValue(OrderItemsModel);
+        this.container.bind<typeof VerificationTokenModel>(TYPES.VerificationTokenModel).toConstantValue(VerificationTokenModel)
     }
 
 

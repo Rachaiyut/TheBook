@@ -70,6 +70,8 @@ export class UserMapper {
                 throw new Error(`Invalid role: ${role}`);
             }),
             photo: user.photo,
+            verify: false,
+            token: []
         });
     }
 
