@@ -16,6 +16,8 @@ class Local {
         const jwtRefreshExpire = process.env.JWT_REFRESH_EXPIRE!;
         const jwtCookieExpire = process.env.JWT_COOKIE_EXPIRES!;
 
+        const userVerifyCode = process.env.USER_VERIFICATION_CODE!;
+
         const googleId = process.env.GOOGLE_ID!;
         const googleSecret = process.env.GOOGLE_SECRET!;
         const googleCallback = process.env.GOOGLE_CALLBACK!;
@@ -44,6 +46,7 @@ class Local {
             jwtAccessExpire,
             jwtRefreshExpire,
             jwtCookieExpire,
+            userVerifyCode,
             googleId,
             googleSecret,
             googleCallback,

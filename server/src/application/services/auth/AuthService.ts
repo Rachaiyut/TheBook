@@ -2,7 +2,7 @@ import { injectable, inject } from "inversify";
 import { TYPES } from "@inversify/types";
 
 // DTO
-import { IAuthResponseDTO, ILoginDTO, IRegisterDTO } from "@application/dtos/auth/index";
+import { IAuthResponseDTO, ILoginDTO, IRegisterDTO, IVerifyDTO } from "@application/dtos/auth/index";
 
 // Mapper
 import { UserMapper } from "@application/mappers/UserMapper";
@@ -26,6 +26,8 @@ import { User } from "@domain/entites/index";
 // Factory
 import EmailFactory from "@infrastructure/services/notification/email/factories/EmailFactory";
 import isEmail from "validator/lib/isEmail";
+import { EncryptionService } from "@infrastructure/services/crypto";
+import Local from "@shared/Local";
 
 
 
@@ -39,6 +41,7 @@ class AuthService {
     private readonly _userRepository: UserRepository;
 
     private readonly _emailFactory: EmailFactory;
+    private readonly _encryptionService: EncryptionService;
 
 
     constructor(
@@ -46,7 +49,8 @@ class AuthService {
         @inject(TYPES.PasswordService) passwordService: PasswordService,
         @inject(TYPES.JWTService) jwtService: JWTService,
         @inject(TYPES.UserRepository) userRepository: UserRepository,
-        @inject(TYPES.EmailFactory) emailFactory: EmailFactory
+        @inject(TYPES.EmailFactory) emailFactory: EmailFactory,
+        @inject(TYPES.EncryptionService) encryptionService: EncryptionService,
     ) {
         this._userService = userService;
         this._passwordService = passwordService;
@@ -54,6 +58,7 @@ class AuthService {
         this._userRepository = userRepository;
 
         this._emailFactory = emailFactory;
+        this._encryptionService = encryptionService;
     }
 
 
@@ -92,12 +97,16 @@ class AuthService {
 
         // Create new User
         const newUser = await this._userService.createNewUser(registerDTO);
-        
+
+        // Encrypt userId
+        const { encryptedData, token, iv } = await this.creatNewUserVerify(newUser.userId);
+
+
         // Send Verify to user email
         const registerConfirmation = this._emailFactory.createEmailStrategy("register");
         await registerConfirmation.sendEmail(registerDTO.email, newUser.userId)
 
-        const accessToken = this._jwtService.generateAccessToken(newUser.userId)
+        const accessToken = this._jwtService.generateAccessToken(newUser.userId) 
         const refreshToken = this._jwtService.genrerefreshToken(newUser.userId);
 
         return UserMapper.toUserResponseDTO(newUser, accessToken, refreshToken)
@@ -125,6 +134,26 @@ class AuthService {
         return UserMapper.toUserResponseDTO(user, newAccessToken, newRefreshToken)
     }
 
+
+    public userVerify(verifyDTO: IVerifyDTO) {
+        const { encrypted, token } = verifyDTO;
+
+        const decrypted = this._encryptionService.decrypt(encrypted, Local.config().userVerifyCode, token);
+
+        return decrypted
+    }
+
+
+    public async creatNewUserVerify(userId: string) {
+        const { encryptedData, iv, token } = await this._encryptionService.encrypt(
+            userId,
+            Local.config().userVerifyCode,
+        );
+
+        return { encryptedData, iv, token };
+
+    }
+
 }
 
-export default AuthService;
+export default AuthService;  

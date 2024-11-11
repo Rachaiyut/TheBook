@@ -13,6 +13,7 @@ export const TYPES = {
     Register: Symbol.for("Register"),
     Login: Symbol.for("Login"),
     RefreshToken: Symbol.for("RefreshToken"),
+    UserVerify: Symbol.for("UserVerify"),
     GetAllBooks: Symbol.for("GetAllBooks"),
     GetBook: Symbol.for("GetBook"),
     GetTop5Books: Symbol.for("GetTop5Books"),

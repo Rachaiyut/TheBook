@@ -40,7 +40,8 @@ import {
 import {
     Register,
     Login,
-    RefreshToken
+    RefreshToken,
+    UserVerify,
 } from "@application/use-cases/auth/index";
 import {
     DeleteUser,
@@ -193,6 +194,7 @@ export class DIContainer {
         this.container.bind<Register>(TYPES.Register).to(Register);
         this.container.bind<Login>(TYPES.Login).to(Login)
         this.container.bind<RefreshToken>(TYPES.RefreshToken).to(RefreshToken)
+        this.container.bind<UserVerify>(TYPES.UserVerify).to(UserVerify)
 
         //User
         this.container.bind<GetAllUsers>(TYPES.GetAllUsers).to(GetAllUsers);

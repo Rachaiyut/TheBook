@@ -1,5 +1,5 @@
 import CryptoService from "./CryptoService";
-import EncryptionService from "./EnCryptionService";
+import EncryptionService from "./EncryptService";
 import HashService from "./HashService";
 
 export {

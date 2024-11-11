@@ -10,24 +10,27 @@ import {
 import { TYPES } from "@inversify/types";
 
 // Usecase
-import { Register as RegisterUsecase } from "@application/use-cases/auth/index";
+import { Register as RegisterUsecase, UserVerify } from "@application/use-cases/auth/index";
 
 // Error Utilities
 import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
 // Config
 import Local from "@shared/Local";
+import { IVerifyDTO } from "@application/dtos/auth";
 
 @controller("/auth")
 class RegisterController {
 
-    private readonly _registerUsecase: RegisterUsecase
-
+    private readonly _registerUsecase: RegisterUsecase;
+    private readonly _userVerify: UserVerify;
 
     constructor(
-        @inject(TYPES.Register) registerUsecase: RegisterUsecase
+        @inject(TYPES.Register) registerUsecase: RegisterUsecase,
+        @inject(TYPES.UserVerify) userVerify: UserVerify,
     ) {
-        this._registerUsecase = registerUsecase
+        this._registerUsecase = registerUsecase;
+        this._userVerify = userVerify;
     }
 
 
@@ -66,16 +69,17 @@ class RegisterController {
         })
     }
 
-    @httpGet('/verify/:userId/:accessToken')
-    public async verify(req: Request<{ userId: string, accessToken: string }>, res: Response) {
-        const { userId, accessToken } = req.params;
+    @httpGet('/verify/:encrypted/:iv')
+    public async verify(req: Request<{ encrypted: string, token: string }>, res: Response) {
+        const { encrypted, token } = req.params;
+
+        const decrypted = this._userVerify.execute({ encrypted, token })
 
         res.status(200).json({
             data: {
                 success: true,
                 data: {
-                    userId,
-                    accessToken
+                    decrypted
                 }
             }
         })
