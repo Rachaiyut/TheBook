@@ -78,7 +78,7 @@ import StripeService from "@infrastructure/services/Stripe/StripeService";
 import EmailService from "@application/services/api/EmailService";
 import EmailFactory from "@infrastructure/services/notification/email/factories/EmailFactory";
 
-import { LoginConfirmationEmail } from "@infrastructure/services/notification/email/service/auth/index";
+import { LoginConfirmationEmail, RegisterConfirmationEmail } from "@infrastructure/services/notification/email/service/auth/index";
 import { CryptoService, EncryptionService, HashService } from "@infrastructure/services/crypto/index";
 
 export class DIContainer {
@@ -220,6 +220,7 @@ export class DIContainer {
 
     private stragies() {
         this.container.bind<LoginConfirmationEmail>(TYPES.LoginConfirmationEmail).to(LoginConfirmationEmail);
+        this.container.bind<RegisterConfirmationEmail>(TYPES.RegisterConfirmationEmail).to(RegisterConfirmationEmail);
     }
 
     private middleware() {

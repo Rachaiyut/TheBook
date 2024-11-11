@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { inject } from "inversify";
 import {
     controller,
+    httpGet,
     httpPost
 } from "inversify-express-utils";
 
@@ -63,6 +64,22 @@ class RegisterController {
             success: true,
             data: result
         })
+    }
+
+    @httpGet('/verify/:userId/:accessToken')
+    public async verify(req: Request<{ userId: string, accessToken: string }>, res: Response) {
+        const { userId, accessToken } = req.params;
+
+        res.status(200).json({
+            data: {
+                success: true,
+                data: {
+                    userId,
+                    accessToken
+                }
+            }
+        })
+
     }
 
 }

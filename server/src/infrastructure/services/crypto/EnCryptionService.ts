@@ -1,4 +1,4 @@
-import { randomBytes, createCipheriv, createDecipheriv } from "crypto";
+import { randomBytes, createCipheriv, createDecipheriv, createHash } from "crypto";
 
 import CryptoService from "./CryptoService";
 
@@ -10,13 +10,17 @@ class EncryptionService extends CryptoService {
      * @param secretKey - The secret key as a Buffer.
      * @returns An object containing the encrypted data and the initialization vector (IV).
      */
-    public encrypt(data: string, secretKey: Buffer): { encryptedData: string, iv: string } {
+    public encrypt(data: string, secretKey: string): { encryptedData: string, iv: string } {
+        // Ensure the key length is 32 bytes for AES-256-CBC
+        const key = createHash('sha256').update(secretKey).digest(); // Generates a 32-byte key
         const iv = randomBytes(16); // Generate a random initialization vector
-        const cipher = createCipheriv(this.algorithm, secretKey, iv);
+        const cipher = createCipheriv(this.algorithm, key, iv);
+        
         let encrypted = cipher.update(data, 'utf8', 'hex');
         encrypted += cipher.final('hex');
+        
         return { encryptedData: encrypted, iv: iv.toString('hex') };
-    }
+      }
 
 
     /**

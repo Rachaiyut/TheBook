@@ -1,7 +1,8 @@
-extend baseEmail
+extend ./baseEmail
 
 block content
   .content
     p Hi there!
     p Thank you for signing up. To complete your registration, please verify your email address by clicking the button below:
-    a.button(href='{{verification_link}}') Verify My Email
+    a.button(href=verification_link) Verify My Email
+    p=verification_link

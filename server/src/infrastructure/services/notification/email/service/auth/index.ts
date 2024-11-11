@@ -1,5 +1,5 @@
-import LoginConfirmationEmail from "./LoginConfirmations";
-import RegisterConfirmationEmail from "./RegisterConfrimation";
+import LoginConfirmationEmail from "./LoginService";
+import RegisterConfirmationEmail from "./RegisterService";
 
 export {
     LoginConfirmationEmail,

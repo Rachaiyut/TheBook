@@ -25,6 +25,7 @@ import { User } from "@domain/entites/index";
 
 // Factory
 import EmailFactory from "@infrastructure/services/notification/email/factories/EmailFactory";
+import isEmail from "validator/lib/isEmail";
 
 
 
@@ -83,13 +84,18 @@ class AuthService {
 
     public async register(registerDTO: IRegisterDTO): Promise<IAuthResponseDTO> {
 
-        const isEmailExist = await this._userRepository.findUserByEmail(registerDTO.email);
+        const isEmailExist: User | null = await this._userRepository.findUserByEmail(registerDTO.email);
 
         if (isEmailExist) {
             throw ErrorFactory.createError("Conflict", "This Email already used")
         }
 
+        // Create new User
         const newUser = await this._userService.createNewUser(registerDTO);
+        
+        // Send Verify to user email
+        const registerConfirmation = this._emailFactory.createEmailStrategy("register");
+        await registerConfirmation.sendEmail(registerDTO.email, newUser.userId)
 
         const accessToken = this._jwtService.generateAccessToken(newUser.userId)
         const refreshToken = this._jwtService.genrerefreshToken(newUser.userId);

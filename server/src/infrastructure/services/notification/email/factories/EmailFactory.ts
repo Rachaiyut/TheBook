@@ -1,27 +1,31 @@
 import { inject, injectable } from "inversify";
 import { TYPES } from "@inversify/types";
 
-// Stragies 
-import { LoginConfirmationEmail } from "../service/auth/index";
+// Mail Service
+import { LoginConfirmationEmail, RegisterConfirmationEmail } from "../service/auth/index";
 
 @injectable()
 class EmailFactory {
 
-    private readonly _loginComfirmation: LoginConfirmationEmail
+    private readonly _loginComfirmation: LoginConfirmationEmail;
+    private readonly _registerConfirmation: RegisterConfirmationEmail;
 
     constructor(
-        @inject(TYPES.LoginConfirmationEmail) loginConfirmationEmail: LoginConfirmationEmail
+        @inject(TYPES.LoginConfirmationEmail) loginConfirmationEmail: LoginConfirmationEmail,
+        @inject(TYPES.RegisterConfirmationEmail) registerConfirmation: RegisterConfirmationEmail
     ) {
         this._loginComfirmation = loginConfirmationEmail;
+        this._registerConfirmation = registerConfirmation;
     }
 
     public createEmailStrategy(type: string) {
-        switch (type) {
+        switch (type) { 
             case "login":
                 return this._loginComfirmation;
-            case 'register':
+            case "register":
+                return this._registerConfirmation;
             default:
-                throw new Error("Invalid email type");
+                throw new Error("Invalid email type"); 
         }
     }
 }
