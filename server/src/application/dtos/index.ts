@@ -7,6 +7,7 @@ import IOrderItemsDTO from "./orderItems/IOrderItemsDTO";
 import IGenreDTO from "./genre/IGenreDTO";
 import IOrderDetailDTO from "./order/IOrderDetailDTO";
 import IOrderLineItemDTO from "./order/IOrderLineItemDTO";
+import IVerificationTokenDTO from "./verificationToken/IVerificationTokenDTO";
 
 export {
     IRegisterDTO,
@@ -17,5 +18,6 @@ export {
     IOrderDetailDTO,
     IOrderItemsDTO,
     IGenreDTO,
-    IOrderLineItemDTO
+    IOrderLineItemDTO,
+    IVerificationTokenDTO
 }

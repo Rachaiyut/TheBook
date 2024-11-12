@@ -15,7 +15,9 @@ import ErrorFactory from "@domain/exceptions/ErrorFactory";
 @injectable()
 class UserRepository {
 
+
     private readonly _userModel: typeof UserModel;
+
 
     constructor(
         @inject(TYPES.UserModel) userModel: typeof UserModel
@@ -32,22 +34,30 @@ class UserRepository {
         return UserMapper.toEntityFromModel(newUser)
     }
 
+
     public async getAllUsers(limit: number, offset: number): Promise<User[]> {
         const allUsers = await UserModel.findAll({ limit, offset });
 
         return allUsers.map((users) => UserMapper.toEntityFromModel(users));
     }
 
-    public async findUserByEmail(email: string): Promise<User | null> {
+
+    public async findUserByEmail(email: string): Promise<User> {
         const isUserExist = await this._userModel.findOne(
             {
                 where: { email }
             }
         );
 
-        return isUserExist ? UserMapper.toEntityFromModel(isUserExist) : null;
+        if (!isUserExist) {
+            throw ErrorFactory.createError("Conflict", "This Email already used")
+        }
+
+
+        return UserMapper.toEntityFromModel(isUserExist)
 
     }
+
 
     public async findUserByPK(userId: string): Promise<User | null> {
         const user = await this._userModel.findByPk(userId);
@@ -57,7 +67,6 @@ class UserRepository {
         } else {
             return null;
         }
-
 
     }
 
@@ -75,6 +84,7 @@ class UserRepository {
 
     }
 
+
     public async updateUserByPK(userId: string, user: User): Promise<User> {
         const userModel = UserMapper.toPersistenceModel(user);
 
@@ -88,6 +98,24 @@ class UserRepository {
         }
 
         return UserMapper.toEntityFromModel(updateUser);
+    }
+
+
+    public async updateUserVerify(userId: string): Promise<boolean> {
+        const [updateRows, [updateUser]] = await this._userModel.update({ verify: true }, {
+            where: { userId },
+            returning: true
+        })
+
+        if (updateRows === 0) {
+            throw ErrorFactory.createError("NotFound", "Failed to update")
+        }
+
+        if (updateUser.verify === true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public async deleteUserByPK(userId: string): Promise<number> {

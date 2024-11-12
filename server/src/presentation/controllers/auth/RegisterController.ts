@@ -69,7 +69,7 @@ class RegisterController {
         })
     }
 
-    @httpGet('/verify/:encrypted/:iv')
+    @httpGet('/verify/:encrypted/:token')
     public async verify(req: Request<{ encrypted: string, token: string }>, res: Response) {
         const { encrypted, token } = req.params;
 

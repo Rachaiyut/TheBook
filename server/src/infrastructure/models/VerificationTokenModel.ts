@@ -3,17 +3,19 @@ import {
     Model,
     InferAttributes,
     InferCreationAttributes,
+    sql,
 } from '@sequelize/core';
 import {
     Attribute,
     PrimaryKey,
     Table,
-    AutoIncrement,
+    Default,
     ColumnName,
     Unique
 } from '@sequelize/core/decorators-legacy';
 
 import { injectable } from 'inversify';
+
 
 @injectable()
 @Table({
@@ -21,12 +23,12 @@ import { injectable } from 'inversify';
 })
 class VerificationTokenModel extends Model<InferAttributes<VerificationTokenModel>, InferCreationAttributes<VerificationTokenModel>> {
 
-    @Attribute(DataTypes.INTEGER)
+    @Attribute(DataTypes.UUID.V4)
     @ColumnName('token_id')
-    @AutoIncrement
+    @Default(sql.uuidV4)
     @PrimaryKey
     @Unique
-    declare tokenId: number
+    declare tokenId?: number
 
     @Attribute(DataTypes.UUID.V4)
     @ColumnName('user_id')
@@ -34,6 +36,9 @@ class VerificationTokenModel extends Model<InferAttributes<VerificationTokenMode
 
     @Attribute(DataTypes.TEXT)
     declare token: string;
+
+    @Attribute(DataTypes.TEXT)
+    declare encrypted: string
 
     @Attribute(DataTypes.TEXT)
     declare iv: string

@@ -4,10 +4,11 @@ import ConflictError from './errors/ConflictError';
 import DatabaseError from './errors/DatabaseError';
 import TokenError from './errors/TokenError';
 import { LoginError } from './errors/LoginError';
-import AuthorizationError from './errors/AuthorizationError';
+import AuthorizationError from './errors/Authentication/AuthorizationError';
 import WebhookVerificationFailed from './errors/Stripe/InvalidSignature';
 import InvalidEvent from './errors/Stripe/InvalidEvent';
 import UnsupportedEvent from './errors/Stripe/UnsubpportedEvent';
+import UnauthorizedError from './errors/Authentication/UnauthorizedError';
 
 class ErrorFactory {
 	static createError(type: string, message: string): Error {
@@ -18,6 +19,8 @@ class ErrorFactory {
 				return new RegisterError(message);
 			case "Login":
 				return new LoginError(message);
+			case "Unauthorized":
+				return new UnauthorizedError(message)
 			case 'Conflict':
 				return new ConflictError(message);
 			case 'Database':

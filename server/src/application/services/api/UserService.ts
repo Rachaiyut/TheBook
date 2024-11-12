@@ -111,6 +111,18 @@ class UserService {
     }
 
 
+    public async updateUserVerify(userId: string) {
+        const isUserVerifyUpdated = await this._userRepository.updateUserVerify(userId);
+
+        if (!isUserVerifyUpdated) {
+            throw ErrorFactory.createError("Unauthorized", "Please verify your account by checking your email for the verification link.")
+        }
+
+        return isUserVerifyUpdated;
+
+    }
+
+
     public async deleteUser(userId: string): Promise<number> {
         const userModel = await this._userRepository.findUserByPK(userId);
 

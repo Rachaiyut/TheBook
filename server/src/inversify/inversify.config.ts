@@ -20,7 +20,8 @@ import {
     UserRepository,
     BookRepository,
     OrderRepository,
-    OrderItemsRepository
+    OrderItemsRepository,
+    VerificationTokenRepository
 } from "@infrastructure/repositories/index"
 
 //Services
@@ -28,7 +29,8 @@ import {
     BookService,
     UserService,
     OrderService,
-    PaymentService
+    PaymentService,
+    VerificationTokenService
 } from "@application/services/api/index";
 import {
     JWTService,
@@ -159,7 +161,8 @@ export class DIContainer {
         this.container.bind<BookRepository>(TYPES.BookRepository).to(BookRepository);
         this.container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository);
         this.container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepository);
-        this.container.bind<OrderItemsRepository>(TYPES.OrderItemsRepository).to(OrderItemsRepository)
+        this.container.bind<OrderItemsRepository>(TYPES.OrderItemsRepository).to(OrderItemsRepository);
+        this.container.bind<VerificationTokenRepository>(TYPES.VerificationTokenRepository).to(VerificationTokenRepository);
     }
 
 
@@ -172,6 +175,7 @@ export class DIContainer {
         this.container.bind<AuthService>(TYPES.AuthService).to(AuthService);
         this.container.bind<RoleService>(TYPES.RoleService).to(RoleService);
         this.container.bind<PaymentService>(TYPES.PaymentService).to(PaymentService);
+        this.container.bind<VerificationTokenService>(TYPES.VerificationTokenService).to(VerificationTokenService);
     }
 
 

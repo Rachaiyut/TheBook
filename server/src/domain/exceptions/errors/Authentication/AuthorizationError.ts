@@ -1,4 +1,4 @@
-import BaseError from "../BaseError"
+import BaseError from "../../BaseError"
 
 class AuthorizationError extends BaseError {
     public readonly statusCode: number = 403;

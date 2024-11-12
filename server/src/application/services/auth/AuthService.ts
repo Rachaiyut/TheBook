@@ -7,27 +7,25 @@ import { IAuthResponseDTO, ILoginDTO, IRegisterDTO, IVerifyDTO } from "@applicat
 // Mapper
 import { UserMapper } from "@application/mappers/UserMapper";
 
-// Error Handling
-import ErrorFactory from "@domain/exceptions/ErrorFactory";
-
 // Service
 import { JWTService, PasswordService, } from "@application/services/auth/index";
-import { UserService } from "@application/services/api/index";
+import { UserService, VerificationTokenService } from "@application/services/api/index";
 
-// Outer Service
-import EmailService from "@application/services/api/EmailService";
+// Internal Service
+import { EncryptionService } from "@infrastructure/services/crypto";
 
 // Repository
 import { UserRepository } from "@infrastructure/repositories/index";
 
-// Entity
-import { User } from "@domain/entites/index";
+// Error Handling
+import ErrorFactory from "@domain/exceptions/ErrorFactory";
 
 // Factory
 import EmailFactory from "@infrastructure/services/notification/email/factories/EmailFactory";
-import isEmail from "validator/lib/isEmail";
-import { EncryptionService } from "@infrastructure/services/crypto";
+
+// Config
 import Local from "@shared/Local";
+
 
 
 
@@ -36,6 +34,7 @@ class AuthService {
 
 
     private readonly _userService: UserService;
+    private readonly _verificationTokenService: VerificationTokenService
     private readonly _passwordService: PasswordService;
     private readonly _jwtService: JWTService;
     private readonly _userRepository: UserRepository;
@@ -46,6 +45,7 @@ class AuthService {
 
     constructor(
         @inject(TYPES.UserService) userService: UserService,
+        @inject(TYPES.VerificationTokenService) verificationTokenService: VerificationTokenService,
         @inject(TYPES.PasswordService) passwordService: PasswordService,
         @inject(TYPES.JWTService) jwtService: JWTService,
         @inject(TYPES.UserRepository) userRepository: UserRepository,
@@ -54,6 +54,7 @@ class AuthService {
     ) {
         this._userService = userService;
         this._passwordService = passwordService;
+        this._verificationTokenService = verificationTokenService;
         this._jwtService = jwtService;
         this._userRepository = userRepository;
 
@@ -64,49 +65,34 @@ class AuthService {
 
     public async login(loginDTO: ILoginDTO): Promise<IAuthResponseDTO> {
 
-        const user: User | null = await this._userRepository.findUserByEmail(loginDTO.email);
+        const userEntity  = await this._userRepository.findUserByEmail(loginDTO.email);
 
-        if (!user) {
-            throw ErrorFactory.createError("Conflict", "can not this email")
-        }
+        // Cheach Pasword
+        const passwordCorrect = await this._passwordService.verifyPassword(loginDTO.password, userEntity.password);
 
-        const passwordCorrect = await this._passwordService.verifyPassword(loginDTO.password, user.password)
+        const accessToken = this._jwtService.generateAccessToken(userEntity.userId);
+        const refreshToken = this._jwtService.genrerefreshToken(userEntity.userId);
 
-        if (!passwordCorrect) {
-            throw ErrorFactory.createError("Login", "Password is not correct");
-        }
-
-
-        const loginConfirmation = this._emailFactory.createEmailStrategy("login");
-        await loginConfirmation.sendEmail("charut55@gmail.com", user.userId)
-
-        const accessToken = this._jwtService.generateAccessToken(user.userId);
-        const refreshToken = this._jwtService.genrerefreshToken(user.userId);
-
-        return UserMapper.toUserResponseDTO(UserMapper.toDto(user), accessToken, refreshToken)
+        return UserMapper.toUserResponseDTO(UserMapper.toDto(userEntity), accessToken, refreshToken)
     }
 
 
     public async register(registerDTO: IRegisterDTO): Promise<IAuthResponseDTO> {
 
-        const isEmailExist: User | null = await this._userRepository.findUserByEmail(registerDTO.email);
-
-        if (isEmailExist) {
-            throw ErrorFactory.createError("Conflict", "This Email already used")
-        }
+        const userEntity = await this._userRepository.findUserByEmail(registerDTO.email);
 
         // Create new User
         const newUser = await this._userService.createNewUser(registerDTO);
 
-        // Encrypt userId
-        const { encryptedData, token, iv } = await this.creatNewUserVerify(newUser.userId);
-
+        // Create new Verify
+        const { encryptedData, token } = await this.creatNewUserVerifyToken(newUser.userId);
 
         // Send Verify to user email
         const registerConfirmation = this._emailFactory.createEmailStrategy("register");
-        await registerConfirmation.sendEmail(registerDTO.email, newUser.userId)
+        await registerConfirmation.sendEmail(registerDTO.email, encryptedData, token)
 
-        const accessToken = this._jwtService.generateAccessToken(newUser.userId) 
+        // Generate tokens
+        const accessToken = this._jwtService.generateAccessToken(newUser.userId);
         const refreshToken = this._jwtService.genrerefreshToken(newUser.userId);
 
         return UserMapper.toUserResponseDTO(newUser, accessToken, refreshToken)
@@ -116,7 +102,7 @@ class AuthService {
     public async refreshToken(refreshToken: string) {
 
         if (!refreshToken) {
-            throw ErrorFactory.createError("Login", "You are not logged in!")
+            throw ErrorFactory.createError("Login", "You are not logged in!");
         }
 
         const decoded = await this._jwtService.verifyRefreshToken(refreshToken);
@@ -125,32 +111,52 @@ class AuthService {
             throw ErrorFactory.createError("Token", "Your session is expired or invalid");
         }
 
-        const user = await this._userService.getUser(decoded.data)
+        const user = await this._userService.getUser(decoded.data);
 
-
+        // Generate tokens
         const newAccessToken = this._jwtService.generateAccessToken(user.userId);
         const newRefreshToken = this._jwtService.genrerefreshToken(user.userId);
 
-        return UserMapper.toUserResponseDTO(user, newAccessToken, newRefreshToken)
+        return UserMapper.toUserResponseDTO(user, newAccessToken, newRefreshToken);
     }
 
 
-    public userVerify(verifyDTO: IVerifyDTO) {
+    // Hit wih route verify
+    public async userVerify(verifyDTO: IVerifyDTO): Promise<boolean> {
         const { encrypted, token } = verifyDTO;
 
-        const decrypted = this._encryptionService.decrypt(encrypted, Local.config().userVerifyCode, token);
+        // Get data Form database for verify
+        const { iv } = await this._verificationTokenService.getVerificationToken(encrypted, token);
 
-        return decrypted
+        const decrypted = await this._encryptionService.decrypt(encrypted, Local.config().userVerifyCode, iv);
+
+        // Update verify in user table
+        const isUserVerifyUpdated = await this._userService.updateUserVerify(decrypted);
+
+        return isUserVerifyUpdated;
     }
 
 
-    public async creatNewUserVerify(userId: string) {
+    public async creatNewUserVerifyToken(userId: string) {
+
+        // Encrypt data
         const { encryptedData, iv, token } = await this._encryptionService.encrypt(
             userId,
             Local.config().userVerifyCode,
         );
 
-        return { encryptedData, iv, token };
+        // Create reference encrypt with user
+        await this._verificationTokenService.createNewVerificationToken({
+            userId,
+            token,
+            encrypted: encryptedData,
+            iv
+        })
+
+        return {
+            encryptedData,
+            token
+        };
 
     }
 

@@ -2,6 +2,9 @@ import { injectable } from 'inversify';
 
 import bcrypt from 'bcrypt';
 
+// Error Factory
+import ErrorFactory from '@domain/exceptions/ErrorFactory';
+
 @injectable()
 export class PasswordService {
     private readonly saltRounds = 10;
@@ -11,7 +14,13 @@ export class PasswordService {
     }
 
     public async verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-        return bcrypt.compare(password, hashedPassword);
+        const passwordCorrect = bcrypt.compare(password, hashedPassword);
+
+        if (!passwordCorrect) {
+            throw ErrorFactory.createError("Login", "Password is not correct");
+        } 
+
+        return passwordCorrect;
     }
 }
 
