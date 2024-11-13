@@ -40,7 +40,7 @@ function SignUpForm({ handleHide }) {
         handleHide();
 
         if (registerRedux.fulfilled.match(resultAction)) {
-            navigate('/my-account/account');
+            navigate('/');
         }
 
     }

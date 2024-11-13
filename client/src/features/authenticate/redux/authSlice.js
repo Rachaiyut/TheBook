@@ -10,7 +10,7 @@ export const registerRedux = createAsyncThunk(
 
             const { data } = await registerUser({ name, email, password })
 
-            localStorage.setItem('token', data.data.token)
+            console.log(data)
 
             return data
 
@@ -88,8 +88,6 @@ const authSlice = createSlice({
             })
             .addCase(registerRedux.fulfilled, (state, action) => {
                 state.loading = false;
-                state.userInfo = action.payload.data
-                state.token = action.payload.data.token
                 state.success = true;
             })
             .addCase(registerRedux.rejected, (state, action) => {
