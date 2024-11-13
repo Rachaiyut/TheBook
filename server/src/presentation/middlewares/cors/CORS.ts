@@ -10,7 +10,7 @@ class Cors {
     public mount(_app: Application) {
 
         const options = {
-            origin: Local.config().url,
+            origin: ["http://localhost:5173", Local.config().url],
             credentials: true,
             optionsSuccessStatus: 200,
             methods: ['GET', 'POST', 'PUT', "PATCH", 'DELETE']

@@ -65,7 +65,7 @@ class AuthService {
 
     public async login(loginDTO: ILoginDTO): Promise<IAuthResponseDTO> {
 
-        const userEntity  = await this._userRepository.findUserByEmail(loginDTO.email);
+        const userEntity = await this._userRepository.findUserByEmail(loginDTO.email);
 
         // Cheach Pasword
         const passwordCorrect = await this._passwordService.verifyPassword(loginDTO.password, userEntity.password);
@@ -79,7 +79,8 @@ class AuthService {
 
     public async register(registerDTO: IRegisterDTO): Promise<IAuthResponseDTO> {
 
-        const userEntity = await this._userRepository.findUserByEmail(registerDTO.email);
+        // Check already have email in database?
+        await this._userRepository.chcekUserEmail(registerDTO.email)
 
         // Create new User
         const newUser = await this._userService.createNewUser(registerDTO);

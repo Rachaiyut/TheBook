@@ -3,6 +3,7 @@
         "name": "Rachaiyut Hayibilang",
         "email": "rachiyut.hayibilang@email.com",
         "password": "12345678",
-        "roles": ["user"]
+        "roles": ["user"],
+        "verify": true
     }
 ]

@@ -57,7 +57,7 @@ class BookRepository {
 
         if (isBookExist !== null) {
             plainBook = JSON.parse(JSON.stringify(isBookExist.get({ plain: true })));
-            plainBook.genre = plainBook.genre.map((genre: { name: string }) => genre.name);            
+            plainBook.genre = plainBook.genre.map((genre: { name: string }) => genre.name);
         }
 
         return isBookExist ? BookMapper.toEntityFromModel(isBookExist) : null;
@@ -127,7 +127,7 @@ class BookRepository {
                         [Op.gte]: firstDay,
                         [Op.lte]: lastDay
                     }
-                } 
+                }
             },
             limit: queryParams.limit
         })

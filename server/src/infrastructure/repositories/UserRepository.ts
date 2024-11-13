@@ -43,19 +43,33 @@ class UserRepository {
 
 
     public async findUserByEmail(email: string): Promise<User> {
-        const isUserExist = await this._userModel.findOne(
+        const user = await this._userModel.findOne(
             {
                 where: { email }
             }
         );
 
-        if (!isUserExist) {
-            throw ErrorFactory.createError("Conflict", "This Email already used")
+        if (!user) {
+            throw ErrorFactory.createError("NotFound", "This Email is not Found")
         }
 
+        return UserMapper.toEntityFromModel(user)
 
-        return UserMapper.toEntityFromModel(isUserExist)
+    }
 
+
+    public async chcekUserEmail(email: string): Promise<User | null> {
+        const isUserExist = await this._userModel.findOne(
+            {
+                where: { email }
+            }
+        )
+
+        if (isUserExist) {
+            throw ErrorFactory.createError("NotFound", "This Email is already used")
+        }
+
+        return null
     }
 
 

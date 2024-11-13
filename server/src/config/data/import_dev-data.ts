@@ -10,7 +10,7 @@ import { Sequelize } from "@sequelize/core";
 import { PostgresDialect } from '@sequelize/postgres';
 
 // Models
-import { BookModel, BookGenreModel, UserModel, GenreModel } from "@infrastructure/models/index";
+import { BookModel, BookGenreModel, UserModel, GenreModel, VerificationTokenModel } from "@infrastructure/models/index";
 
 // import BookModel from "../../infrastructure/models/BookModel";
 // import BookGenreModel from "../../infrastructure/models/BookGenreModel"
@@ -47,7 +47,7 @@ async function init() {
         port: 5432,
         clientMinMessages: 'notice',
         schema: 'public',
-        models: [GenreModel, BookModel, BookGenreModel, UserModel]
+        models: [GenreModel, BookModel, BookGenreModel, UserModel, VerificationTokenModel]
     })
 
     try {
@@ -70,7 +70,7 @@ const importData = async () => {
         const promises = [
             BookModel.bulkCreate(books, { hooks: true }),
             GenreModel.bulkCreate(genres, { hooks: true }),
-            UserModel.bulkCreate(users, { hooks: true }),
+            // UserModel.bulkCreate(users, { hooks: true }),
         ];
 
         for (const model of promises) {

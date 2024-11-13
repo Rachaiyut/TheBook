@@ -245,7 +245,7 @@
 		"ratingAverage": 4.8,
 		"pages": 396,
 		"imageCover": "dream.png",
-		"publicationDate": "2024-10-01T16:41:46.334734"
+		"publicationDate": "2024-11-01T16:41:46.334734"
 	},
 	{
 		"isbn": "au2ru270axqt",
@@ -259,7 +259,7 @@
 		"ratingAverage": 4.9,
 		"pages": 514,
 		"imageCover": "alone.jpeg",
-		"publicationDate": "2024-10-01T16:41:46.334785"
+		"publicationDate": "2024-11-01T16:41:46.334785"
 	},
 	{
 		"isbn": "gj59icje284f",
@@ -273,7 +273,7 @@
 		"ratingAverage": 4.5,
 		"pages": 299,
 		"imageCover": "eye.png",
-		"publicationDate": "2024-10-03T16:41:46.334815"
+		"publicationDate": "2024-11-03T16:41:46.334815"
 	},
 	{
 		"isbn": "e7flkon9ke9n",
@@ -287,7 +287,7 @@
 		"ratingAverage": 4.5,
 		"pages": 481,
 		"imageCover": "pencil.jpeg",
-		"publicationDate": "2024-10-03T16:41:46.334833"
+		"publicationDate": "2024-11-03T16:41:46.334833"
 	},
 	{
 		"isbn": "xyx3qyjgomae",
@@ -301,7 +301,7 @@
 		"ratingAverage": 4.7,
 		"pages": 300,
 		"imageCover": "prayer.png",
-		"publicationDate": "2024-10-03T16:41:46.334850"
+		"publicationDate": "2024-11-03T16:41:46.334850"
 	},
 	{
 		"isbn": "x9r30y4ij3wh",
@@ -315,7 +315,7 @@
 		"ratingAverage": 4.6,
 		"pages": 431,
 		"imageCover": "puzzle.png",
-		"publicationDate": "2024-10-02T16:41:46.334864"
+		"publicationDate": "2024-11-02T16:41:46.334864"
 	},
 	{
 		"isbn": "vbugz3slexsu",
@@ -329,7 +329,7 @@
 		"ratingAverage": 4.6,
 		"pages": 557,
 		"imageCover": "sword.jpeg",
-		"publicationDate": "2024-10-03T16:41:46.334882"
+		"publicationDate": "2024-11-03T16:41:46.334882"
 	},
 	{
 		"isbn": "279uhh4mu0f9",
@@ -343,7 +343,7 @@
 		"ratingAverage": 4.5,
 		"pages": 384,
 		"imageCover": "the-invisible-man.jpeg",
-		"publicationDate": "2024-10-03T16:41:46.334901"
+		"publicationDate": "2024-11-03T16:41:46.334901"
 	},
 	{
 		"isbn": "fnjgsrqt2ow6",
@@ -357,12 +357,12 @@
 		"ratingAverage": 5.0,
 		"pages": 269,
 		"imageCover": "elevate-your-life.png",
-		"publicationDate": "2024-10-02T16:41:46.334918"
+		"publicationDate": "2024-11-02T16:41:46.334918"
 	},
 	{
 		"isbn": "ltpdc5yz90by",
 		"name": "I will Always Love You",
-		"description": "A captivating story of adventure and mystery for book 10.",
+		"description": "A captivating story of adventure and mystery for book 11.",
 		"authors": [
 			"Alice Brown"
 		],
@@ -371,6 +371,6 @@
 		"ratingAverage": 4.7,
 		"pages": 422,
 		"imageCover": "love-you.png",
-		"publicationDate": "2024-10-03T16:41:46.334933"
+		"publicationDate": "2024-11-03T16:41:46.334933"
 	}
 ]
