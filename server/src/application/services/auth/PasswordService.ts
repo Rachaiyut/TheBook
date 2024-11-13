@@ -13,14 +13,12 @@ export class PasswordService {
         return bcrypt.hash(password, this.saltRounds);
     }
 
-    public async verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
+    public async verifyPassword(password: string, hashedPassword: string): Promise<void> {
         const passwordCorrect = bcrypt.compare(password, hashedPassword);
 
         if (!passwordCorrect) {
             throw ErrorFactory.createError("Login", "Password is not correct");
         } 
-
-        return passwordCorrect;
     }
 }
 

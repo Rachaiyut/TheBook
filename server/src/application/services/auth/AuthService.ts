@@ -4,6 +4,9 @@ import { TYPES } from "@inversify/types";
 // DTO
 import { IAuthResponseDTO, ILoginDTO, IRegisterDTO, IVerifyDTO } from "@application/dtos/auth/index";
 
+// Entity
+import { User } from "@domain/entites/index";
+
 // Mapper
 import { UserMapper } from "@application/mappers/UserMapper";
 
@@ -67,13 +70,15 @@ class AuthService {
 
         const userEntity = await this._userRepository.findUserByEmail(loginDTO.email);
 
+        const userVerify = await this.findAndVerifyUser(userEntity.googleId, userEntity.userId);
+
         // Cheach Pasword
-        const passwordCorrect = await this._passwordService.verifyPassword(loginDTO.password, userEntity.password);
+        await this._passwordService.verifyPassword(loginDTO.password, userVerify.password);
 
-        const accessToken = this._jwtService.generateAccessToken(userEntity.userId);
-        const refreshToken = this._jwtService.genrerefreshToken(userEntity.userId);
+        const accessToken = this._jwtService.generateAccessToken(userVerify.userId);
+        const refreshToken = this._jwtService.genrerefreshToken(userVerify.userId);
 
-        return UserMapper.toUserResponseDTO(UserMapper.toDto(userEntity), accessToken, refreshToken)
+        return UserMapper.toUserResponseDTO(UserMapper.toDto(userVerify), accessToken, refreshToken)
     }
 
 
@@ -119,6 +124,19 @@ class AuthService {
         const newRefreshToken = this._jwtService.genrerefreshToken(user.userId);
 
         return UserMapper.toUserResponseDTO(user, newAccessToken, newRefreshToken);
+    }
+
+
+    public async findAndVerifyUser(googleId?: string, userId?: string): Promise<User> {
+        if (!googleId && !userId) {
+            throw new Error('Either googleId or userId must be provided');
+        }
+
+        const whereCondition = googleId ? { googleId } : { userId };
+
+        const user = await this._userRepository.findAndVerifyUser(whereCondition);
+
+        return user;
     }
 
 

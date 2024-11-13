@@ -57,6 +57,22 @@ class UserRepository {
 
     }
 
+    public async findAndVerifyUser(criteria: { googleId?: string; userId?: string }): Promise<User> {
+        const userModel = await this._userModel.findOne({
+            where: criteria,
+        });
+
+        if (!userModel) {
+            throw ErrorFactory.createError("NotFound", "User are not logged in")
+        }
+
+        if (userModel.dataValues.verify === false) {
+            throw ErrorFactory.createError("Unauthorized", "User are not verify")
+        }
+
+        return UserMapper.toEntityFromModel(userModel)
+    }
+
 
     public async chcekUserEmail(email: string): Promise<User | null> {
         const isUserExist = await this._userModel.findOne(
