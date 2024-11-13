@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from '../ui/AppLayout';
+import ResultLayout from '../ui/ResultLayout'
 import ResultBook from '../features/book/ResultBook';
 
 const Home = lazy(() => import('../pages/Home'))
@@ -18,7 +19,7 @@ function AppRoutes() {
                 <Route path="order" element={<Order />} />
                 <Route path="wishlist" element={<Wishlist />} />
             </Route>
-            <Route path="/result" element={<AppLayout />}>
+            <Route path="/result" element={<ResultLayout />}>
                 <Route path=':slug' element={<ResultBook />} />
             </Route>
         </Routes>
