@@ -1,10 +1,19 @@
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
 import PropTypes from "prop-types";
+
+// Redux
 import { useDispatch } from "react-redux";
 import { logout } from "../features/authenticate/redux/authSlice";
+
+// React Router DOM
 import { Link, useNavigate } from "react-router-dom";
+
+// Context
 import { OptionalFormProvider } from "../contexts/OptionalFormContext";
+
+// Ui
 import Modal from "./Modal";
 
 const pages = [
@@ -14,7 +23,7 @@ const pages = [
     { title: "Log In/ Sign Up", path: "/signup" },
 ];
 
-function NavbarDropDown({ children, color, bgColor, className = "" }) {
+function MenuDropDown({ children, color, bgColor, className = "" }) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const dialogRef = useRef();
     const dispatch = useDispatch();
@@ -22,6 +31,7 @@ function NavbarDropDown({ children, color, bgColor, className = "" }) {
     const token = localStorage.getItem('token');
 
     const showModal = () => dialogRef.current.show();
+
     const handleLogout = () => {
         dispatch(logout());
         navigate("/");
@@ -52,7 +62,7 @@ function NavbarDropDown({ children, color, bgColor, className = "" }) {
                         style={{ minWidth: "12rem" }}
                     >
                         {pages.map((item, index) => (
-                            <NavbarDropDownItem
+                            <MenuDropDownItem
                                 key={index}
                                 item={item}
                                 color={color}
@@ -68,23 +78,24 @@ function NavbarDropDown({ children, color, bgColor, className = "" }) {
     );
 }
 
-function NavbarDropDownItem({ item, color, showModal, handleLogout, token }) {
+
+function MenuDropDownItem({ item, color, showModal, handleLogout, token }) {
     const isAuthRoute = item.path === "/signup";
     const isLoggedIn = !!token;
 
     if (isAuthRoute) {
         return (
-            <div
+            <li
                 className={`text-sm py-2 px-4 font-bold block w-full whitespace-no-wrap ${color} hover:cursor-pointer hover:underline`}
                 onClick={isLoggedIn ? handleLogout : showModal}
             >
                 {isLoggedIn ? "Logout" : item.title}
-            </div>
+            </li>
         );
     }
 
     return (
-        <div
+        <li
             className={`text-sm py-2 px-4 font-bold block w-full whitespace-no-wrap ${color} hover:cursor-pointer hover:underline`}
             onClick={!isLoggedIn ? showModal : undefined}
         >
@@ -98,18 +109,18 @@ function NavbarDropDownItem({ item, color, showModal, handleLogout, token }) {
             ) : (
                 item.title
             )}
-        </div>
+        </li>
     );
 }
 
-NavbarDropDown.propTypes = {
+MenuDropDown.propTypes = {
     children: PropTypes.node,
     color: PropTypes.string,
     bgColor: PropTypes.string,
     className: PropTypes.string,
 };
 
-NavbarDropDownItem.propTypes = {
+MenuDropDownItem.propTypes = {
     item: PropTypes.object.isRequired,
     color: PropTypes.string.isRequired,
     showModal: PropTypes.func.isRequired,
@@ -117,4 +128,4 @@ NavbarDropDownItem.propTypes = {
     token: PropTypes.string,
 };
 
-export default NavbarDropDown;
+export default MenuDropDown;

@@ -38,7 +38,7 @@ function Order() {
                     </div>
 
                     {/* <!-- Billing Address Section --> */}
-                    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                    {/* <div className="bg-white shadow-md rounded-lg overflow-hidden">
                         <div className="p-6 border-b border-gray-200">
                             <h2 className="text-2xl font-semibold text-gray-800">Billing Address</h2>
                         </div>
@@ -70,7 +70,7 @@ function Order() {
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
 
