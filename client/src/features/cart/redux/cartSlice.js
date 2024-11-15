@@ -4,13 +4,7 @@ const initialState = {
     userId: "",
     status: "pending",
     totalAmount: 0,
-    orderItems: [{
-        isbn: "",
-        name: "",
-        imageCover: "",
-        quantity: 0,
-        price: 0
-    }]
+    orderItems: []
 }
 
 

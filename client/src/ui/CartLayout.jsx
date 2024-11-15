@@ -10,7 +10,6 @@ function CartLayout() {
     return (
         <>
             <Navbar />
-            <div className=""></div>
             <main className="bg-moonLily">
                 <section className="max-w-[1340px] mx-auto flex px-4 md:px-10 p-6">
                     <Outlet />

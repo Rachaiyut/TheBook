@@ -38,7 +38,7 @@ function CartBadge() {
                     onClick={token ? handleCart : showModal}
                 />
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-                    {orderItems.length - 1}
+                    {orderItems.length}
                 </span>
             </div>
         </>
